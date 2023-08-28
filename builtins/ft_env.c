@@ -19,7 +19,8 @@ void	ft_env(t_env **env)
 	tmp = *env;
 	while (tmp)
 	{
-		printf("%s=%s\n",tmp->name, tmp->value);
+		if (tmp->value)
+			printf("%s=%s\n",tmp->name, tmp->value);
 		tmp = tmp->next;
 	}
 }

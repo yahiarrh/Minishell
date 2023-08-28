@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "./includes/blt_lib.h"
 #include <readline/readline.h>
 
 int main(int ac, char **av, char **envp)
@@ -32,5 +32,13 @@ int main(int ac, char **av, char **envp)
 			ft_pwd(&env);
 		if (!ft_strcmp("env", line))
 			ft_env(&env);
+		if (!ft_strcmp("exit", line))
+			exit (EXIT_SUCCESS);
+		if (!ft_strcmp("cd", line))
+		{
+			line = readline(prompt);
+			ft_cd(&env, line);
+		}
+		
 	}
 }

@@ -17,7 +17,6 @@ t_env	*ft_getenv(char **envp)
 	t_env	*env;
 	t_env	*tmp;
 	int		i;
-	int		j;
 	int		equ;
 
 	i = 0;
@@ -28,12 +27,14 @@ t_env	*ft_getenv(char **envp)
 	while (envp[i])
 	{
 		equ = 0;
-		j = 0;
 		while (envp[i][equ] && envp[i][equ] != '=')
 			equ++;
 		tmp = malloc(sizeof(t_env));
 		tmp->name = ft_substr(envp[i], 0, equ);
-		tmp->value = getenv(tmp->name);
+		if (!ft_strcmp(tmp->name, "OLDPWD"))
+			tmp->value = NULL;
+		else
+			tmp->value = getenv(tmp->name);
 		ft_lstadd_back(&env, tmp);
 		i++;
 	}	
