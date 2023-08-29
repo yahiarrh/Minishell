@@ -13,9 +13,10 @@ typedef struct s_env{
 } t_env;
 
 t_env	*ft_getenv(char **envp);
-t_env	*ft_getval(t_env **env, char *s);
+t_env	*ft_getval(t_env **env, char *name);
 void	ft_env(t_env **env);
 void	ft_pwd(t_env **env);
+void	ft_cd(t_env **env, char *p);
 void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstlast(t_env *lst);
 void	ft_echo(char **s);

@@ -12,7 +12,7 @@
 
 #include "../includes/blt_lib.h"
 
-t_env *ft_getval(t_env **env, char *s)
+t_env *ft_getval(t_env **env, char *name)
 {
 	t_env	*tmp;
 
@@ -20,7 +20,7 @@ t_env *ft_getval(t_env **env, char *s)
 
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->name, s))
+		if (!ft_strcmp(tmp->name, name))
 			return (tmp);
 		tmp = tmp->next;
 	}
