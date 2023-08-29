@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:49:44 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2022/10/27 11:42:54 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:03:34 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putnbr_fd(int n, int fd)
 	nbr = n;
 	if (nbr < 0)
 	{
-		ft_putchar_fd('-', fd);
+		ft_putchar('-');
 		nbr *= -1;
 	}
 	if (nbr > 9)
@@ -29,6 +29,6 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 	{
-		ft_putchar_fd(nbr + 48, fd);
+		ft_putchar(nbr + 48);
 	}
 }

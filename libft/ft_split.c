@@ -6,11 +6,12 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:53:22 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2022/10/31 01:30:15 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:43:42 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static char	**dealc(char **s, int i)
 {
@@ -35,15 +36,17 @@ static	int	count_word(char const *s, char c)
 	num = 0;
 	while (s[j])
 	{
-		if (s[j] != c)
+		if(s[j] != c)
+		{
 			m++;
-		if (s[j] == c && s[j + 1] != c && s[j + 1])
-			num++;
+			while (s[j] && s[j] != c)
+				j++;
+		}
 		j++;
 	}
 	if (num == 0 && m != 0)
 		num++;
-	return (num);
+	return (m);
 }
 
 static	char	*give_word(char const *s, char c)
