@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/29 18:15:06 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/08/30 09:02:54 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_cd(t_env **env, char *p)
 		}
 		else
 		{
-			printf("p;%s    op:%s\n",p,op);
+			op = ft_strjoin(op, "/");
 			ft_update(env, "PWD", ft_strjoin(op, p));
 			ft_update(env, "OLDPWD", op);
 		}

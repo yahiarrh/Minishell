@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/29 11:58:20 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:11:32 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int main(int ac, char **av, char **envp)
 		line = readline(prompt);
 		if (!line)
 			exit(0);
+		if(*line)
+			add_history(line);
 		if (!ft_strcmp("pwd", line))
 			ft_pwd(&env);
 		if (!ft_strcmp("env", line))
@@ -51,6 +53,11 @@ int main(int ac, char **av, char **envp)
 			if (ft_strlen(line) == 0)
 				ft_cd(&env, NULL);
 			ft_cd(&env, line);
+		}
+		if(!ft_strcmp("unset", line))
+		{
+			line = readline(prompt);
+			ft_unset(&env, line);
 		}
 	}
 }

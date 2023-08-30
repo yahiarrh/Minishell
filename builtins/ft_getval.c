@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/29 17:04:31 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:42:47 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,20 @@ void	ft_update(t_env **env, char *name, char *nv)
 
 	tmp = ft_getval(env, name);
 	tmp->value = nv;
+}
+
+int	ft_checkarg(char *arg)
+{
+	int	i;
+
+	i = 1;
+	if (!ft_isalpha(arg[0]) && arg[0] != '_')
+		return (0);
+	while (arg[i])
+	{
+		if(!ft_isalnum(arg[i]) && arg[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
 }

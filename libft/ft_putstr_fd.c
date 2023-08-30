@@ -6,13 +6,13 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:26:31 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/27 11:04:51 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:53:05 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char *s)
+void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ void	ft_putstr(char *s)
 	i = 0;
 	while (s[i])
 	{
-		ft_putchar(s[i]);
+		ft_putchar_fd(s[i], fd);
 		i++;
 	}
 }

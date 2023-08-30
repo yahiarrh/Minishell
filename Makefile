@@ -1,7 +1,7 @@
 NAME = minis
 
 SRC	=	main.c ./builtins/pwd.c ./builtins/ft_lstadd_back.c ./builtins/ft_lstlast.c ./builtins/ft_getval.c \
-		./builtins/env.c ./builtins/echo.c ./builtins/cd.c
+		./builtins/env.c ./builtins/echo.c ./builtins/cd.c ./builtins/unset.c
  
 CFLAGS	= -Wall -Wextra -Werror
 
