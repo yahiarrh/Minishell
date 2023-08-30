@@ -6,12 +6,17 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/29 07:07:13 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:58:20 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/blt_lib.h"
 #include <readline/readline.h>
+
+void	lak()
+{
+	system("leaks minis");
+}
 
 int main(int ac, char **av, char **envp)
 {
@@ -23,6 +28,7 @@ int main(int ac, char **av, char **envp)
 	env = ft_getenv(envp);
 	char *prompt = "minis : ";
 	char *line;
+	atexit(lak);
 	while (1)
 	{
 		line = readline(prompt);
@@ -41,7 +47,10 @@ int main(int ac, char **av, char **envp)
 		}
 		if(!ft_strcmp("cd", line))
 		{
-			ft_cd(&env, NULL);
+			line = readline(prompt);
+			if (ft_strlen(line) == 0)
+				ft_cd(&env, NULL);
+			ft_cd(&env, line);
 		}
 	}
 }
