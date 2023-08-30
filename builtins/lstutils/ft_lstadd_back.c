@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 22:26:30 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/24 13:33:12 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/10/20 22:39:28 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/08/30 14:37:42 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../../includes/blt_lib.h"
 
-t_env	*ft_lstlast(t_env *lst)
+void	ft_lstadd_back(t_env **lst, t_env *new)
 {
-	if (!lst)
-		return (lst);
-	while (lst->next)
+	t_env	*ptr;
+
+	if (!lst || !new)
+		return ;
+	if (!*lst)
 	{
-		lst = lst->next;
+		*lst = new;
+		return ;
 	}
-	return (lst);
+	ptr = ft_lstlast(*lst);
+	ptr->next = new;
+}
+
+void	ft_lstdelone(t_env *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	del(lst->name);
+	free (lst);
 }

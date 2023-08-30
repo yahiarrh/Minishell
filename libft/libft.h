@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 12:42:56 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/30 12:36:55 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:43:39 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-t_list	*ft_lstnew(void *content);
+t_list	*ft__lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 // void	ft_lstadd_back(t_list **lst, t_list *new);
 int		ft_strcmp2(const char *s1, const char *s2);

@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 21:03:21 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2022/10/26 15:49:13 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2023/08/30 14:36:47 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/08/30 14:40:39 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/blt_lib.h"
 
-t_list	*ft_lstnew(void *content)
+t_env	*ft_lstnew(char *content)
 {
-	t_list	*s;
+	t_env	*s;
 
-	s = malloc(sizeof(t_list));
+	s = malloc(sizeof(t_env));
 	if (!s)
 		return (NULL);
-	s->content = content;
+	s->name = ft_strdup(content);
 	s->next = NULL;
 	return (s);
 }

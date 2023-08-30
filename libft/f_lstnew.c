@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 22:39:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/30 12:37:32 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/10/20 21:03:21 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/08/30 14:43:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "libft.h"
 
-void	ft_lstadd_back(t_env **lst, t_env *new)
+t_list	*ft__lstnew(void *content)
 {
-	t_env	*ptr;
+	t_list	*s;
 
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	ptr = ft_lstlast(*lst);
-	ptr->next = new;
-}
-
-void	ft_lstdelone(t_env *lst, void (*del)(void *))
-{
-	if (!lst || !del)
-		return ;
-	del(lst->name);
-	free (lst);
+	s = malloc(sizeof(t_list));
+	if (!s)
+		return (NULL);
+	s->content = content;
+	s->next = NULL;
+	return (s);
 }
