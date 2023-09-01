@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/30 14:50:51 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:51:05 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,18 @@ int main(int ac, char **av, char **envp)
 		if(!ft_strcmp("unset", line))
 		{
 			line = readline(prompt);
-			ft_unset(&env, line);
+			ft_unset(&env, ft_split(line, ' '));
 		}
 		if(!ft_strcmp("export", line))
 		{
-			ft_export(&env, "d", "NULL");
+			line = readline(prompt);
+			if (ft_strlen(line) == 0)
+			{
+				line = NULL;
+				ft_export(&env, &line);
+			}
+			else
+				ft_export(&env, ft_split(line, ' '));
 		}
 	}
 }

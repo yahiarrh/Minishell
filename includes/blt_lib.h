@@ -24,7 +24,7 @@ t_env	*ft_lstnew(char *content);
 void	ft_echo(char **s);
 void	ft_cd(t_env **env, char *p);
 void	ft_update(t_env **env, char *name, char *nv);
-void	ft_unset(t_env **env, char *name);
-void	ft_export(t_env **env, char *name);
+void	ft_unset(t_env **env, char **name);
+void	ft_export(t_env **env, char **name);
 int		ft_checkarg(char *arg);
 #endif
