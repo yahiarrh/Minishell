@@ -7,8 +7,7 @@ SRC	=	ft_atoi.c ft_calloc.c ft_isalnum.c ft_isdigit.c ft_itoa.c\
 		ft_isprint.c ft_memchr.c ft_memcpy.c ft_memset.c ft_putendl_fd.c\
 		ft_putstr_fd.c ft_strchr.c ft_striteri.c ft_strlcat.c ft_strlen.c\
 		ft_strncmp.c ft_strrchr.c ft_substr.c ft_toupper.c\
-
-BNS = 	ft_lstadd_back.c ft_lstadd_front.c ft_lstdelone.c ft_lstlast.c ft_lstnew.c\
+		ft_lstadd_front.c ft_lstdelone.c f_lstnew.c\
 		ft_lstsize.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
 
 CFLAGS	= -Wall -Werror -Wextra 
@@ -23,8 +22,6 @@ LIBFTH = libft.h
 
 OBJS	= $(SRC:.c=.o)
 
-OBJS_B = $(BNS:.c=.o)
-
 all	: $(NAME)
 
 $(NAME) : $(OBJS)
@@ -32,9 +29,6 @@ $(NAME) : $(OBJS)
 
 %.o :  %.c $(LIBFTH) 
 	@$(CC) -c $(CFLAGS) $<
-
-bonus : $(OBJS_B) $(LIBFTH)
-	$(AR) $(NAME) $^
 
 clean :
 	$(RM) $(OBJS) $(OBJS_B)

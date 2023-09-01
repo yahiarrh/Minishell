@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/29 07:07:13 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:20:53 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ int main(int ac, char **av, char **envp)
 		line = readline(prompt);
 		if (!line)
 			exit(0);
+		if(*line)
+			add_history(line);
 		if (!ft_strcmp("pwd", line))
 			ft_pwd(&env);
 		if (!ft_strcmp("env", line))
 			ft_env(&env);
 		if (!ft_strcmp("exit", line))
-			exit(0);
+		{
+			line = readline(prompt);
+			ft_exit(ft_split(line, ' '));
+		}
 		if (!ft_strcmp("echo", line))
 		{
 			line = readline(prompt);
@@ -41,7 +46,26 @@ int main(int ac, char **av, char **envp)
 		}
 		if(!ft_strcmp("cd", line))
 		{
-			ft_cd(&env, NULL);
+			line = readline(prompt);
+			if (ft_strlen(line) == 0)
+				ft_cd(&env, NULL);
+			ft_cd(&env, line);
+		}
+		if(!ft_strcmp("unset", line))
+		{
+			line = readline(prompt);
+			ft_unset(&env, ft_split(line, ' '));
+		}
+		if(!ft_strcmp("export", line))
+		{
+			line = readline(prompt);
+			if (ft_strlen(line) == 0)
+			{
+				line = NULL;
+				ft_export(&env, &line);
+			}
+			else
+				ft_export(&env, ft_split(line, ' '));
 		}
 	}
 }
