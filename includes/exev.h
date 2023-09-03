@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   exev.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 17:09:47 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/03 08:35:05 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2023/09/03 14:59:39 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/09/03 15:02:34 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#ifndef EXEV_H
+# define EXEV_H
 
-int	ft_isdigit(long long c)
-{
-	if (c > LLONG_MIN && c < LLONG_MAX)
-		return (1);
-	else
-		return (0);
-}
+# include "../libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+
+
+
+#endif
