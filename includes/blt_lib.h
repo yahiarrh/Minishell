@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   blt_lib.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/03 14:59:34 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/09/03 14:59:37 by yrrhaibi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef	BLT_LIB_H
 # define BLT_LIB_H
 
@@ -27,5 +39,5 @@ void	ft_update(t_env **env, char *name, char *nv);
 void	ft_unset(t_env **env, char **name);
 void	ft_export(t_env **env, char **name);
 int		ft_checkarg(char *arg);
-void	ft_exit(char	**status);
+void	ft_exit(char **status);
 #endif
