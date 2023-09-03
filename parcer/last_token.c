@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   last_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 17:09:47 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/03 08:35:05 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/10/25 16:39:44 by msaidi            #+#    #+#             */
+/*   Updated: 2023/09/03 10:08:36 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "tokenizer.h"
 
-int	ft_isdigit(long long c)
+t_list	*last_token(t_list *lst)
 {
-	if (c > LLONG_MIN && c < LLONG_MAX)
-		return (1);
-	else
-		return (0);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

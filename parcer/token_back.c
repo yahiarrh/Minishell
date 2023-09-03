@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   token_back.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 17:09:47 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/03 08:35:05 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/11/01 17:03:48 by msaidi            #+#    #+#             */
+/*   Updated: 2023/09/03 10:15:47 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "tokenizer.h"
 
-int	ft_isdigit(long long c)
+void	token_back(t_list **lst, t_list *new)
 {
-	if (c > LLONG_MIN && c < LLONG_MAX)
-		return (1);
+	t_list	*node;
+
+	if (!new || !lst)
+		return ;
+	if (*lst)
+	{
+		node = last_token(*lst);
+		node->next = new;
+	}
 	else
-		return (0);
+		*lst = new;
 }
