@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/03 14:59:51 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/03 15:30:38 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ t_list	tokenizer(char *arg)
 			word_tok(arg + i, command);
 		
 	}
+	return (command);
 }
