@@ -11,39 +11,69 @@
 /* ************************************************************************** */
 
 #include "tokenizer.h"
+
 int	spc_chk(char c)
 {
 	if (c && (c == ' ' || c == '\t'))
 		return (1);
 	return (0);
 }
-void	indicator_check(char *arg, t_list *command)
-{
-	
 
-}
-
-void	word_tok(char *arg, t_list *command)
+t_list	*indicator_check(char *arg)
 {
 
 }
 
-t_list	tokenizer(char *arg)
+int	ft_delim(char *str)
 {
-	t_list	*command;
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_strchr(INDICATORS, str[i++]))
+			break ;
+	}
+	return (i);
+}
+
+t_list	*word_tok(char *arg)
+{
+	t_list *command;
+	int	i;
+
+	i = 0;
+	command = malloc(sizeof (t_list *));
+	command->type = WORD;
+	command->word = ft_substr(arg, 0, ft_delim(arg));
+	command->next ;
+	return (command);
+}
+
+t_list	*tokenizer(char *arg)
+{
+	t_list	*head;
 	int		i;
+	bool	spc;
 
 	i = -1;
-	command = malloc(sizeof (*t_list));
 	while (arg[++i])
 	{
-		while (arg[i] && arg[i] != ' ' && arg[i] != '\t')
-			i++;
-		if (ft_strchr("|\'\"<>", arg[i]) || spc_check(arg[i]))
-			indicator_check(arg + i, command);
+		if (ft_strchr(INDICATORS, arg[i]) || spc_chk(arg[i]))
+		{
+			if (arg[i] == ' ')
+				spc = 1;
+			token_back(&head, indicator_check(arg + i));
+		}
 		else
-			word_tok(arg + i, command);
+			token_back(&head, word_tok(arg + i));
+
 		
 	}
-	return (command);
+	return (head);
+}
+
+int main ()
+{
+	char *s = "";
 }

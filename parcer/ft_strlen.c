@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 07:58:59 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/03 14:37:57 by msaidi           ###   ########.fr       */
+/*   Created: 2022/10/06 19:08:17 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/08/24 10:14:38 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenizer.h"
 
-int	ft_strchr(const char *str, int c)
+size_t	ft_strlen(const char *c)
 {
-	char	ch;
-	int		i;
+	size_t	i;
 
-	ch = (char)c;
 	i = 0;
-	if (c == 0)
-		return ((char *)str + ft_strlen(str));
-	while (str[i])
-	{
-		if (str[i] == ch)
-			return (1);
+	if (!c)
+		return (0);
+	while (c[i])
 		i++;
-	}
-	return (0);
+	return (i);
 }
