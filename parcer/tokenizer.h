@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/03 15:30:20 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/05 15:52:39 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <readline/readline.h>
-#define INDICATORS "|\'\"<>"
+#define INDICATORS " |\'\"<>"
 
 typedef struct s_list
 {
 	char			*word;
 	int				type;
 	struct s_list	*next;
+	struct s_list	*down;
 }t_list;
 
 enum e_cmd
@@ -42,5 +43,7 @@ t_list	*tokenizer(char *arg);
 int	ft_strchr(const char *str, int c);
 char	*ft_substr(char const *s, unsigned int start, int len);
 size_t	ft_strlen(const char *c);
+char	*ft_strdup(const char *s);
+t_list	*word_tok(char *arg, int len);
 
 #endif

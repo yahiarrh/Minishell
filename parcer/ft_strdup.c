@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_back.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 17:03:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/05 13:45:28 by msaidi           ###   ########.fr       */
+/*   Created: 2022/10/10 23:57:06 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/09/05 10:44:42 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenizer.h"
 
-void	token_back(t_list **lst, t_list *new)
+char	*ft_strdup(const char *s)
 {
-	t_list	*node;
+	char	*d;
+	int		len;
+	int		i;
 
-	if (!new || !lst)
-		return ;
-	if (*lst)
-	{
-		node = last_token(*lst);
-		node->next = new;
-	}
-	else
-		*lst = new;
+	i = -1;
+	len = ft_strlen(s);
+	d = (char *)malloc((len + 1) * sizeof(char));
+	if (!d)
+		return (NULL);
+	while (s[++i])
+		d[i] = s[i];
+	d[i] = '\0';
+	return (d);
 }
