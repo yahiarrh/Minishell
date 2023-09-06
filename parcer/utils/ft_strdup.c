@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   last_token.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 16:39:44 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/03 10:08:36 by msaidi           ###   ########.fr       */
+/*   Created: 2022/10/10 23:57:06 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/09/06 10:10:56 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../tokenizer.h"
 
-t_list	*last_token(t_list *lst)
+char	*ft_strdup(const char *s)
 {
-	if (!lst)
+	char	*d;
+	int		len;
+	int		i;
+
+	i = -1;
+	len = ft_strlen(s);
+	d = (char *)malloc((len + 1) * sizeof(char));
+	if (!d)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	while (s[++i])
+		d[i] = s[i];
+	d[i] = '\0';
+	return (d);
 }

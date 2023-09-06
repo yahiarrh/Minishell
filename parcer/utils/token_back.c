@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   token_back.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 19:08:17 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/24 10:14:38 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/11/01 17:03:48 by msaidi            #+#    #+#             */
+/*   Updated: 2023/09/06 10:11:12 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../tokenizer.h"
 
-size_t	ft_strlen(const char *c)
+void	token_back(t_list **lst, t_list *new)
 {
-	size_t	i;
+	t_list	*node;
 
-	i = 0;
-	if (!c)
-		return (0);
-	while (c[i])
-		i++;
-	return (i);
+	if (!new || !lst)
+		return ;
+	if (*lst)
+	{
+		node = last_token(*lst);
+		node->next = new;
+	}
+	else
+		*lst = new;
 }

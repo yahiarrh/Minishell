@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 23:57:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/05 10:44:42 by msaidi           ###   ########.fr       */
+/*   Created: 2022/10/07 07:58:59 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/09/06 10:10:40 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../tokenizer.h"
 
-char	*ft_strdup(const char *s)
+int	ft_strchr(const char *str, int c)
 {
-	char	*d;
-	int		len;
+	char	ch;
 	int		i;
 
-	i = -1;
-	len = ft_strlen(s);
-	d = (char *)malloc((len + 1) * sizeof(char));
-	if (!d)
-		return (NULL);
-	while (s[++i])
-		d[i] = s[i];
-	d[i] = '\0';
-	return (d);
+	ch = (char)c;
+	i = 0;
+	if (c == 0)
+		return (2);
+	while (str[i])
+	{
+		if (str[i] == ch)
+			return (1);
+		i++;
+	}
+	return (0);
 }

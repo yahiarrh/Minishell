@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_back.c                                       :+:      :+:    :+:   */
+/*   last_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 17:03:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/05 13:45:28 by msaidi           ###   ########.fr       */
+/*   Created: 2022/10/25 16:39:44 by msaidi            #+#    #+#             */
+/*   Updated: 2023/09/06 10:11:05 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../tokenizer.h"
 
-void	token_back(t_list **lst, t_list *new)
+t_list	*last_token(t_list *lst)
 {
-	t_list	*node;
-
-	if (!new || !lst)
-		return ;
-	if (*lst)
-	{
-		node = last_token(*lst);
-		node->next = new;
-	}
-	else
-		*lst = new;
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

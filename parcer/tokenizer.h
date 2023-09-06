@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/05 15:52:39 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/06 14:17:30 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <readline/readline.h>
-#define INDICATORS " |\'\"<>"
+#define INDICATORS "|\'\"<>"
 
 typedef struct s_list
 {
 	char			*word;
 	int				type;
+	bool			spc; //gadd had zab
 	struct s_list	*next;
 	struct s_list	*down;
 }t_list;
@@ -45,5 +46,7 @@ char	*ft_substr(char const *s, unsigned int start, int len);
 size_t	ft_strlen(const char *c);
 char	*ft_strdup(const char *s);
 t_list	*word_tok(char *arg, int len);
+t_list  *pipe_tok(t_list *cmdline);
+t_list  *double_quotes(char *arg, t_list *token);
 
 #endif

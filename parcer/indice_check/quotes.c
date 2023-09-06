@@ -1,31 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 07:58:59 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/05 10:37:34 by msaidi           ###   ########.fr       */
+/*   Created: 2023/09/06 10:14:59 by msaidi            #+#    #+#             */
+/*   Updated: 2023/09/06 10:53:55 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../tokenizer.h"
 
-int	ft_strchr(const char *str, int c)
+int	chr_q(char *str, char q)
 {
-	char	ch;
-	int		i;
+	int	i;
 
-	ch = (char)c;
 	i = 0;
-	if (c == 0)
-		return (2);
 	while (str[i])
 	{
-		if (str[i] == ch)
-			return (1);
+		if (str[i] == q)
+			break ;
 		i++;
 	}
-	return (0);
+	if (str[i] == '\0')
+		return (-1);
+	return (i);
+}
+
+
+t_list  *double_quotes(char *arg, t_list *token)
+{
+	int	len;
+
+	len = chr_q(arg + 1, '\"');
+	if (len < 0)
+	{
+		printf("closi l quotes azaml\n");
+		exit(1);
+	}
+	token->word = ft_substr(arg, 0, len);
+	token->type = DQ;
+	token->next = NULL;
+	token->down = NULL;
+	return (token);
 }

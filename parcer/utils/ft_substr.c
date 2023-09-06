@@ -6,11 +6,11 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:50:48 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/05 10:41:43 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/06 10:11:00 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../tokenizer.h"
 
 char	*ft_substr(char const *s, unsigned int start, int len)
 {
