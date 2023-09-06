@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:16:02 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/03 08:51:22 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:29:27 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static char	*extr_val(char *val)
 	while (val[i])
 	{
 		if (val[i] == '=')
-			return(val + i);
+			return (val + i);
 		if (val[i] == '+' && val[i + 1] == '=')
-			return(val + i);
+			return (val + i);
 		i++;
 	}
 	return (NULL);
@@ -36,32 +36,63 @@ static int	extr_name(char *name)
 	while (name[i])
 	{
 		if (name[i] == '=')
-			return(i);
+			return (i);
 		if (name[i] == '+' && name[i + 1] == '=')
-			return(i);
+			return (i);
 		i++;
 	}
 	return (i);
 }
 
-void	ft_export(t_env **env, char **name)
+static void	pr_env(t_env **env)
+{
+	t_env	*tmp;
+
+	tmp = *env;
+	while (tmp)
+	{
+		if (!tmp->value)
+			printf("declare -x %s\n", tmp->name);
+		else
+			printf("declare -x %s=\"%s\"\n", tmp->name, tmp->value);
+		tmp = tmp->next;
+	}
+}
+
+static void	up_val(t_env **env, char *name, char *n)
 {
 	t_env	*tmp;
 	char	*value;
+
+	tmp = *env;
+	value = extr_val(name);
+	if (!ft_getval(env, n))
+	{
+		tmp = ft_lstnew(n);
+		ft_lstadd_back(env, tmp);
+	}
+	if (value)
+	{
+		if (*value == '=')
+			ft_update(env, n, value + 1);
+		else if (*value == '+')
+		{
+			ft_update(env, n,
+				ft_strjoin(ft_getval(env, n)->value, value + 2));
+		}
+		else
+			ft_update(env, n, value);
+	}
+}
+
+void	ft_export(t_env **env, char **name)
+{
 	char	*n;
 	int		i;
 
 	if (!name[1])
 	{
-		tmp = *env;
-		while (tmp)
-		{
-			if (!tmp->value)
-				printf("declare -x %s\n",tmp->name);
-			else
-				printf("declare -x %s=\"%s\"\n",tmp->name, tmp->value);
-			tmp = tmp->next;
-		}
+		pr_env(env);
 		return ;
 	}
 	name++;
@@ -70,34 +101,10 @@ void	ft_export(t_env **env, char **name)
 		i = extr_name(*name);
 		n = ft_substr(*name, 0, i);
 		if (!ft_checkarg(n))
-		{
-			ft_putstr_fd("bash: export: ", 2);
-			ft_putstr_fd(*name, 2);
-			ft_putstr_fd(" :not a valid identifier\n", 2);
-		}
+			ft_err_msg("bash: export: ", *name,
+				" :not a valid identifier\n");
 		else
-		{
-			value = extr_val(*name);
-			if(!ft_getval(env, n))
-			{
-				tmp = ft_lstnew(n);
-				ft_lstadd_back(env, tmp);
-			}
-			if(value)
-			{
-				if (*value == '=')
-				{
-					ft_update(env, n, value + 1);
-				}
-				else if (*value == '+')
-				{
-					ft_update(env, n,
-						ft_strjoin(ft_getval(env, n)->value, value + 2));
-				}
-				else
-					ft_update(env, n, value);
-			}
-		}
+			up_val(env, *name, n);
 		name++;
 	}
 	return ;

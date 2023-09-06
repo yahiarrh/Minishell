@@ -6,8 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:50:42 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/03 14:59:02 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:17:29 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ""
+#include "../includes/exev.h"
+
+void	ft_exec()
+{}

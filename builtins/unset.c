@@ -6,11 +6,19 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:03:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/01 12:59:33 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:30:36 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/blt_lib.h"
+
+static t_env	*prev(t_env *tmp, t_env *tmp2, char *name)
+{
+	while (ft_strcmp(tmp->next->name, name))
+		tmp = tmp->next;
+	tmp->next = tmp2->next;
+	return (tmp);
+}
 
 void	ft_unset(t_env **env, char **name)
 {
@@ -22,24 +30,17 @@ void	ft_unset(t_env **env, char **name)
 	while (name[i])
 	{
 		if (!ft_checkarg(name[i]))
-		{
-			ft_putstr_fd("bash: unset: ", 2);
-			ft_putstr_fd(name[i], 2);
-			ft_putstr_fd(" :not a valid identifier\n", 2);
-		}
+			ft_err_msg("bash: unset: ", name[i],
+				" :not a valid identifier\n");
 		else
 		{
-			if((tmp2 = ft_getval(env, name[i])))
+			tmp2 = ft_getval(env, name[i]);
+			if (tmp2)
 			{
-				tmp = *env;
-				if(!ft_strcmp(tmp->name, name[i]))
-					*env = tmp->next;
+				if (!ft_strcmp((*env)->name, name[i]))
+					*env = (*env)->next;
 				else
-				{
-					while (ft_strcmp(tmp->next->name, name[i]))
-						tmp = tmp->next;
-					tmp->next = tmp2->next;
-				}
+					tmp = prev(*env, tmp2, name[i]);
 				ft_lstdelone(tmp2, free);
 				tmp2 = NULL;
 			}

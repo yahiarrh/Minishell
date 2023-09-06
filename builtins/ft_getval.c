@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/01 10:58:02 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:57:01 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,15 @@ t_env	*ft_getenv(char **envp)
 			tmp->value = getenv(tmp->name);
 		ft_lstadd_back(&env, tmp);
 		i++;
-	}	
-	return env;
+	}
+	return (env);
 }
 
-t_env *ft_getval(t_env **env, char *name)
+t_env	*ft_getval(t_env **env, char *name)
 {
 	t_env	*tmp;
 
 	tmp = *env;
-
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->name, name))
@@ -73,7 +72,7 @@ int	ft_checkarg(char *arg)
 		return (0);
 	while (arg[i])
 	{
-		if(!ft_isalnum(arg[i]) && arg[i] != '_')
+		if (!ft_isalnum(arg[i]) && arg[i] != '_')
 			return (0);
 		i++;
 	}

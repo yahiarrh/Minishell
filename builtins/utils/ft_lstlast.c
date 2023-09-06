@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 17:13:57 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 11:31:08 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/10/20 22:26:30 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/09/05 16:17:12 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../../includes/blt_lib.h"
 
-void	ft_pwd(t_env **env)
+t_env	*ft_lstlast(t_env *lst)
 {
-	t_env	*tmp;
-	char	*pwd;
-
-	tmp = ft_getval(env, "PWD");
-	if (!tmp)
-	{
-		pwd = getcwd(NULL, 0);
-		printf("%s\n", pwd);
-		free(pwd);
-		return ;
-	}
-	printf("%s\n", tmp->value);
+	if (!lst)
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
