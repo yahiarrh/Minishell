@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:53:22 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/27 11:43:42 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/07 14:12:59 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static	int	count_word(char const *s, char c)
 	num = 0;
 	while (s[j])
 	{
-		if(s[j] != c)
+		if (s[j] != c)
 		{
 			m++;
 			while (s[j] && s[j] != c)

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 23:57:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2022/10/31 01:39:05 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/07 14:13:12 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strdup(const char *s)
 	while (s[i])
 	{
 		d[i] = s[i];
-			i++;
+		i++;
 	}
 	d[i] = '\0';
 	return (d);

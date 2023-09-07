@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:50:48 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2022/10/30 18:31:25 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/07 14:13:32 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!sub)
 		return (0);
 	while (s[start] && i < len)
-	{	
+	{
 		sub[i] = s[start];
 		start++;
 		i++;
