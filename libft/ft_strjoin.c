@@ -6,11 +6,12 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 15:06:31 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 10:49:25 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:16:30 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

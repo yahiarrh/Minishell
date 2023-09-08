@@ -1,7 +1,7 @@
 NAME = minis
 
-SRC	=	main.c ./builtins/pwd.c ./builtins/utils/ft_lstadd_back.c ./builtins/utils/ft_lstlast.c ./builtins/ft_getval.c ./builtins/utils/ft_lstnew.c\
-		./builtins/env.c ./builtins/echo.c ./builtins/cd.c ./builtins/unset.c ./builtins/export.c ./builtins/exit.c ./builtins/utils/ft_err_msg.c
+SRC	=	main.c builtins/pwd.c builtins/utils/ft_lstadd_back.c builtins/utils/ft_lstlast.c builtins/ft_getval.c builtins/utils/ft_lstnew.c\
+		builtins/env.c builtins/echo.c builtins/cd.c builtins/unset.c builtins/export.c builtins/exit.c builtins/utils/ft_err_msg.c expander/expand.c
  
 CFLAGS	= -Wall -Wextra -Werror
 
