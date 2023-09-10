@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/08 15:21:50 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:19:47 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 
+	g_exit_status = 0;
 	env = ft_getenv(envp);
-	char *s = expand(&env, "$HOME-asd");
+	char *s = expand(&env, "das..33$?$PW-D._33");
 	printf("%s\n",s);
 	// char *prompt = "minis : ";
 	// char *line;

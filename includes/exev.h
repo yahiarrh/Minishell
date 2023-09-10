@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:39 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/03 15:02:34 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:22:42 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,5 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-
-
 
 #endif

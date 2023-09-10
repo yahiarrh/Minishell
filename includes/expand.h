@@ -6,12 +6,12 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:23:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/08 11:34:07 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:24:30 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
-#define EXPAND_H
+# define EXPAND_H
 
 # include "../libft/libft.h"
 # include "../includes/blt_lib.h"

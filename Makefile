@@ -25,6 +25,7 @@ $(NAME) : $(OBJS)
 	@cc $(OBJS) -o $(NAME) $(LIBFT) -lreadline  $(CFLAGS)
 
 clean :
+	@make clean -C libft
 	$(RM) $(OBJS)
 
 

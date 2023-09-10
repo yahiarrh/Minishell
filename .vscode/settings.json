@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "blt_lib.h": "c"
+        "blt_lib.h": "c",
+        "minishell.h": "c",
+        "stdio.h": "c"
     }
 }

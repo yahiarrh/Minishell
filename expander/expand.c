@@ -6,18 +6,28 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:23:25 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/08 15:21:19 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:18:54 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static int	checkarg(char arg)
+{
+	int	i;
+
+	i = 1;
+	if (!ft_isalpha(arg) && arg != '_')
+		return (0);
+	return (1);
+}
 
 static int	spc_len(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] && s[i] == ' ')
+	while (s[i])
 	{
 		if (s[i] == '$')
 			break ;
@@ -44,10 +54,25 @@ static char	*extr_name(char *s)
 		nam = ft_substr("?", 0, 1);
 		return (nam);
 	}
-	while (s[i] && s[i] != '$' && ft_checkarg(&s[i]))
+	while (s[i] && s[i] != '$' && checkarg(s[0]))
+	{
+		if (!ft_isalnum(s[i]) && s[i] != '_')
+			break ;
 		i++;
+	}
 	nam = ft_substr(s, 0, i);
 	return (nam);
+}
+
+static char	*ft_val(t_env **env, char *name, char *ret)
+{
+	if (ft_strcmp2(name, "?"))
+		ret = ft_strjoin(ret, ft_itoa(g_exit_status));
+	else if (!ft_getval(env, name))
+		ret = ft_strjoin(ret, NULL);
+	else
+		ret = ft_strjoin(ret, ft_getval(env, name)->value);
+	return (ret);
 }
 
 char	*expand(t_env **env, char *var)
@@ -57,7 +82,6 @@ char	*expand(t_env **env, char *var)
 	char	*ret;
 	int		i;
 
-
 	i = 0;
 	ret = NULL;
 	while (var[i])
@@ -65,19 +89,17 @@ char	*expand(t_env **env, char *var)
 		val = ret;
 		if (var[i] == '$')
 		{
-			i++;
-			name = extr_name(var + i);
-			ret = ft_strjoin(ret, ft_getval(env, name)->value);
+			name = extr_name(var + i + 1);
+			ret = ft_val(env, name, ret);
 			free(val);
-			i += ft_strlen(name);
+			i += ft_strlen(name) + 1;
 		}
 		else
 		{
 			ret = ft_strjoin(ret, ft_substr(var, i, spc_len(var + i)));
 			free(val);
-			i = ft_strlen(ret);
+			i += spc_len(var + i);
 		}
-		i++;
 	}
 	return (ret);
 }
