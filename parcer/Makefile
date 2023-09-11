@@ -14,12 +14,12 @@ HEADERM = tokenizer.h
 
 OBJS	= $(SRC:.c=.o)
 
-%.o : %.c  $(LIBFT_H)
+%.o : %.c  $(HEADERM)
 		$(CC) $(CFLAGS) -c -o $@ $<
 
 all	: $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) 
 	@cc $(OBJS) -o $(NAME) -lreadline  $(CFLAGS)
 
 clean :

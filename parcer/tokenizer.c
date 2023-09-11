@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/06 13:43:26 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/10 14:51:30 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,6 @@ int	spc_chk(char c)
 	return (0);
 }
 
-t_list	*indicator_check(char *c)
-{
-	t_list	*cmdline;
-
-	cmdline = malloc(sizeof(t_list));
-	if (c[0] == '|')
-		pipe_tok(cmdline);
-	else if (c[0] == '\"')
-		double_quotes(c, cmdline);
-	// else if (c[i] == '\"')
-	// 	single_quote();
-	return (cmdline);
-}
 
 int	ft_delim(char *str)
 {
@@ -51,23 +38,42 @@ int	ft_delim(char *str)
 t_list	*tokenizer(char *arg)
 {
 	t_list	*head;
+	t_flags	*j;
 	int		i;
-	int		len;
+
 
 	i = 0;
+	j = malloc(sizeof(t_flags));
+	j->spc = 0;
+	j->len = 0;
 	head = NULL;
 	while (arg[i])
 	{
-		if (ft_strchr(INDICATORS, arg[i]) || spc_chk(arg[i]))
+		while (spc_chk(arg[i]))
 		{
-			token_back(&head, indicator_check(arg + i));
+			j->spc = 1;
 			i++;
+		}
+		if (arg[i] == '|')
+		{
+			token_back(&head, pipe_tok());
+			i++;
+		}
+		else if (arg[i] == '\'' || arg[i] == '\"')
+		{
+			j->len = chr_q(arg + (i + 1), arg[i]);
+			token_back(&head, ft_quotes(arg + i, j->len));
+			i += j->len + 2;
+		}
+		else if () // redirin and redirout
+		{
+			
 		}
 		else
 		{
-			len = ft_delim(arg + i);
-			token_back(&head, word_tok(arg + i, len));
-			i += len;
+			j->len = ft_delim(arg + i);
+			token_back(&head, word_tok(arg + i, j->len));
+			i += j->len;
 		}
 	}
 	return (head);

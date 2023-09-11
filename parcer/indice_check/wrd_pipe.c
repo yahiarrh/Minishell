@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:06:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/06 10:18:06 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/10 12:18:10 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ t_list	*word_tok(char *arg, int len)
 	return (command);
 }
 
-t_list  *pipe_tok(t_list *cmdline)
+t_list  *pipe_tok(void)
 {
-    cmdline->type = PIPE;
-	cmdline->word = malloc(sizeof(char) * 2);
-	cmdline->word[0] = '|';
-	cmdline->word[1] = '\0';
-	cmdline->next = NULL;
-    return (cmdline);
+	t_list	*token;
+
+	token = malloc(sizeof(t_list));
+    token->type = PIPE;
+	token->word = malloc(sizeof(char) * 2);
+	token->word[0] = '|';
+	token->word[1] = '\0';
+	token->next = NULL;
+    return (token);
 }
