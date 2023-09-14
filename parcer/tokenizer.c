@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/10 14:51:30 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/14 18:22:23 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_delim(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_strchr(INDICATORS, str[i]))
+		if (ft_tokchr(INDICATORS, str[i]))
 			break ;
 		i++;
 	}
@@ -35,45 +35,47 @@ int	ft_delim(char *str)
 }
 
 
-t_list	*tokenizer(char *arg)
+t_token	*tokenizer(char *arg)
 {
-	t_list	*head;
-	t_flags	*j;
+	t_token	*head;
+	t_flags	*flag;
 	int		i;
 
 
 	i = 0;
-	j = malloc(sizeof(t_flags));
-	j->spc = 0;
-	j->len = 0;
+	flag = malloc(sizeof(t_flags));
+	flag->len = 0;
+	flag->single_q = 0;
+	flag->double_q = 0;
+	flag->spc = 1;
 	head = NULL;
 	while (arg[i])
 	{
-		while (spc_chk(arg[i]))
+		if (spc_chk(arg[i]))
 		{
-			j->spc = 1;
+			flag->spc = 1;
 			i++;
 		}
-		if (arg[i] == '|')
+		else if (arg[i] == '|')
 		{
-			token_back(&head, pipe_tok());
+			flag->spc = 1;
+			token_back(&head, pipe_tok(), 1);
 			i++;
 		}
 		else if (arg[i] == '\'' || arg[i] == '\"')
 		{
-			j->len = chr_q(arg + (i + 1), arg[i]);
-			token_back(&head, ft_quotes(arg + i, j->len));
-			i += j->len + 2;
-		}
-		else if () // redirin and redirout
-		{
-			
+			flag->len = chr_q(arg + i +1, flag, arg[i]);
+			if(flag->len || (!flag->len && (flag->spc && spc_chk(arg[i + 2])))) 
+				token_back(&head, ft_quotes(arg + i, flag), flag->spc);
+			i += flag->len + 2;
+			flag->spc = 0;
 		}
 		else
 		{
-			j->len = ft_delim(arg + i);
-			token_back(&head, word_tok(arg + i, j->len));
-			i += j->len;
+			flag->len = ft_delim(arg + i);
+			token_back(&head, word_tok(arg + i, flag->len), flag->spc);
+			flag->spc = 0;
+			i += flag->len;
 		}
 	}
 	return (head);
@@ -83,7 +85,7 @@ int main ()
 {
 	char *prompt = "TOKE$> ";
 	char *line;
-	t_list	*f;
+	t_token	*f;
 
 	while (1)
 	{
@@ -94,6 +96,11 @@ int main ()
 		{
 			printf("word :: %s\n", f->word);
 			printf("type :: %d\n", f->type);
+			if (f->down)
+			{
+				printf("down->word :: %s\n", f->down->word);
+				printf("down->type :: %d\n", f->down->type);
+			}
 			printf("---------------\n");
 			f = f->next;
 		}

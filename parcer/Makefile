@@ -1,7 +1,7 @@
 NAME = tokenizer
 
-SRC	=	tokenizer.c ./utils/ft_strchr.c ./utils/ft_strlen.c ./utils/ft_substr.c ./utils/last_token.c ./utils/token_back.c \
-		./utils/ft_strdup.c ./indice_check/quotes.c ./indice_check/wrd_pipe.c
+SRC	=	tokenizer.c ./utils/ft_tokchr.c ./utils/ft_strlen.c ./utils/ft_subtoken.c ./utils/last_token.c ./utils/token_back.c \
+		./utils/ft_strdup.c ./indice_check/quotes.c ./indice_check/wrd_pipe.c ../libft/ft_memset.c
  
 CFLAGS	= -Wall -Wextra -Werror
 

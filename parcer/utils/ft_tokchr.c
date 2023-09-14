@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_tokchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 11:50:48 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 10:11:00 by msaidi           ###   ########.fr       */
+/*   Created: 2022/10/07 07:58:59 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/09/14 18:05:01 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../tokenizer.h"
 
-char	*ft_substr(char const *s, unsigned int start, int len)
+int	ft_tokchr(const char *str, int c)
 {
+	char	ch;
 	int		i;
-	char	*sub;
-	int		st;
 
-	if (!s)
-		return (NULL);
-	if (len == 0 || ft_strlen(s) <= start)
-		return (ft_strdup(""));
+	ch = (char)c;
 	i = 0;
-	st = ft_strlen(s + start);
-	if (start < (unsigned int)len)
-		sub = (char *)malloc(sizeof(char) * (st + 1));
-	else
-		sub = (char *)malloc(sizeof(char) * (len + 1));
-	if (!sub)
-		return (0);
-	while (s[start] && i < len)
-		sub[i++] = s[start++];
-	sub[i] = '\0';
-	return (sub);
+	if (c == 0)
+		return (2);
+	while (str[i])
+	{
+		if (str[i] == ch)
+			return (1);
+		i++;
+	}
+	return (0);
 }

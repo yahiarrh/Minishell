@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_subtoken.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 07:58:59 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 10:10:40 by msaidi           ###   ########.fr       */
+/*   Created: 2022/10/11 11:50:48 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/09/14 11:30:35 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../tokenizer.h"
 
-int	ft_strchr(const char *str, int c)
+char	*ft_subtoken(char const *s, unsigned int start, int len)
 {
-	char	ch;
 	int		i;
+	char	*sub;
+	int		st;
 
-	ch = (char)c;
+	if (!s)
+		return (NULL);
+	if (len == 0 || ft_strlen(s) <= start)
+		return (ft_strdup(""));
 	i = 0;
-	if (c == 0)
-		return (2);
-	while (str[i])
-	{
-		if (str[i] == ch)
-			return (1);
-		i++;
-	}
-	return (0);
+	st = ft_strlen(s + start);
+	if (start < (unsigned int)len)
+		sub = (char *)malloc(sizeof(char) * (st + 1));
+	else
+		sub = (char *)malloc(sizeof(char) * (len + 1));
+	if (!sub)
+		return (0);
+	while (s[start] && i < len)
+		sub[i++] = s[start++];
+	sub[i] = '\0';
+	return (sub);
 }
