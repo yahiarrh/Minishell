@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 13:46:22 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:22:39 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,38 +43,12 @@ static void	home_case(t_env **env, char *op)
 	ft_update(env, "OLDPWD", op);
 }
 
-static void	doublep_case(t_env **env, char *op)
-{
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = NULL;
-	if (!ft_strcmp(op, "/"))
-	{
-		ft_update(env, "OLDPWD", "/");
-		return ;
-	}
-	i = ft_strlen(op);
-	while (i && op[i] != '/')
-		i--;
-	if (!ft_strcmp(op, "/Users"))
-		ft_update(env, "PWD", "/");
-	else
-	{
-		tmp = malloc(i + 1);
-		ft_strlcpy(tmp, op, i + 1);
-		ft_update(env, "PWD", tmp);
-	}
-	ft_update(env, "OLDPWD", op);
-}
-
 void	ft_cd(t_env **env, char *p)
 {
 	char	*op;
 
-	op = ft_getval(env, "PWD")->value;
-	if (!p)
+	op = getcwd(NULL, 0);
+	if (!p || p[0] == '~')
 		home_case(env, op);
 	else if (p[0] == '-')
 		dash_case(env, op);
@@ -82,18 +56,7 @@ void	ft_cd(t_env **env, char *p)
 	{
 		if (chdir(p))
 			ft_err_msg("bash: cd: ", p, ": No such file or directory\n");
-		if (p[0] == '/')
-		{
-			ft_update(env, "PWD", p);
-			ft_update(env, "OLDPWD", op);
-		}
-		else if (!ft_strcmp(p, ".."))
-			doublep_case(env, op);
-		else
-		{
-			op = ft_strjoin(op, "/");
-			ft_update(env, "PWD", ft_strjoin(op, p));
-			ft_update(env, "OLDPWD", op);
-		}
+		ft_update(env, "PWD", getcwd(NULL, 0));
+		ft_update(env, "OLDPWD", op);
 	}
 }

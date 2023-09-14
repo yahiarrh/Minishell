@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/10 11:52:57 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:27:15 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ t_env	*ft_getenv(char **envp)
 	env = NULL;
 	while (envp[i])
 		i++;
-	i = 0;
-	while (envp[i])
+	i = -1;
+	while (envp[++i])
 	{
 		equ = 0;
 		while (envp[i][equ] && envp[i][equ] != '=')
 			equ++;
 		tmp = malloc(sizeof(t_env));
+		ft_memset(tmp, 0, sizeof(t_env));
 		tmp->name = ft_substr(envp[i], 0, equ);
 		if (!ft_strcmp(tmp->name, "OLDPWD"))
 			tmp->value = NULL;
 		else
 			tmp->value = getenv(tmp->name);
 		ft_lstadd_back(&env, tmp);
-		i++;
 	}
 	return (env);
 }
