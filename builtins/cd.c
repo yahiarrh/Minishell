@@ -6,15 +6,36 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/14 12:22:39 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:25:12 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/blt_lib.h"
 
+
+// unset oldpwd & pwd + cd .. 
+static void	ft_update_cd(t_env **env, char *name, char *nv)
+{
+	t_env	*tmp;
+
+	if (!ft_getval(env, name))
+	{
+		tmp = ft_lstnew(name);
+		ft_lstadd_back(env, tmp);
+	}
+	else
+		tmp = ft_getval(env, name);
+	tmp->value = nv;
+}
+
 static void	dash_case(t_env **env, char *op)
 {
-	if (!(ft_getval(env, "OLDPWD")->value))
+	if (!(ft_getval(env, "OLDPWD")))
+	{
+		ft_err_msg("bash: cd:", NULL, " OLDPWD not set\n");
+		return ;
+	}
+	else if (!(ft_getval(env, "OLDPWD")->value))
 	{
 		ft_err_msg("bash: cd:", NULL, " OLDPWD not set\n");
 		return ;
@@ -26,9 +47,9 @@ static void	dash_case(t_env **env, char *op)
 			perror("chdir problem");
 			return ;
 		}
-		ft_update(env, "PWD", ft_getval(env, "OLDPWD")->value);
+		ft_update_cd(env, "PWD", ft_getval(env, "OLDPWD")->value);
 		printf("%s\n", ft_getval(env, "OLDPWD")->value);
-		ft_update(env, "OLDPWD", op);
+		ft_update_cd(env, "OLDPWD", op);
 	}
 }
 
@@ -39,8 +60,8 @@ static void	home_case(t_env **env, char *op)
 		perror("chdir problem");
 		return ;
 	}
-	ft_update(env, "PWD", ft_getval(env, "HOME")->value);
-	ft_update(env, "OLDPWD", op);
+	ft_update_cd(env, "PWD", getcwd(NULL, 0));
+	ft_update_cd(env, "OLDPWD", op);
 }
 
 void	ft_cd(t_env **env, char *p)
@@ -56,7 +77,7 @@ void	ft_cd(t_env **env, char *p)
 	{
 		if (chdir(p))
 			ft_err_msg("bash: cd: ", p, ": No such file or directory\n");
-		ft_update(env, "PWD", getcwd(NULL, 0));
-		ft_update(env, "OLDPWD", op);
+		ft_update_cd(env, "PWD", getcwd(NULL, 0));
+		ft_update_cd(env, "OLDPWD", op);
 	}
 }

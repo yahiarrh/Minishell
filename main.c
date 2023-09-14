@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/10 14:39:36 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:02:18 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,4 @@ int main(int ac, char **av, char **envp)
 		if(!ft_strcmp("export", ft_split(line, ' ')[0]))
 				ft_export(&env, ft_split(line, ' '));
 	}
-}
+} 
