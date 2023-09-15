@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/14 18:25:12 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:49:49 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	ft_cd(t_env **env, char *p)
 	{
 		if (chdir(p))
 			ft_err_msg("bash: cd: ", p, ": No such file or directory\n");
+		if (ft_getval(env, "PWD"))
+			ft_update_cd(env, "OLDPWD", op);
 		ft_update_cd(env, "PWD", getcwd(NULL, 0));
-		ft_update_cd(env, "OLDPWD", op);
 	}
 }
