@@ -6,11 +6,11 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:39:44 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/14 17:48:27 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:07:21 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tokenizer.h"
+#include "../../includes/tokenizer.h"
 
 t_token	*last_token(t_token *lst)
 {

@@ -1,12 +1,5 @@
 {
     "files.associations": {
-        "blt_lib.h": "c",
-        "readline.h": "c",
-        "type_traits": "c",
-        "complex": "c",
-        "libft.h": "c",
-        "tokenizer.h": "c",
-        "__node_handle": "c"
-    },
-    "C_Cpp.errorSquiggles": "disabled"
+        "tokenizer.h": "c"
+    }
 }

@@ -6,11 +6,11 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:14:59 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/14 18:15:08 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:08:02 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tokenizer.h"
+#include "../../includes/tokenizer.h"
 
 int	chr_q(char *str, t_flags *flag, char q)
 {

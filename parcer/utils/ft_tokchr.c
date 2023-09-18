@@ -6,11 +6,11 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 07:58:59 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/14 18:05:01 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:06:34 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tokenizer.h"
+#include "../../includes/tokenizer.h"
 
 int	ft_tokchr(const char *str, int c)
 {

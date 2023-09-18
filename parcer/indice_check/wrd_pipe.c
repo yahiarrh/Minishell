@@ -6,11 +6,11 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:06:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/14 17:21:36 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:08:10 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tokenizer.h"
+#include "../../includes/tokenizer.h"
 
 t_token	*word_tok(char *arg, int len)
 {
@@ -34,6 +34,32 @@ t_token  *pipe_tok(void)
     token->type = PIPE;
 	token->word = malloc(sizeof(char) * 2);
 	token->word[0] = '|';
+	token->word[1] = '\0';
+	token->next = NULL;
+	token->down = NULL;
+    return (token);
+}
+t_token  *redirin_tok(void)
+{
+	t_token	*token;
+
+	token = malloc(sizeof(t_token));
+    token->type = REDIN;
+	token->word = malloc(sizeof(char) * 2);
+	token->word[0] = '<';
+	token->word[1] = '\0';
+	token->next = NULL;
+	token->down = NULL;
+    return (token);
+}
+t_token  *redirout_tok(void)
+{
+	t_token	*token;
+
+	token = malloc(sizeof(t_token));
+    token->type = REDOUT;
+	token->word = malloc(sizeof(char) * 2);
+	token->word[0] = '>';
 	token->word[1] = '\0';
 	token->next = NULL;
 	token->down = NULL;

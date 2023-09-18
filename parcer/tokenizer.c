@@ -6,11 +6,11 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/14 18:22:23 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:05:27 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../includes/tokenizer.h"
 
 int	spc_chk(char c)
 {
@@ -33,14 +33,38 @@ int	ft_delim(char *str)
 	}
 	return (i);
 }
-
+int	tok_indice(t_token **token, char	*arg)
+{
+	if (arg[0] == '<')
+	{
+		if (arg[1] == '<')
+		{
+			token_back(token, heredoc_tok(), 1);
+			return(2);
+		}
+		else
+			token_back(token, redirin_tok(), 1);
+	}
+	else if (arg[0] == '>')
+	{
+		if (arg[1] == '>')
+		{
+			token_back(token, append_tok(), 1);
+			return(2);
+		}
+		else
+			token_back(token, redirout_tok(), 1);
+	}
+	else
+		token_back(token, pipe_tok(), 1);
+	return(1);
+}
 
 t_token	*tokenizer(char *arg)
 {
 	t_token	*head;
 	t_flags	*flag;
 	int		i;
-
 
 	i = 0;
 	flag = malloc(sizeof(t_flags));
@@ -56,11 +80,10 @@ t_token	*tokenizer(char *arg)
 			flag->spc = 1;
 			i++;
 		}
-		else if (arg[i] == '|')
+		else if (ft_tokchr("|<>", arg[i]))
 		{
 			flag->spc = 1;
-			token_back(&head, pipe_tok(), 1);
-			i++;
+			i += tok_indice(&head, arg + i);
 		}
 		else if (arg[i] == '\'' || arg[i] == '\"')
 		{
@@ -78,6 +101,8 @@ t_token	*tokenizer(char *arg)
 			i += flag->len;
 		}
 	}
+	if (flag->double_q || flag->single_q)
+		printf("quote not closed\n");
 	return (head);
 }
 
