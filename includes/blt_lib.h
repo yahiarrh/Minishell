@@ -6,17 +6,18 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:34 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 11:47:48 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:55:08 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BLT_LIB_H
 # define BLT_LIB_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "../libft/libft.h"
+// # include <stdio.h>
+// # include <stdlib.h>
+// # include <unistd.h>
+// # include "../libft/libft.h"
+# include "../minishell.h"
 
 typedef struct s_env{
 	char			*name;

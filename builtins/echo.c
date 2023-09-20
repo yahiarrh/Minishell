@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:04:30 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 14:03:07 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:26:13 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
 
 static int	option(char *s)
 {

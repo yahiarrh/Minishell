@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 17:13:57 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 11:31:08 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:26:36 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
 
 void	ft_pwd(t_env **env)
 {

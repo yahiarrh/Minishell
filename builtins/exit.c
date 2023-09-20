@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:05:16 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/07 13:27:00 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:26:17 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
 
 static void	alph_arg(char **status)
 {
@@ -48,6 +48,7 @@ void	ft_exit(char	**status)
 	if (i > 2)
 	{
 		ft_err_msg("bash: exit: ", NULL, "too many arguments\n");
+		g_exit_status = 1;
 		return ;
 	}
 	else

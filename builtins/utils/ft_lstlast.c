@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 22:26:30 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/14 11:24:59 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:56:24 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/blt_lib.h"
+#include "../../minishell.h"
 
 t_env	*ft_lstlast(t_env *lst)
 {

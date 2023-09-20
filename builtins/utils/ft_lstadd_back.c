@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 22:39:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/07 14:12:24 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:26:49 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/blt_lib.h"
+#include "../../minishell.h"
 
 void	ft_lstadd_back(t_env **lst, t_env *new)
 {

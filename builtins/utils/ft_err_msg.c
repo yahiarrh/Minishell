@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 08:48:12 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/07 14:12:06 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:56:15 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/blt_lib.h"
+#include "../../minishell.h"
 
 void	ft_err_msg(char *err, char *targ, char *erty)
 {

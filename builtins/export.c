@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:16:02 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/14 12:28:52 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:26:19 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
 
 static char	*extr_val(char *val)
 {
@@ -63,8 +63,11 @@ static void	up_val(t_env **env, char *name, char *n)
 {
 	t_env	*tmp;
 	char	*value;
+	char	*v;
 
 	value = extr_val(name);
+	tmp = NULL;
+	v = NULL;
 	if (!ft_getval(env, n))
 	{
 		tmp = ft_lstnew(n);
@@ -75,10 +78,8 @@ static void	up_val(t_env **env, char *name, char *n)
 		if (*value == '=')
 			ft_update(env, n, value + 1);
 		else if (*value == '+' && ft_getval(env, n)->value)
-		{
-			ft_update(env, n,
+			ft_update(env, n, 
 				ft_strjoin(ft_getval(env, n)->value, value + 2));
-		}
 		else
 			ft_update(env, n, value + 2);
 	}

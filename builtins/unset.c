@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:03:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/06 11:30:36 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:26:30 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
 
 static t_env	*prev(t_env *tmp, t_env *tmp2, char *name)
 {

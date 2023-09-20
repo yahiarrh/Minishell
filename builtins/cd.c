@@ -6,14 +6,12 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/15 11:49:49 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:25:56 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
 
-
-// unset oldpwd & pwd + cd .. 
 static void	ft_update_cd(t_env **env, char *name, char *nv)
 {
 	t_env	*tmp;
@@ -22,9 +20,12 @@ static void	ft_update_cd(t_env **env, char *name, char *nv)
 	{
 		tmp = ft_lstnew(name);
 		ft_lstadd_back(env, tmp);
+		free(tmp);
 	}
 	else
+	{
 		tmp = ft_getval(env, name);
+	}
 	tmp->value = nv;
 }
 
@@ -67,8 +68,10 @@ static void	home_case(t_env **env, char *op)
 void	ft_cd(t_env **env, char *p)
 {
 	char	*op;
+	char	*o;
 
 	op = getcwd(NULL, 0);
+	o = NULL;
 	if (!p || p[0] == '~')
 		home_case(env, op);
 	else if (p[0] == '-')
@@ -76,9 +79,15 @@ void	ft_cd(t_env **env, char *p)
 	else
 	{
 		if (chdir(p))
+		{
 			ft_err_msg("bash: cd: ", p, ": No such file or directory\n");
-		if (ft_getval(env, "PWD"))
-			ft_update_cd(env, "OLDPWD", op);
-		ft_update_cd(env, "PWD", getcwd(NULL, 0));
+			g_exit_status = 1;
+			return ;
+		}
+		o = getcwd(NULL, 0);
+		ft_update_cd(env, "PWD", o);
+		ft_update_cd(env, "OLDPWD", op);
 	}
+	free(op);
+	free(o);
 }
