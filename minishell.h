@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/17 12:07:48 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:16:31 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,13 @@
 int	g_exit_status;
 # define PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin\
 				:/sbin:/usr/local/munki:/Library/Apple/usr/bin"
+
+typedef struct s_gt
+{
+	void		*ptr;
+	struct s_gt *next;
+}t_gt;
+
+void	*get_ptr(t_gt **head, size_t i, int flag);
 
 #endif

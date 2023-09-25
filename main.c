@@ -6,31 +6,60 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:23:30 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:17:09 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <readline/readline.h>
 
-void	lstclear(t_env **lst, void (*del) (void *))
+static last_ptr(t_gt *lst)
 {
-
-	if (!lst || !*lst || !del)
-		return ;
-	while (*lst)
-	{
-		del ((*lst)->name);
-		free (*lst);
-		(*lst) = (*lst)->next;
-	}
-	*lst = NULL;
+	if (!lst)
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
-void l()
+static add_ptr(t_gt **head, t_gt *new)
 {
+	t_gt	*tmp;
 
-	system("leaks minis");
+	if (!head || !new)
+		return ;
+	if (!*head)
+	{
+		*head = new;
+		return ;
+	}
+	tmp = last_ptr(*head);
+	tmp->next = new;
+}
+
+void	*get_ptr(t_gt **head, size_t i, int flag)
+{
+	void	*ptr;
+	t_gt	*tmp;
+
+	tmp = NULL;
+	if (flag == 1)
+	{
+		ptr = malloc(i);
+		tmp = malloc(sizeof(t_gt));
+		tmp->ptr = ptr;
+		add_ptr(head, tmp);
+		return (ptr);
+	}
+	else
+	{
+		while ((*head))
+		{
+			free((*head)->ptr);
+			*head = (*head)->next;
+		}
+	}
+	return (NULL);
 }
 
 int main(int ac, char **av, char **envp)
@@ -41,7 +70,6 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 
 	g_exit_status = 0;
-	atexit(l);
 	env = ft_getenv(envp);
 	char *prompt = "minis : ";
 	char *line;
