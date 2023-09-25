@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "tokenizer.h": "c"
+        "tokenizer.h": "c",
+        "libft.h": "c"
     }
 }
