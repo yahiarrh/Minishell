@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/25 16:16:31 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:07:40 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "includes/blt_lib.h"
 # include "includes/expand.h"
 # include "includes/exev.h"
+# include "parcing/parcing.h"
 
 int	g_exit_status;
 # define PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin\
@@ -28,6 +29,6 @@ typedef struct s_gt
 	struct s_gt *next;
 }t_gt;
 
-void	*get_ptr(t_gt **head, size_t i, int flag);
+void	*get_ptr(size_t i, int flag);
 
 #endif

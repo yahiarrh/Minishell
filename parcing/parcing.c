@@ -2,7 +2,7 @@
 
 static int	syntx(t_token *list)
 {
-	if ()
+	if ();
 }
 
 void	parcer(t_token **list, t_gt **head)
