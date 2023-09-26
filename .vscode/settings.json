@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "tokenizer.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "stdio.h": "c"
     }
 }

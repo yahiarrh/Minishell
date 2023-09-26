@@ -6,28 +6,48 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/23 16:30:52 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/26 13:42:46 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tokenizer.h"
+#include "parcing.h"
 
-t_args	*check_syntax(t_token *token)
+t_args	*last_token(t_args *lst)
 {
-	t_args	*line;
-
-	line = malloc(sizeof(t_args));
-	if (token->type == PIPE)
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
+void	arg_back(t_args **lst, t_args *new)
+{
+	t_args	*node;
 
-t_args  parcing(t_token *token)
+
+	if (!new || !lst)
+		return ;
+	if (*lst)
+	{
+		node = last_token(*lst);
+		node->next = new;
+	}
+	else
+		*lst = new;
+}
+
+t_args  *parcing(t_token *token)
 {
 	t_args  *head;
 
 	head = NULL;
 	if (!token)
 		return (NULL);
-	head = check_syntax(token);
-
+	while (token)
+	{
+		if (token->type == WORD)
+			arg_back(&head, new_arg(token));
+	}
+	return (head);
 }

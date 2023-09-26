@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/23 16:21:06 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/09/26 13:02:03 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,6 @@ enum e_cmd
 	APPEND,
 	HEREDOC
 };
-typedef struct s_redir
-{
-	char	*cmdline;
-	int		type;
-}t_redir;
-
-typedef struct s_pipe
-{
-	char	*cmdline;
-	int		type;
-}t_pipe;
-
-typedef struct s_args
-{
-	char	*cmdline;
-	int		type;
-	t_redir	*redir;
-	t_pipe	*pipe;
-	struct s_args *next;
-}t_args;
 
 t_token	*last_token(t_token *lst);
 t_token	*last_down(t_token *lst);
