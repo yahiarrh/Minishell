@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.h                                           :+:      :+:    :+:   */
+/*   exec_comm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/08 09:23:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/01 11:48:30 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2023/10/01 11:21:18 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/10/01 11:56:03 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPAND_H
-# define EXPAND_H
+#include "../../minishell.h"
 
-// # include "../libft/libft.h"
-// # include "../includes/blt_lib.h"
-# include "../minishell.h"
+static char *find_path(char *comm, char **path)
+{
+	
+}
 
-char	*expand(t_env **env, char *var);
+void    exec_comm(t_env **env, char **comm, char **path)
+{
+	char    *rpat;
 
-#endif
+	rpat = find_path(comm[0], path);
+}

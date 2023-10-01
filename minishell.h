@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/26 13:07:40 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:24:34 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "includes/blt_lib.h"
 # include "includes/expand.h"
 # include "includes/exev.h"
-# include "parcing/parcing.h"
 
 int	g_exit_status;
 # define PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin\

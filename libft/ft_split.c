@@ -6,12 +6,12 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:53:22 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/07 14:12:59 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:26:23 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+#include "../minishell.h"
 
 static char	**dealc(char **s, int i)
 {
@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	count = count_word(s, c);
-	word = malloc(sizeof(char *) * (count + 1));
+	word = get_ptr((sizeof(char *) * (count + 1)), 1);
 	if (!word)
 		return (NULL);
 	while (*s)
