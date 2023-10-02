@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:39 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/01 11:49:25 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:51:52 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # include "../minishell.h"
 
 void    exec_comm(t_env **env, char **comm, char **path);
+void	comm_type(t_env **env, char	**comm);
 
 #endif
