@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/26 13:02:03 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:19:23 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include <readline/readline.h>
+
 #define INDICATORS " \'\"|<>"
 #define SYN "syntax error"
 
@@ -68,7 +69,7 @@ t_token	*double_quotes(char *arg, t_flags *flag);
 t_token	*single_quotes(char *arg, t_flags *flag);
 t_token	*ft_quotes(char *arg, t_flags *flag);
 int		chr_q(char *str, t_flags *flag, char q);
-t_args  parcing(t_token *token);
-t_args	*check_syntax(t_token *token);
+// t_args  parcing(t_token *token);
+// t_args	*check_syntax(t_token *token);
 
 #endif
