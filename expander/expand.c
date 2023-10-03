@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:23:25 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/03 14:55:09 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:50:00 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	*ft_val(t_env **env, char *name, char *ret)
 	return (ret);
 }
 
-static char	*expand(t_env **env, char *var)
+char	*expand(t_env **env, char *var)
 {
 	char	*name;
 	char	*val;
@@ -103,7 +103,45 @@ static char	*expand(t_env **env, char *var)
 	}
 	return (ret);
 }
-filtre_exp(t_token *token)
+t_cmd	*cmdlast(t_cmd *lst)
 {
-	if (token->down)
+	if (!lst)
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+static void	cmd_back(t_cmd **lst, t_cmd *new)
+{
+	t_cmd	*ptr;
+
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	ptr = cmdlast(*lst);
+	ptr->next = new;
+}
+t_cmd *filtre_exp(t_env **env, t_token *token)
+{
+	t_cmd	*head;
+	t_cmd	*tmp;
+
+	if (token->type == DQ)
+	{
+		while (token)
+		{
+			tmp = malloc(sizeof(t_cmd));
+			ft_memset(tmp, 0, sizeof(t_cmd));
+			tmp->cmd = expand(env, token->word);
+			cmd_back(&head, tmp);
+			token = token->down;
+			free(tmp);
+		}
+		return(head);
+	}
 }

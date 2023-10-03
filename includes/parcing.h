@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.h                                           :+:      :+:    :+:   */
+/*   parcing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/08 09:23:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/03 15:50:47 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
+/*   Updated: 2023/10/03 15:05:22 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPAND_H
-# define EXPAND_H
+# ifndef PARCING_H
+# define PARCING_H
 
-// # include "../libft/libft.h"
-// # include "../includes/blt_lib.h"
-# include "../minishell.h"
+# include "tokenizer.h"
+# include <stdbool.h>
 
-char	*expand(t_env **env, char *var);
-t_cmd *filtre_exp(t_env **env, t_token *token);
+typedef	struct s_cmd
+{
+	char	*cmd;
+	struct s_cmd *next;
+}t_cmd;
+
+typedef struct s_args
+{
+	int				fd_in;
+	int				fd_out;
+	t_cmd			*cmd;
+	struct s_args	*next;
+}t_args;
+
+
+
+t_args  *parcing(t_token *token);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/03 14:38:42 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:05:54 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "includes/expand.h"
 # include "includes/exev.h"
 # include "includes/tokenizer.h"
+# include "includes/parcing.h"
 
 int	g_exit_status;
 # define PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin\
