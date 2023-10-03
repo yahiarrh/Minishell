@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/03 14:10:00 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/03 15:33:50 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,19 @@ t_token	*tokenizer(char *arg)
 		printf("quote not closed\n");
 	return (head);
 }
-
-int main ()
+#include "../includes/blt_lib.h"
+int main (int ac, char **av, char **envp)
 {
 	char *prompt = "TOKE$> ";
 	char *line;
 	t_token	*f;
 	t_args	*parsed;
+	t_env *env;
 
+	(void)av;
+	(void)ac;
+
+	env = ft_getenv(envp);
 	while (1)
 	{
 		line = readline(prompt);

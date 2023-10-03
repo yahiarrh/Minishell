@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/03 14:55:16 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/03 15:35:00 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "tokenizer.h"
 # include <stdbool.h>
+# include <fcntl.h>
+# include "../includes/blt_lib.h"
 
 typedef	struct s_cmd
 {
@@ -29,8 +31,6 @@ typedef struct s_args
 	t_cmd			*cmd;
 	struct s_args	*next;
 }t_args;
-
-
 
 t_args  *parcing(t_token *token);
 

@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/03 14:19:23 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/03 15:34:52 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include <readline/readline.h>
+# include "../includes/blt_lib.h"
+
 
 #define INDICATORS " \'\"|<>"
 #define SYN "syntax error"
