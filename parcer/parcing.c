@@ -6,13 +6,13 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/26 13:42:46 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:54:24 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parcing.h"
+#include "../includes/parcing.h"
 
-t_args	*last_token(t_args *lst)
+t_args	*last_arg(t_args *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -30,13 +30,32 @@ void	arg_back(t_args **lst, t_args *new)
 		return ;
 	if (*lst)
 	{
-		node = last_token(*lst);
+		node = last_arg(*lst);
 		node->next = new;
 	}
 	else
 		*lst = new;
 }
 
+// t_args	*word_add(t_token *token, int tab_sz)
+// {
+	
+// }
+t_args	*check_tokens(t_token *token, t_args *head)
+{
+	int tab_sz;
+	
+	tab_sz = cmd_length(token);
+	printf("%d\n", tab_sz);
+	exit(0);
+	while (token && token->type == PIPE)
+	{
+		
+	}
+	if (token->type == PIPE)
+		check_tokens(token, head);
+
+}
 t_args  *parcing(t_token *token)
 {
 	t_args  *head;
@@ -44,10 +63,6 @@ t_args  *parcing(t_token *token)
 	head = NULL;
 	if (!token)
 		return (NULL);
-	while (token)
-	{
-		if (token->type == WORD)
-			arg_back(&head, new_arg(token));
-	}
+	check_tokens(token, head);
 	return (head);
 }

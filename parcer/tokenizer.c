@@ -6,11 +6,12 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/18 12:05:27 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:10:00 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/tokenizer.h"
+#include "../includes/parcing.h"
 
 int	spc_chk(char c)
 {
@@ -111,24 +112,26 @@ int main ()
 	char *prompt = "TOKE$> ";
 	char *line;
 	t_token	*f;
+	t_args	*parsed;
 
 	while (1)
 	{
 		line = readline(prompt);
 		f = tokenizer(line);
+		parsed = parcing(f);
 	
-		while (f)
-		{
-			printf("word :: %s\n", f->word);
-			printf("type :: %d\n", f->type);
-			if (f->down)
-			{
-				printf("down->word :: %s\n", f->down->word);
-				printf("down->type :: %d\n", f->down->type);
-			}
-			printf("---------------\n");
-			f = f->next;
-		}
+		// while (f)
+		// {
+		// 	printf("word :: %s\n", f->word);
+		// 	printf("type :: %d\n", f->type);
+		// 	if (f->down)
+		// 	{
+		// 		printf("down->word :: %s\n", f->down->word);
+		// 		printf("down->type :: %d\n", f->down->type);
+		// 	}
+		// 	printf("---------------\n");
+		// 	f = f->next;
+		// }
 
 	}
 
