@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:23:25 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/10 14:39:10 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:55:09 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	*ft_val(t_env **env, char *name, char *ret)
 	return (ret);
 }
 
-char	*expand(t_env **env, char *var)
+static char	*expand(t_env **env, char *var)
 {
 	char	*name;
 	char	*val;
@@ -102,4 +102,8 @@ char	*expand(t_env **env, char *var)
 		}
 	}
 	return (ret);
+}
+filtre_exp(t_token *token)
+{
+	if (token->down)
 }
