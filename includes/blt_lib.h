@@ -28,4 +28,6 @@ void	ft_unset(t_env **env, char **name);
 void	ft_export(t_env **env, char **name);
 int		ft_checkarg(char *arg);
 void	ft_exit(char	**status);
+char	*expand(t_env **env, char *var);
+
 #endif

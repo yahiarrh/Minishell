@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "tokenizer.h": "c",
-        "parcing.h": "c"
+        "parcing.h": "c",
+        "blt_lib.h": "c"
     }
 }

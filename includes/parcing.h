@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/03 15:35:00 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/03 15:58:44 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_args
 	struct s_args	*next;
 }t_args;
 
-t_args  *parcing(t_token *token);
+t_args  *parcing(t_token *token, t_env *env);
 
 
 #endif
