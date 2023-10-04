@@ -57,7 +57,7 @@ static char	*extr_name(char *s)
 static char	*ft_val(t_env **env, char *name, char *ret)
 {
 	if (ft_strcmp2(name, "?"))
-		ret = ft_strjoin(ret, ft_itoa(g_exit_status));
+		ret = ft_strjoin(ret, ft_itoa(0));
 	else if (!ft_getval(env, name))
 		ret = ft_strjoin(ret, NULL);
 	else
@@ -65,7 +65,7 @@ static char	*ft_val(t_env **env, char *name, char *ret)
 	return (ret);
 }
 
-static char	*expand(t_env **env, char *var)
+char	*expand(t_env **env, char *var)
 {
 	char	*name;
 	char	*val;

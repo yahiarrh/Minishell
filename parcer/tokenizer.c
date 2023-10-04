@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/03 15:33:50 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/04 16:23:18 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,24 @@ int main (int ac, char **av, char **envp)
 
 	(void)av;
 	(void)ac;
-
 	env = ft_getenv(envp);
 	while (1)
 	{
 		line = readline(prompt);
 		f = tokenizer(line);
-		parsed = parcing(f);
-	
+		parsed = parcing(f, env);
+
+		while (parsed)
+		{
+			while (parsed->cmd)
+			{
+				printf("cmd == %s\n", parsed->cmd->cmd);
+				parsed->cmd = parsed->cmd->next;
+			}
+			printf("in == %d\n", parsed->fd_in);
+			printf("out == %d\n", parsed->fd_out);
+			parsed = parsed->next;
+		}
 		// while (f)
 		// {
 		// 	printf("word :: %s\n", f->word);
