@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "tokenizer.h": "c",
+        "readline.h": "c",
+        "parcing.h": "c"
+    }
+}

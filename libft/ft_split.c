@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:53:22 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/01 11:26:23 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:56:52 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	count = count_word(s, c);
-	word = get_ptr((sizeof(char *) * (count + 1)), 1);
+	word = get_ptr((sizeof(char *) * (count + 1)), ALLOC);
 	if (!word)
 		return (NULL);
 	while (*s)

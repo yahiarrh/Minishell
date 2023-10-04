@@ -6,14 +6,14 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/03 15:58:59 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:56:36 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <readline/readline.h>
 
-static last_ptr(t_gt *lst)
+static t_gt	*last_ptr(t_gt *lst)
 {
 	if (!lst)
 		return (lst);
@@ -22,7 +22,7 @@ static last_ptr(t_gt *lst)
 	return (lst);
 }
 
-static add_ptr(t_gt **head, t_gt *new)
+static void add_ptr(t_gt **head, t_gt *new)
 {
 	t_gt	*tmp;
 
@@ -47,9 +47,11 @@ void	*get_ptr(size_t i, int flag)
 	if (flag == 1)
 	{
 		ptr = malloc(i);
+		if (!ptr)
+			return (NULL);
 		tmp = malloc(sizeof(t_gt));
 		tmp->ptr = ptr;
-		add_ptr(head, tmp);
+		add_ptr(&head, tmp);
 		return (ptr);
 	}
 	else
@@ -72,11 +74,8 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 
 	g_exit_status = 0;
-	tmp = malloc(sizeof(t_token));
-	tmp->type = DQ;
-	
 	env = ft_getenv(envp);
-	filtre_exp(&env, tmp)
+	filtre_exp(&env, tmp);
 	// char *prompt = "minis : ";
 	// char *line;
 	// while (1)

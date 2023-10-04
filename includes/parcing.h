@@ -6,14 +6,14 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/03 15:05:22 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:47:35 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef PARCING_H
 # define PARCING_H
 
-# include "tokenizer.h"
+# include "../minishell.h"
 # include <stdbool.h>
 
 typedef	struct s_cmd
@@ -32,7 +32,7 @@ typedef struct s_args
 
 
 
-t_args  *parcing(t_token *token);
+// t_args  *parcing(t_token *token);
 
 
 #endif

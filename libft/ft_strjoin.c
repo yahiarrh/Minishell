@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 15:06:31 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/01 11:27:41 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:57:03 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ret = ft_strdup(s2);
 		return (ret);
 	}
-	ret = (char *)get_ptr((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char), 1);
+	ret = (char *)get_ptr((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char), ALLOC);
 	if (!ret)
 		return (NULL);
 	while (*s1)
