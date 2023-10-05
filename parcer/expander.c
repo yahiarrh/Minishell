@@ -65,7 +65,7 @@ static char	*ft_val(t_env **env, char *name, char *ret)
 	return (ret);
 }
 
-char	*expand(t_env **env, char *var)
+char	* expand(t_env **env, char *var)
 {
 	char	*name;
 	char	*val;

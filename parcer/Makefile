@@ -5,7 +5,7 @@ SRC	=	tokenizer.c ./utils/ft_tokchr.c ./utils/ft_strlen.c ./utils/ft_subtoken.c 
 		parcing.c expander.c ../builtins/pwd.c ../builtins/lstutils/ft_lstadd_back.c ../builtins/lstutils/ft_lstlast.c ../builtins/ft_getval.c ../builtins/lstutils/ft_lstnew.c\
 		../builtins/env.c ../builtins/echo.c ../builtins/cd.c ../builtins/unset.c ../builtins/export.c ../builtins/exit.c
  
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g
 
 CC		= cc
 
@@ -29,6 +29,7 @@ $(NAME) : $(OBJS)
 
 clean :
 	$(RM) $(OBJS)
+	@make clean -C ../libft
 
 
 fclean : clean

@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/04 16:23:18 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/05 14:41:14 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,18 @@ int main (int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline(prompt);
+		if (!line)
+			break ;
 		f = tokenizer(line);
 		parsed = parcing(f, env);
-
+		if (!parsed)
+			continue;
 		while (parsed)
 		{
 			while (parsed->cmd)
 			{
-				printf("cmd == %s\n", parsed->cmd->cmd);
+				if (parsed->cmd->cmd)
+					printf("cmd == %s\n", parsed->cmd->cmd);
 				parsed->cmd = parsed->cmd->next;
 			}
 			printf("in == %d\n", parsed->fd_in);
