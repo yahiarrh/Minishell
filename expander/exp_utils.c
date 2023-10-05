@@ -6,11 +6,20 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:37:53 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/04 14:43:12 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:12:54 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+t_cmd	*exp_last(t_cmd *lst)
+{
+	if (!lst)
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
 
 static t_cmd	*cmd_last(t_cmd *lst)
 {
@@ -38,20 +47,24 @@ static void	cmd_back(t_cmd **lst, t_cmd *new)
 static void	sq_case(t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
+	char	*s;
 
-	tmp = get_ptr(sizeof(t_cmd), ALLOC);
-	ft_memset(tmp, 0, sizeof(t_cmd));
-	tmp->cmd = ft_strdup(token->word);
-	cmd_back(head, tmp);
+	tmp = exp_last(*head);
+	s = tmp->cmd;
+	free(tmp->cmd);
+	tmp->cmd = ft_strjoin(s, ft_strdup(token->word));
+	free(s);
 }
 static void	dq_case(t_env **env, t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
+	char	*s;
 
-	tmp = get_ptr(sizeof(t_cmd), ALLOC);
-	ft_memset(tmp, 0, sizeof(t_cmd));
-	tmp->cmd = expand(env, token->word);
-	cmd_back(head, tmp);
+	tmp = exp_last(*head);
+	s = tmp->cmd;
+	free(tmp->cmd);
+	tmp->cmd =  ft_strjoin(s, expand(env, token->word));
+	free(s);
 }
 static void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 {
