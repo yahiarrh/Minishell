@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/07 15:58:25 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/09 18:48:25 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,13 @@ void	dq_case(t_env **env, t_cmd **head, t_token *token);
 void	sq_case(t_cmd **head, t_token *token);
 int	ft_cmdsize(t_cmd *lst);
 t_cmd	*exp_last(t_cmd *lst);
+int	ft_cmdsize(t_cmd *lst);
+t_args	*last_arg(t_args *lst);
+t_cmd	*cmd_last(t_cmd *lst);
+void	cmd_back(t_cmd **lst, t_cmd *new);
+t_cmd	*exp_last(t_cmd *lst);
+int	heredoc(t_env *env, char *delim);
+void	print_syn(t_token *token);
+char	**join_cmds(t_cmd *command);
 
 #endif

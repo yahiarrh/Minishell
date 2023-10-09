@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/07 12:42:37 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/09 18:49:21 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int main (int ac, char **av, char **envp)
 {
 	char *prompt = "TOKE$> ";
 	char *line;
+	char **cmd;
 	t_token	*f;
 	t_args	*parsed;
 	t_env *env;
@@ -127,18 +128,24 @@ int main (int ac, char **av, char **envp)
 		parsed = parcing(f, env);
 		if (!parsed)
 			continue;
-		while (parsed)
+		cmd = join_cmds(parsed->cmd);
+		while (*cmd)
 		{
-			while (parsed->cmd)
-			{
-				if (parsed->cmd->cmd)
-					printf("cmd == %s\n", parsed->cmd->cmd);
-				parsed->cmd = parsed->cmd->next;
-			}
-			printf("in == %d\n", parsed->fd_in);
-			printf("out == %d\n", parsed->fd_out);
-			puts("==============");
-			parsed = parsed->next;
+			printf("%s\n", *cmd);
+			cmd++;
+		}
+		// while (parsed)
+		// {
+		// 	while (parsed->cmd)
+		// 	{
+		// 		if (parsed->cmd->cmd)
+		// 			printf("cmd == %s\n", parsed->cmd->cmd);
+		// 		parsed->cmd = parsed->cmd->next;
+		// 	}
+		// 	printf("in == %d\n", parsed->fd_in);
+		// 	printf("out == %d\n", parsed->fd_out);
+		// 	puts("==============");
+		// 	parsed = parsed->next;
 		}
 		// while (f)
 		// {
@@ -153,6 +160,6 @@ int main (int ac, char **av, char **envp)
 		// 	f = f->next;
 		// }
 
-	}
+	// }
 
 }

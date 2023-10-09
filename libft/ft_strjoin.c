@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 15:06:31 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/04 15:31:27 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/09 18:51:30 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ret);
 	}
 	ret = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	ft_memset(ret, 0, sizeof(ret));
 	if (!ret)
 		return (NULL);
 	while (*s1)
