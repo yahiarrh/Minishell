@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:04:30 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:26:13 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:44:57 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	option(char *s)
 	if (s[i] == '-')
 		i++;
 	if (s[i] == 'n')
-		i += ft_strcmp2(s + i, "n");
+		i += ft_cmp2(s + i, "n");
 	if (s[i])
 		return (0);
 	return (i);

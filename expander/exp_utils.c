@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:37:53 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/05 16:12:54 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:18:20 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 	s = ft_split(expand(env, token->word), ' ');
 	while (*s)
 	{
-		tmp = get_ptr(sizeof(t_cmd), ALLOC);
+		tmp = malloc(sizeof(t_cmd));
 		ft_memset(tmp, 0, sizeof(t_cmd));
 		tmp->cmd = *s;
 		cmd_back(head, tmp);

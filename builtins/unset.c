@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:03:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:26:30 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:45:26 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_env	*prev(t_env *tmp, t_env *tmp2, char *name)
 {
-	while (ft_strcmp(tmp->next->name, name))
+	while (ft_cmp(tmp->next->name, name))
 		tmp = tmp->next;
 	tmp->next = tmp2->next;
 	return (tmp);
@@ -37,7 +37,7 @@ void	ft_unset(t_env **env, char **name)
 			tmp2 = ft_getval(env, name[i]);
 			if (tmp2)
 			{
-				if (!ft_strcmp((*env)->name, name[i]))
+				if (!ft_cmp((*env)->name, name[i]))
 					*env = (*env)->next;
 				else
 					tmp = prev(*env, tmp2, name[i]);

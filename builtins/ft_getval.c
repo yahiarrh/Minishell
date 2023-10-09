@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:26:23 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:50:51 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_env	*ft_getenv(char **envp)
 		tmp = malloc(sizeof(t_env));
 		ft_memset(tmp, 0, sizeof(t_env));
 		tmp->name = ft_substr(envp[i], 0, equ);
-		if (!ft_strcmp(tmp->name, "OLDPWD"))
+		if (!ft_cmp(tmp->name, "OLDPWD"))
 			tmp->value = NULL;
 		else
 			tmp->value = getenv(tmp->name);
@@ -50,11 +50,10 @@ t_env	*ft_getval(t_env **env, char *name)
 		return (NULL);
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->name, name))
+		if (!ft_cmp(tmp->name, name))
 			return (tmp);
 		tmp = tmp->next;
 	}
-	free(name);
 	return (NULL);
 }
 

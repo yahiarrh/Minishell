@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 23:57:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/07 14:13:12 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/07 12:21:52 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s)
 	int		len;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	len = ft_strlen(s);
 	d = (char *)malloc((len + 1) * sizeof(char));

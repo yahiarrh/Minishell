@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:23:25 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/04 13:53:46 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:45:47 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*extr_name(char *s)
 
 static char	*ft_val(t_env **env, char *name, char *ret)
 {
-	if (ft_strcmp2(name, "?"))
+	if (ft_cmp2(name, "?"))
 		ret = ft_strjoin(ret, ft_itoa(g_exit_status));
 	else if (!ft_getval(env, name))
 		ret = ft_strjoin(ret, NULL);

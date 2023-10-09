@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:16:02 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:26:19 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:51:56 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	up_val(t_env **env, char *name, char *n)
 			ft_update(env, n, value + 1);
 		else if (*value == '+' && ft_getval(env, n)->value)
 			ft_update(env, n, 
-				ft_strjoin(ft_getval(env, n)->value, value + 2));
+				ft_join(ft_getval(env, n)->value, value + 2));
 		else
 			ft_update(env, n, value + 2);
 	}
@@ -95,11 +95,11 @@ void	ft_export(t_env **env, char **name)
 		pr_env(env);
 		return ;
 	}
-	name++;
+	name++;//free n
 	while (*name)
 	{
 		i = extr_name(*name);
-		n = ft_substr(*name, 0, i);
+		n = ft_sub(*name, 0, i);
 		if (!ft_checkarg(n))
 			ft_err_msg("bash: export: ", *name,
 				" :not a valid identifier\n");
