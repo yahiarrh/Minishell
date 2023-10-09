@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 17:45:42 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:10:50 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ static int	builtin(t_env **env, char **comm)
 	return (1);
 }
 
-void	comm_type(t_env **env, char	**comm, int *pipe)
+void	comm_type(t_env **env, char	**comm, t_args *arg, int *pie)
 {
-	(void)pipe;
+	dup2(pie, arg->fd_in);
+	close(arg->fd_out);
 	if (builtin(env, comm))
 		return ;
 	else
