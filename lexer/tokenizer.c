@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/05 14:41:14 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/07 12:42:37 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ int main (int ac, char **av, char **envp)
 			}
 			printf("in == %d\n", parsed->fd_in);
 			printf("out == %d\n", parsed->fd_out);
+			puts("==============");
 			parsed = parsed->next;
 		}
 		// while (f)

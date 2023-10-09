@@ -6,11 +6,11 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/05 15:15:45 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/07 16:17:47 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parcing.h"
+#include "includes/parcing.h"
 
 int	ft_cmdsize(t_cmd *lst)
 {
@@ -19,11 +19,12 @@ int	ft_cmdsize(t_cmd *lst)
 	count = 0;
 	if (!lst)
 		return (0);
-	while (lst != NULL)
+	while (lst)
 	{
 		count++;
 		lst = lst->next;
 	}
+	printf("count ==> %d\n", count);
 	return (count);
 }
 
@@ -58,35 +59,58 @@ void	cmd_back(t_cmd **lst, t_cmd *new)
 	else
 		*lst = new;
 }
+t_cmd	*exp_last(t_cmd *lst)
+{
+	if (!lst)
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
 
 void	sq_case(t_cmd **head, t_token *token)
 {
-	
+	t_cmd	*tmp;
+	char	*s;
 
-
-	ft_strdup(token->word);
-	
+	tmp = exp_last(*head);
+	s = ft_strdup(tmp->cmd);
+	free(tmp->cmd);
+	tmp->cmd = ft_strjoin(s, ft_strdup(token->word));
+	free(s);
 }
 void	dq_case(t_env **env, t_cmd **head, t_token *token)
 {
-	
+	t_cmd	*tmp;
+	char	*s;
 
-	expand(env, token->word);
-	
+	tmp = exp_last(*head);
+	s = ft_strdup(tmp->cmd);
+	free(tmp->cmd);
+	tmp->cmd =  ft_strjoin(s, expand(env, token->word));
+	free(s);
 }
 void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 {
 	char	**s;
 	t_cmd	*tmp;
-	int i = 0;
+	int		i;
 
-	s = ft_split(expand(env, token->word), ' ');
 	i = 0;
+	s = ft_split(expand(env, token->word), ' ');
+	if (!s)
+		return ;
 	while (s[i])
 	{
+		if (!i)
+		{
+			(*head)->cmd = *s;
+			i++;
+			continue ;
+		}
 		tmp = malloc(sizeof(t_cmd));
-		ft_memset(tmp, 0, sizeof(t_cmd));
-		tmp->cmd = ft_strdup(s[i]);
+		tmp->next = NULL;
+		tmp->cmd = s[i];
 		cmd_back(head, tmp);
 		i++;
 	}
@@ -95,7 +119,8 @@ t_cmd	*filtre_exp(t_env **env, t_token *token)
 {
 	t_cmd	*head;
 
-	head = NULL;
+	head = malloc(sizeof(t_cmd));
+	ft_memset(head, 0, sizeof(t_cmd));
 	while (token)
 	{
 		if (token->type == SQ)
@@ -153,16 +178,16 @@ int	heredoc(t_env *env, char *delim)
 	return (pipefd[0]);
 }
 
-void	fill_redir(t_token *token, t_args *new_arg , t_env *env)
+bool	fill_redir(t_token *token, t_args *new_arg , t_env *env)
 {
-	// if len cmds > 1 protect;
 	t_cmd	*tmp;
 
 	tmp = filtre_exp(&env, token->next);
 	if (ft_cmdsize(tmp) > 1)
-		printf("%s ambiguous redirect\n", token->next->word);
-	while ()
-	if (token->type == REDIN)
+		return (printf("%s: ambiguous redirect\n", token->next->word), false);
+	if (!tmp->cmd && token->next && token->next->type == PIPE)
+		return (false);
+	else if (token->type == REDIN)
 		new_arg->fd_in = open(expand(&env, token->next->word), O_CREAT, 0644);
 	else if (token->type == REDOUT)
 			new_arg->fd_out = open(expand(&env, token->next->word), O_CREAT, 0644);
@@ -170,6 +195,7 @@ void	fill_redir(t_token *token, t_args *new_arg , t_env *env)
 		new_arg->fd_out = open(expand(&env, token->next->word), O_CREAT | O_APPEND, 0644);
 	else if (token->type == HEREDOC)
 		new_arg->fd_in = heredoc(env, expand(&env, token->next->word));
+	return (true);
 }
 t_args	*check_tokens(t_token **token, t_env *env)
 {
@@ -185,12 +211,8 @@ t_args	*check_tokens(t_token **token, t_env *env)
 	{
 		if ((*token)->type > DQ)
 		{
-			if (!(*token)->next)
-			{
-				printf("syntax error\n");
+			if (!((*token)->next) || !(fill_redir((*token), new_arg, env)))
 				return (NULL);
-			}
-			fill_redir((*token), new_arg, env);
 			(*token) = (*token)->next;
 		}
 		else
@@ -198,6 +220,16 @@ t_args	*check_tokens(t_token **token, t_env *env)
 		(*token) = (*token)->next;
 	}
 	return (new_arg);
+}
+
+void	print_syn(t_token *token)
+{
+	char *err;
+
+	err = "newline";
+	if  (last_token(token)->type == PIPE || token->type == PIPE)
+		err = "|";
+	printf("syntax error near unexpected token `%s'\n",err);
 }
 t_args  *parcing(t_token *token, t_env *env)
 {
@@ -207,6 +239,8 @@ t_args  *parcing(t_token *token, t_env *env)
 	head = NULL;
 	if (!token)
 		return (NULL);
+	if (token->type == PIPE || last_token(token)->type == PIPE)
+		return (print_syn(token), NULL);
 	while (token)
 	{
 		tmp = check_tokens(&token, env);
@@ -218,9 +252,6 @@ t_args  *parcing(t_token *token, t_env *env)
 			token = token->next;
 	}
 	if (token)
-	{
-		printf("syntax error near \'%s\'", token->word);
-		return (NULL);
-	}
+		return (print_syn(token), NULL);
 	return (head);
 }

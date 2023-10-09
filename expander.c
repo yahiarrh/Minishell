@@ -1,6 +1,6 @@
-#include "../includes/blt_lib.h"
-#include "../includes/tokenizer.h"
-#include "../includes/parcing.h"
+#include "includes/blt_lib.h"
+#include "includes/tokenizer.h"
+#include "includes/parcing.h"
 
 static int	checkarg(char arg)
 {
