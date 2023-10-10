@@ -17,10 +17,11 @@
 
 typedef struct s_id
 {
-    int id;
-    struct s_id *next;
+	pid_t		id;
+	struct s_id *next;
 }t_id;
 
+void	ft_exec(t_env **env, t_args *arg);
 void    exec_comm(t_env **env, char **comm, char **path);
 void	comm_type(t_env **env, char	**comm, t_args *arg, int *pie);
 #endif

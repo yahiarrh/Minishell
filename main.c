@@ -68,53 +68,47 @@
 int main(int ac, char **av, char **envp)
 {
 	t_env *env;
+	t_args *arg;
 
 	(void)av;
 	(void)ac;
-
+	arg = malloc(sizeof(t_args));
 	g_exit_status = 0;
 	env = ft_getenv(envp);
-	// char **c = swtch_tp(env);
-	// while (*c)
+
+	// char *prompt = "minis : ";
+	// char *line;
+	// while (1)
 	// {
-	// 	printf("%s\n", *c);
-	// 	c++;
+	// 	line = readline(prompt);
+ 	// 		exit(0);
+	// 	if(*line)
+	// 		add_history(line);
+	// 	if (!ft_strcmp("pwd", line))
+	// 		ft_pwd(&env);
+	// 	if (!ft_strcmp("env", line))
+	// 		ft_env(&env);
+	// 	if (!ft_strcmp("exit", ft_split(line, ' ')[0]))
+	// 		ft_exit(ft_split(line, ' '));
+	// 	if (!ft_strcmp(line, "echo"))
+	// 	{
+	// 		free(line);
+	// 		line = readline(prompt);
+	// 			ft_echo(ft_split(line, ' '));		
+	// 	}
+	// 	if(!ft_strcmp("cd", line))
+	// 	{
+	// 		free(line);
+	// 		line = readline(prompt);
+	// 		if (ft_strlen(line) == 0)
+	// 			ft_cd(&env, NULL);
+	// 		else
+	// 			ft_cd(&env, line);
+	// 	}
+	// 	if(!ft_strcmp("unset", ft_split(line, ' ')[0]))
+	// 		ft_unset(&env, ft_split(line, ' '));
+	// 	if(!ft_strcmp("export", ft_split(line, ' ')[0]))
+	// 			ft_export(&env, ft_split(line, ' '));
+	// 	free(line);
 	// }
-	
-	char *prompt = "minis : ";
-	char *line;
-	while (1)
-	{
-		line = readline(prompt);
-		if (!line)
-			exit(0);
-		if(*line)
-			add_history(line);
-		if (!ft_strcmp("pwd", line))
-			ft_pwd(&env);
-		if (!ft_strcmp("env", line))
-			ft_env(&env);
-		if (!ft_strcmp("exit", ft_split(line, ' ')[0]))
-			ft_exit(ft_split(line, ' '));
-		if (!ft_strcmp(line, "echo"))
-		{
-			free(line);
-			line = readline(prompt);
-				ft_echo(ft_split(line, ' '));		
-		}
-		if(!ft_strcmp("cd", line))
-		{
-			free(line);
-			line = readline(prompt);
-			if (ft_strlen(line) == 0)
-				ft_cd(&env, NULL);
-			else
-				ft_cd(&env, line);
-		}
-		if(!ft_strcmp("unset", ft_split(line, ' ')[0]))
-			ft_unset(&env, ft_split(line, ' '));
-		if(!ft_strcmp("export", ft_split(line, ' ')[0]))
-				ft_export(&env, ft_split(line, ' '));
-		free(line);
-	}
 } 

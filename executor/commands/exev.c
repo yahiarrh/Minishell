@@ -12,20 +12,82 @@
 
 #include "../../minishell.h"
 
-static void process(t_env **env, t_args *arg, int falg)
+int	ft_cmdsize(t_cmd *lst)
 {
-	int		id;
+	int	count;
+
+	count = 0;
+	if (!lst)
+		return (0);
+	while (lst)
+	{
+		count++;
+		lst = lst->next;
+	}
+	return (count);
+}
+
+char	**join_cmds(t_cmd *command)
+{
+	char	**c;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = ft_cmdsize(command);
+	c = malloc(sizeof(char *) * len + 1);
+	ft_memset(c, 0, len + 1);
+	while (command)
+	{
+		c[i] = ft_strdup(command->cmd);
+		command = command->next;
+		i++;
+	}
+	return (c);
+}
+
+static void	ft_kill(t_id **ids)
+{
+	while (*ids)
+	{
+		kill((*ids)->id, SIGKILL);
+		free(ids);
+		*ids = (*ids)->next;
+	}
+}
+
+static void	id_back(t_id **lst, t_id *new)
+{
+	t_id	*ptr;
+
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	ptr = ft_lstlast(*lst);
+	ptr->next = new;
+}
+
+static void process(t_env **env, t_args *arg, int falg, t_id **proc)
+{
+	t_id	*id;
 	int		pie[2];
 	int		status;
 
 	pipe(pie);
-	id = fork();
+	id = malloc(sizeof(t_id));
+	ft_memset(id, 0, sizeof(t_id));
+	id->id = fork();
+	id_back(proc, id);
 	if (!id)
 	{
 		if (falg)
 			dup2(pie[1], arg->fd_out);
 		close(pie[0]);
-		comm_type(env, NULL, arg, pie);//lfunc D'AMINE
+		comm_type(env, join_cmds(arg->cmd), arg, pie);//lfunc D'AMINE
 	}
 	else
 	{
@@ -42,9 +104,10 @@ void	ft_exec(t_env **env, t_args *arg)
 	while (arg)
 	{
 		if (arg->next)
-			process(env, arg, 1);
+			process(env, arg, 1, &proc);
 		else
-			process(env, arg, 0);
+			process(env, arg, 0, &proc);
 		arg = arg->next;
 	}
+	ft_kill(proc);
 }
