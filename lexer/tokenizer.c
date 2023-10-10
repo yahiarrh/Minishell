@@ -129,11 +129,9 @@ int main (int ac, char **av, char **envp)
 		if (!parsed)
 			continue;
 		cmd = join_cmds(parsed->cmd);
-		while (*cmd)
-		{
-			printf("%s\n", *cmd);
-			cmd++;
-		}
+		int i = 0;
+		while (cmd[i])
+			printf("%s\n", cmd[i++]);
 		// while (parsed)
 		// {
 		// 	while (parsed->cmd)

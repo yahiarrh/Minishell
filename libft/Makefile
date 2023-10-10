@@ -10,7 +10,7 @@ SRC	=	ft_atoi.c ft_calloc.c ft_isalnum.c ft_isdigit.c ft_itoa.c\
 		ft_lstadd_front.c ft_lstdelone.c f_lstnew.c\
 		ft_lstsize.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
 
-CFLAGS	= -Wall -Werror -Wextra 
+CFLAGS	= -Wall -Wextra -Werror
 
 CC		= cc
 

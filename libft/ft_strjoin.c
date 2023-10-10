@@ -21,10 +21,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-	{
-		ret = ft_strdup(s2);
-		return (ret);
-	}
+		return(ft_strdup(s2));
 	ret = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	ft_memset(ret, 0, sizeof(ret));
 	if (!ret)

@@ -21,14 +21,16 @@ char	**join_cmds(t_cmd *command)
 	i = 0;
 	len = ft_cmdsize(command);
 	c = malloc(sizeof(char *) * len + 1);
+	ft_memset(c, 0, len + 1);
 	while (command)
 	{
-		c[i] = ft_strjoin(c[i], command->cmd);
+		c[i] = ft_strdup(command->cmd);
 		command = command->next;
 		i++;
 	}
 	return (c);
 }
+
 t_args  *parcing(t_token *token, t_env *env)
 {
 	t_args  *head;
