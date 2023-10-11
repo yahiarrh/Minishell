@@ -21,7 +21,7 @@ char	**join_cmds(t_cmd *command)
 	i = 0;
 	len = ft_cmdsize(command);
 	c = malloc(sizeof(char *) * len + 1);
-	ft_memset(c, 0, len + 1);
+	ft_memset(c, 0, sizeof(c));
 	while (command)
 	{
 		c[i] = ft_strdup(command->cmd);
