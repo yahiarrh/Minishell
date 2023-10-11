@@ -6,52 +6,55 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:05:16 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/01 15:22:40 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:26:17 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
+
+static void	alph_arg(char **status)
+{
+	int		j;
+
+	j = 0;
+	while (status[1][j])
+	{
+		if (ft_isalpha(status[1][j]))
+		{
+			printf("exit\n");
+			ft_err_msg("bash: exit: ", status[1], 
+				": numeric argument required\n");
+			exit (255);
+		}
+		j++;
+	}
+}
 
 void	ft_exit(char	**status)
 {
-	int	i;
-	int	j;
+	char	s;
+	int		i;
 
-	i = 0;
-	while (status[i])
-	{
-		j = 0;
-		while (status[i][j])
-		{
-			if(ft_isalpha(status[i][j]))
-			{
-				printf("exit\n");
-				ft_putstr_fd("bash: exit: ", 2);
-				ft_putstr_fd(status[i], 2);
-				ft_putstr_fd(" :numeric argument required\n", 2);
-				exit (0);
-			}
-			j++;
-		}
-		if(!ft_isdigit(ft_atoi(status[i])))
-		{
-			printf("exit\n");
-			ft_putstr_fd("bash: exit: ", 2);
-			ft_putstr_fd(status[i], 2);
-			ft_putstr_fd(" :numeric argument required\n", 2);
-			exit (0);
-		}
-		i++;
-	}
-	if (i > 1)
-	{
-		ft_putstr_fd("bash: exit:", 2);
-		ft_putstr_fd(" :too many arguments\n", 2);
-		return;
-	}
-	else
+	i = 1;
+	if (!status[1])
 	{
 		printf("exit\n");
 		exit (0);
+	}
+	else
+		alph_arg(status);
+	while (status[i])
+		i++;
+	if (i > 2)
+	{
+		ft_err_msg("bash: exit: ", NULL, "too many arguments\n");
+		g_exit_status = 1;
+		return ;
+	}
+	else
+	{
+		s = (char)ft_atoi(status[1]);
+		printf("exit\n");
+		exit (s);
 	}
 }

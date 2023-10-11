@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   exev.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 16:16:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:26:15 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2023/09/03 14:59:39 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/10/11 15:26:16 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#ifndef EXEV_H
+# define EXEV_H
 
-void	ft_env(t_env **env)
+# include "../minishell.h"
+
+typedef struct s_id
 {
-	t_env	*tmp;
+	pid_t		id;
+	struct s_id *next;
+}t_id;
 
-	tmp = *env;
-	while (tmp)
-	{
-		if (tmp->value)
-			printf("%s=%s\n", tmp->name, tmp->value);
-		tmp = tmp->next;
-	}
-}
+void	ft_exec(t_env **env, t_args *arg);
+void    exec_comm(t_env **env, char **comm, char **path);
+void	comm_type(t_env **env, char	**comm, int flag);
+#endif

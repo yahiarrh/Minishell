@@ -6,11 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 17:13:57 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/30 11:08:53 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:26:36 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
 
 void	ft_pwd(t_env **env)
 {
@@ -21,9 +21,9 @@ void	ft_pwd(t_env **env)
 	if (!tmp)
 	{
 		pwd = getcwd(NULL, 0);
-		printf("%s\n",pwd);
+		printf("%s\n", pwd);
 		free(pwd);
 		return ;
 	}
-	printf("%s\n",tmp->value);
+	printf("%s\n", tmp->value);
 }

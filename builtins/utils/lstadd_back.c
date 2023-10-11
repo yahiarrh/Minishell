@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   lstadd_back.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 16:16:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:26:15 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/10/20 22:39:28 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/10/11 13:35:54 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	ft_env(t_env **env)
+void	lstadd_back(t_env **lst, t_env *new)
 {
-	t_env	*tmp;
+	t_env	*ptr;
 
-	tmp = *env;
-	while (tmp)
+	if (!lst || !new)
+		return ;
+	if (!*lst)
 	{
-		if (tmp->value)
-			printf("%s=%s\n", tmp->name, tmp->value);
-		tmp = tmp->next;
+		*lst = new;
+		return ;
 	}
+	ptr = lstlast(*lst);
+	ptr->next = new;
+}
+
+void	lstdelone(t_env *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	del(lst->name);
+	free (lst);
 }

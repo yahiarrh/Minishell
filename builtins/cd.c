@@ -6,92 +6,88 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/01 09:11:33 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:37:26 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/blt_lib.h"
+#include "../minishell.h"
+
+static void	ft_update_cd(t_env **env, char *name, char *nv)
+{
+	t_env	*tmp;
+
+	if (!ft_getval(env, name))
+	{
+		tmp = lstnew(name);
+		lstadd_back(env, tmp);
+		free(tmp);
+	}
+	else
+	{
+		tmp = ft_getval(env, name);
+	}
+	tmp->value = nv;
+}
+
+static void	dash_case(t_env **env, char *op)
+{
+	if (!(ft_getval(env, "OLDPWD")))
+	{
+		ft_err_msg("bash: cd:", NULL, " OLDPWD not set\n");
+		return ;
+	}
+	else if (!(ft_getval(env, "OLDPWD")->value))
+	{
+		ft_err_msg("bash: cd:", NULL, " OLDPWD not set\n");
+		return ;
+	}
+	else
+	{
+		if (chdir(ft_getval(env, "OLDPWD")->value))
+		{
+			perror("chdir problem");
+			return ;
+		}
+		ft_update_cd(env, "PWD", ft_getval(env, "OLDPWD")->value);
+		printf("%s\n", ft_getval(env, "OLDPWD")->value);
+		ft_update_cd(env, "OLDPWD", op);
+	}
+}
+
+static void	home_case(t_env **env, char *op)
+{
+	if (chdir(ft_getval(env, "HOME")->value))
+	{
+		perror("chdir problem");
+		return ;
+	}
+	ft_update_cd(env, "PWD", getcwd(NULL, 0));
+	ft_update_cd(env, "OLDPWD", op);
+}
 
 void	ft_cd(t_env **env, char *p)
 {
-	char	*tmp;
 	char	*op;
-	int		i;
+	char	*o;
 
-	i = 0;
-	tmp = NULL;
-	op = ft_getval(env, "PWD")->value;
-	if (!p)
-	{
-		if(chdir(ft_getval(env, "HOME")->value))
-		{
-			perror("chdir problem");
-			return;
-		}
-		ft_update(env, "PWD", ft_getval(env, "HOME")->value);
-		ft_update(env, "OLDPWD", op);
-		return;
-	}
-	if(p[0] == '-')
-	{
-		if (!(ft_getval(env, "OLDPWD")->value))
-		{
-			perror("OLDPWD not set");
-			return;
-		}
-		else
-		{
-			if(chdir(ft_getval(env, "OLDPWD")->value))
-			{
-				perror("chdir problem");
-				return;
-			}
-			ft_update(env, "PWD", ft_getval(env, "OLDPWD")->value);
-			printf("%s\n",ft_getval(env, "OLDPWD")->value);
-			ft_update(env, "OLDPWD", op);
-			return;
-		}
-	}
+	op = getcwd(NULL, 0);
+	o = NULL;
+	if (!p || p[0] == '~')
+		home_case(env, op);
+	else if (p[0] == '-')
+		dash_case(env, op);
 	else
 	{
 		if (chdir(p))
 		{
-			perror("");
-			return;
+			ft_err_msg("bash: cd: ", p, ": No such file or directory\n");
+			g_exit_status = 1;
+			return ;
 		}
-		if (p[0] == '/')
-		{
-			ft_update(env, "PWD", p);
-			ft_update(env, "OLDPWD", op);
-			return;
-		}
-		else if (!ft_strcmp(p, ".."))
-		{
-			if (!ft_strcmp(op, "/"))
-			{
-				ft_update(env, "OLDPWD", "/");
-				return;
-			}
-			i = ft_strlen(op);
-			while (i && op[i] != '/')
-				i--;
-			if (!ft_strcmp(op, "/Users"))
-				ft_update(env, "PWD", "/");
-			else
-			{
-				tmp = malloc(i + 1);
-				ft_strlcpy(tmp, op, i + 1);
-				ft_update(env, "PWD", tmp);
-				free(tmp);
-			}
-			ft_update(env, "OLDPWD", op);
-			return;
-		}
-		else
-		{
-			op = ft_strjoin(op, "/");
-			ft_update(env, "PWD", ft_strjoin(op, p));
-			ft_update(env, "OLDPWD", op);
-		}
+		o = getcwd(NULL, 0);
+		ft_update_cd(env, "PWD", o);
+		ft_update_cd(env, "OLDPWD", op);
 	}
+	free(op);
+	free(o);
 }

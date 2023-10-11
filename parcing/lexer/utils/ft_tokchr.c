@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_tokchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 07:58:59 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/03 14:37:57 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/11 14:00:20 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../../../minishell.h"
 
-char	*ft_strchr(const char *str, int c)
+int	ft_tokchr(const char *str, int c)
 {
 	char	ch;
 	int		i;
@@ -20,11 +20,11 @@ char	*ft_strchr(const char *str, int c)
 	ch = (char)c;
 	i = 0;
 	if (c == 0)
-		return ((char *)str + ft_strlen(str));
+		return (2);
 	while (str[i])
 	{
 		if (str[i] == ch)
-			return ((char *)(str + i));
+			return (1);
 		i++;
 	}
 	return (0);

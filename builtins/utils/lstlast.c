@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   last_token.c                                       :+:      :+:    :+:   */
+/*   lstlast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 16:39:44 by msaidi            #+#    #+#             */
-/*   Updated: 2023/09/03 10:08:36 by msaidi           ###   ########.fr       */
+/*   Created: 2022/10/20 22:26:30 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/10/11 13:35:37 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "../../minishell.h"
 
-t_list	*last_token(t_list *lst)
+t_env	*lstlast(t_env *lst)
 {
 	if (!lst)
-		return (NULL);
+		return (lst);
 	while (lst->next)
 		lst = lst->next;
 	return (lst);

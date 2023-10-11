@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   last_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 22:26:30 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/30 14:37:38 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/10/25 16:39:44 by msaidi            #+#    #+#             */
+/*   Updated: 2023/10/11 14:01:04 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/blt_lib.h"
+#include "../../../minishell.h"
 
-t_env	*ft_lstlast(t_env *lst)
+t_token	*last_token(t_token *lst)
 {
 	if (!lst)
-		return (lst);
+		return (NULL);
 	while (lst->next)
-	{
 		lst = lst->next;
-	}
+	return (lst);
+}
+t_token	*last_down(t_token *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->down)
+		lst = lst->down;
 	return (lst);
 }

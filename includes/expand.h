@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 16:16:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:26:15 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2023/09/08 09:23:41 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/10/04 13:54:16 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#ifndef EXPAND_H
+# define EXPAND_H
 
-void	ft_env(t_env **env)
-{
-	t_env	*tmp;
+# include "../minishell.h"
+# include "parcing.h"
 
-	tmp = *env;
-	while (tmp)
-	{
-		if (tmp->value)
-			printf("%s=%s\n", tmp->name, tmp->value);
-		tmp = tmp->next;
-	}
-}
+char	*expand(t_env **env, char *var);
+t_cmd   *filtre_exp(t_env **env, t_token *token);
+
+#endif

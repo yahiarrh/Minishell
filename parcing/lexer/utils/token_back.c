@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   token_back.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 14:36:47 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/30 14:40:39 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/11/01 17:03:48 by msaidi            #+#    #+#             */
+/*   Updated: 2023/10/11 14:01:00 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/blt_lib.h"
+#include "../../../minishell.h"
 
-t_env	*ft_lstnew(char *content)
+void	token_back(t_token **lst, t_token *new, bool flag)
 {
-	t_env	*s;
+	t_token	*node;
 
-	s = malloc(sizeof(t_env));
-	if (!s)
-		return (NULL);
-	s->name = ft_strdup(content);
-	s->next = NULL;
-	return (s);
+
+	if (!new || !lst)
+		return ;
+	if (*lst)
+	{
+		node = last_token(*lst);
+		if (flag)
+			node->next = new;
+		else
+		{
+			if (!node->down)
+				node->down = new;
+			else
+				(last_down(node))->down = new; 
+		}
+	}
+	else
+		*lst = new;
 }

@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 22:39:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/08/30 14:37:42 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2023/10/05 11:24:49 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/10/11 13:47:28 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/blt_lib.h"
+#include "../../minishell.h"
 
-void	ft_lstadd_back(t_env **lst, t_env *new)
-{
-	t_env	*ptr;
+// static void	handle(int signal)
+// {
+// 	if (signal == SIGINT)
+// 		printf("");
+// 	else
+// 		ft_exit()
 
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	ptr = ft_lstlast(*lst);
-	ptr->next = new;
-}
-
-void	ft_lstdelone(t_env *lst, void (*del)(void *))
-{
-	if (!lst || !del)
-		return ;
-	del(lst->name);
-	free (lst);
-}
+// }
+// void    sig(void)
+// {
+// 	signal(SIGINT, &handle);
+// 	signal(0, &handle);
+// 	signal(SIGQUIT, SIG_IGN);
+// }
