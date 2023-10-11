@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:37:53 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 16:18:20 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:16:55 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,71 +20,59 @@ t_cmd	*exp_last(t_cmd *lst)
 		lst = lst->next;
 	return (lst);
 }
-
-static t_cmd	*cmd_last(t_cmd *lst)
-{
-	if (!lst)
-		return (lst);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-static void	cmd_back(t_cmd **lst, t_cmd *new)
-{
-	t_cmd	*ptr;
-
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	ptr = cmd_last(*lst);
-	ptr->next = new;
-}
-static void	sq_case(t_cmd **head, t_token *token)
+void	sq_case(t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
 	char	*s;
 
 	tmp = exp_last(*head);
-	s = tmp->cmd;
+	s = ft_strdup(tmp->cmd);
 	free(tmp->cmd);
 	tmp->cmd = ft_strjoin(s, ft_strdup(token->word));
 	free(s);
 }
-static void	dq_case(t_env **env, t_cmd **head, t_token *token)
+void	dq_case(t_env **env, t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
 	char	*s;
 
 	tmp = exp_last(*head);
-	s = tmp->cmd;
+	s = ft_strdup(tmp->cmd);
 	free(tmp->cmd);
 	tmp->cmd =  ft_strjoin(s, expand(env, token->word));
 	free(s);
 }
-static void	wrd_case(t_env **env, t_cmd **head, t_token *token)
+void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 {
 	char	**s;
 	t_cmd	*tmp;
+	int		i;
 
+	i = 0;
 	s = ft_split(expand(env, token->word), ' ');
-	while (*s)
+	if (!s)
+		return ;
+	while (s[i])
 	{
+		if (!i)
+		{
+			(*head)->cmd = *s;
+			i++;
+			continue ;
+		}
 		tmp = malloc(sizeof(t_cmd));
-		ft_memset(tmp, 0, sizeof(t_cmd));
-		tmp->cmd = *s;
+		tmp->next = NULL;
+		tmp->cmd = s[i];
 		cmd_back(head, tmp);
-		s++;
+		i++;
 	}
 }
 t_cmd	*filtre_exp(t_env **env, t_token *token)
 {
 	t_cmd	*head;
 
+	head = malloc(sizeof(t_cmd));
+	ft_memset(head, 0, sizeof(t_cmd));
 	while (token)
 	{
 		if (token->type == SQ)

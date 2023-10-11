@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/04 13:50:16 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/07 14:49:20 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #define TOKENIZER_H
 
 # include <stdio.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include <readline/readline.h>
-# include "../minishell.h"
+# include "../includes/blt_lib.h"
 
 
 #define INDICATORS " \'\"|<>"
-#define SYN "syntax error"
 
 typedef struct s_token
 {

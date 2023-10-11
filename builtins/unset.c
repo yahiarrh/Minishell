@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:03:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 17:45:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:38:25 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_unset(t_env **env, char **name)
 					*env = (*env)->next;
 				else
 					tmp = prev(*env, tmp2, name[i]);
-				ft_lstdelone(tmp2, free);
+				lstdelone(tmp2, free);
 				tmp2 = NULL;
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:16:02 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 17:51:56 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:37:35 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static void	up_val(t_env **env, char *name, char *n)
 	v = NULL;
 	if (!ft_getval(env, n))
 	{
-		tmp = ft_lstnew(n);
-		ft_lstadd_back(env, tmp);
+		tmp = lstnew(n);
+		lstadd_back(env, tmp);
 	}
 	if (value)
 	{

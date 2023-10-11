@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 11:21:18 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 14:23:03 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:49:30 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ static char	**swtch_tp(t_env *env)
 static char *find_path(char *comm, char **path)
 {
 	char	*tmp;
+	char	*tmp1;
 
 	while (*path)
 	{
-		tmp = ft_strjoin(*path, comm);
+		tmp1 = ft_strjoin(*path, "/");
+		tmp = ft_strjoin(tmp1, comm);
+		free(tmp1);
 		if (!access(tmp, X_OK))
 			return (tmp);
 		free(tmp);
@@ -72,4 +75,5 @@ void    exec_comm(t_env **env, char **comm, char **path)
 	rpat = find_path(comm[0], path);
 	cenv = swtch_tp(*env);
 	execve(rpat, comm, cenv);
+	printf("rpat : %s\n", comm[1]);
 }

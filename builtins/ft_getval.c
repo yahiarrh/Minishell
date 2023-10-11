@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 17:50:51 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:36:58 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_env	*ft_getenv(char **envp)
 			tmp->value = NULL;
 		else
 			tmp->value = getenv(tmp->name);
-		ft_lstadd_back(&env, tmp);
+		lstadd_back(&env, tmp);
 	}
 	return (env);
 }

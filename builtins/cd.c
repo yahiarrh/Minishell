@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 15:25:56 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:37:26 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	ft_update_cd(t_env **env, char *name, char *nv)
 
 	if (!ft_getval(env, name))
 	{
-		tmp = ft_lstnew(name);
-		ft_lstadd_back(env, tmp);
+		tmp = lstnew(name);
+		lstadd_back(env, tmp);
 		free(tmp);
 	}
 	else

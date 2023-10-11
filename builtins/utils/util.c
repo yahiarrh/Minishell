@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:28:19 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 17:44:43 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:31:50 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ int	ft_cmp(const char *s1, const char *s2)
 	s22 = (unsigned char *)s2;
 	i = 0;
 	while (s11[i] && s22[i] && s11[i] == s22[i])
-	{
 		i++;
-	}
 	return (s11[i] - s22[i]);
 }

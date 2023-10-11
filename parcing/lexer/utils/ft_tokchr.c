@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_tokchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 11:24:49 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:47:28 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/10/07 07:58:59 by yrrhaibi          #+#    #+#             */
+/*   Updated: 2023/10/11 14:00:20 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
-// static void	handle(int signal)
-// {
-// 	if (signal == SIGINT)
-// 		printf("");
-// 	else
-// 		ft_exit()
+int	ft_tokchr(const char *str, int c)
+{
+	char	ch;
+	int		i;
 
-// }
-// void    sig(void)
-// {
-// 	signal(SIGINT, &handle);
-// 	signal(0, &handle);
-// 	signal(SIGQUIT, SIG_IGN);
-// }
+	ch = (char)c;
+	i = 0;
+	if (c == 0)
+		return (2);
+	while (str[i])
+	{
+		if (str[i] == ch)
+			return (1);
+		i++;
+	}
+	return (0);
+}

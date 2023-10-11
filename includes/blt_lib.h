@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:34 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 17:46:14 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:36:17 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ t_env	*ft_getval(t_env **env, char *name);
 void	ft_env(t_env **env);
 void	ft_pwd(t_env **env);
 void	ft_cd(t_env **env, char *p);
-void	ft_lstadd_back(t_env **lst, t_env *new);
-void	ft_lstdelone(t_env *lst, void (*del)(void *));
-t_env	*ft_lstlast(t_env *lst);
-t_env	*ft_lstnew(char *content);
+void	lstadd_back(t_env **lst, t_env *new);
+void	lstdelone(t_env *lst, void (*del)(void *));
+t_env	*lstlast(t_env *lst);
+t_env	*lstnew(char *content);
 void	ft_echo(char **s);
 void	ft_cd(t_env **env, char *p);
 void	ft_update(t_env **env, char *name, char *nv);

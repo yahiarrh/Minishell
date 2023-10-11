@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   last_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 14:36:47 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/20 11:56:28 by yrrhaibi         ###   ########.fr       */
+/*   Created: 2022/10/25 16:39:44 by msaidi            #+#    #+#             */
+/*   Updated: 2023/10/11 14:01:04 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
-t_env	*ft_lstnew(char *content)
+t_token	*last_token(t_token *lst)
 {
-	t_env	*s;
-
-	s = malloc(sizeof(t_env));
-	if (!s)
+	if (!lst)
 		return (NULL);
-	s->name = ft_strdup(content);
-	s->value = NULL;
-	s->next = NULL;
-	return (s);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+t_token	*last_down(t_token *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->down)
+		lst = lst->down;
+	return (lst);
 }
