@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:50:42 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/09 18:38:36 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:02:47 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void process(t_env **env, t_args *arg, int falg, t_id **proc)
 void	ft_exec(t_env **env, t_args *arg)
 {
 	t_id *proc;
-	//jme3 l'id's dprocesses
+
 	while (arg)
 	{
 		if (arg->next)
