@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:39 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 15:26:16 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:26:14 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,15 @@ typedef struct s_id
 	struct s_id *next;
 }t_id;
 
+typedef struct s_fd
+{
+	int fd_out;
+	int fd_in;
+	struct s_fd *next;
+}t_fd;
+
+int		builtin(t_env **env, char **comm);
 void	ft_exec(t_env **env, t_args *arg);
-void    exec_comm(t_env **env, char **comm, char **path);
+void	exec_comm(t_env **env, char **comm, char **path);
 void	comm_type(t_env **env, char	**comm, int flag);
 #endif

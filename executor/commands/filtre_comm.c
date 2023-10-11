@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 15:48:11 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:28:42 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	sys_comm(t_env **env, char **comm)
 	exec_comm(env, comm, path);
 }
 
-static int	builtin(t_env **env, char **comm)
+int	builtin(t_env **env, char **comm)
 {
 	if (!ft_cmp(comm[0], "pwd"))
 		ft_pwd(env);
