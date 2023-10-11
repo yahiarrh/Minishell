@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/09 18:55:52 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/11 18:26:41 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ char	**join_cmds(t_cmd *command)
 
 	i = 0;
 	len = ft_cmdsize(command);
-	c = malloc(sizeof(char *) * len + 1);
+	c = malloc(sizeof(char *) * (len + 1));
 	ft_memset(c, 0, sizeof(c));
-	while (command)
+	while (i < len)
 	{
 		c[i] = ft_strdup(command->cmd);
 		command = command->next;
 		i++;
 	}
+	c[i] = NULL;
 	return (c);
 }
 
