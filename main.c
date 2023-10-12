@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 15:15:05 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:50:40 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,32 +65,37 @@
 // 	return (NULL);
 // }
 
-int main(int ac, char **av, char **envp)
+void	main_loop(t_token *token, t_env *env, t_args *arg)
 {
-	t_env *env;
-	t_args *arg;
-	t_token *token;
+	char	*prompt;
+	char	*line;
+
+	prompt = "Minishell$> ";
+	while (1)
+	{
+		line = readline(prompt);
+		if (!line)
+			break ;
+		if (line)
+			add_history(line);
+		token = tokenizer(line);
+		arg = parcing(token, env);
+		if (!arg)
+			continue ;
+		ft_exec(&env, arg);
+		free(line);
+	}
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_env	*env;
+	t_args	*arg;
+	t_token	*token;
 
 	(void)av;
 	(void)ac;
 	g_exit_status = 0;
 	env = ft_getenv(envp);
-
-	char *prompt = "minishe : ";
-	char *line;
-	while (1)
-	{
-		line = readline(prompt);
-		if(!line)
-			break;
-		if(line)
-			add_history(line);
-		token = tokenizer(line);
-		arg = parcing(token, env);
-		
-		if (!arg)
-			continue;
-		ft_exec(&env, arg);
-		free(line);
-	}
-} 
+	main_loop(token, env, arg);
+}

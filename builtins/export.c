@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:16:02 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:37:35 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:20:04 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_export(t_env **env, char **name)
 		pr_env(env);
 		return ;
 	}
-	name++;//free n
+	name++;
 	while (*name)
 	{
 		i = extr_name(*name);
@@ -105,6 +105,7 @@ void	ft_export(t_env **env, char **name)
 				" :not a valid identifier\n");
 		else
 			up_val(env, *name, n);
+		free(n);
 		name++;
 	}
 	return ;

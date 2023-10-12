@@ -6,13 +6,12 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/07 14:49:20 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/12 12:17:51 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZER_H
-#define TOKENIZER_H
-
+# define TOKENIZER_H
 # include <stdio.h>
 # include <stdbool.h>
 # include <stdlib.h>
@@ -20,8 +19,7 @@
 # include <readline/readline.h>
 # include "../includes/blt_lib.h"
 
-
-#define INDICATORS " \'\"|<>"
+# define INDICATORS " \'\"|<>"
 
 typedef struct s_token
 {
@@ -33,11 +31,10 @@ typedef struct s_token
 
 typedef struct s_flags
 {
-	int	len;
+	int		len;
 	bool	spc;
 	bool	double_q;
 	bool	single_q;
-	
 }t_flags;
 
 enum e_cmd
@@ -51,7 +48,6 @@ enum e_cmd
 	APPEND,
 	HEREDOC
 };
-
 t_token	*last_token(t_token *lst);
 t_token	*last_down(t_token *lst);
 void	token_back(t_token **lst, t_token *new, bool flag);
@@ -62,15 +58,15 @@ size_t	ft_strlen(const char *c);
 char	*ft_strdup(const char *s);
 t_token	*word_tok(char *arg, int len);
 t_token	*pipe_tok(void);
-t_token  *redirin_tok(void);
-t_token  *redirout_tok(void);
-t_token  *append_tok(void);
-t_token  *heredoc_tok(void);
+t_token	*redirin_tok(void);
+t_token	*redirout_tok(void);
+t_token	*append_tok(void);
+t_token	*heredoc_tok(void);
 t_token	*double_quotes(char *arg, t_flags *flag);
 t_token	*single_quotes(char *arg, t_flags *flag);
 t_token	*ft_quotes(char *arg, t_flags *flag);
 int		chr_q(char *str, t_flags *flag, char q);
-// t_args  parcing(t_token *token);
-// t_args	*check_syntax(t_token *token);
+int		wrd_add(t_token *head, t_flags *flag, char *arg, int i);
+int		q_add(char *arg, t_token *head, t_flags *flag, int i);
 
 #endif

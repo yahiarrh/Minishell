@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:14:59 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/11 14:01:15 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:09:09 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,13 @@ int	chr_q(char *str, t_flags *flag, char q)
 	return (count);
 }
 
-
-t_token  *double_quotes(char *arg, t_flags *flag)
+t_token	*double_quotes(char *arg, t_flags *flag)
 {
 	t_token	*token;
 
 	token = malloc(sizeof(t_token));
 	if (!token)
-		return(NULL);
+		return (NULL);
 	token->word = ft_subtoken(arg, 0, flag->len);
 	token->type = DQ;
 	token->next = NULL;
@@ -48,7 +47,7 @@ t_token  *double_quotes(char *arg, t_flags *flag)
 	return (token);
 }
 
-t_token  *single_quotes(char *arg, t_flags *flag)
+t_token	*single_quotes(char *arg, t_flags *flag)
 {
 	t_token	*token;
 
@@ -70,6 +69,6 @@ t_token	*ft_quotes(char *arg, t_flags *flag)
 	if (arg[0] == '\"')
 		token = double_quotes(arg + 1, flag);
 	else if (arg[0] == '\'')
-		token =single_quotes(arg + 1, flag);
+		token = single_quotes(arg + 1, flag);
 	return (token);
 }

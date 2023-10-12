@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/11 14:08:03 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:03:20 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_args	*last_arg(t_args *lst)
 		lst = lst->next;
 	return (lst);
 }
+
 t_cmd	*cmd_last(t_cmd *lst)
 {
 	if (!lst)
@@ -43,10 +44,10 @@ t_cmd	*cmd_last(t_cmd *lst)
 		lst = lst->next;
 	return (lst);
 }
+
 void	cmd_back(t_cmd **lst, t_cmd *new)
 {
 	t_cmd	*node;
-
 
 	if (!new || !lst)
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/04 13:51:30 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:52:13 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "includes/expand.h"
 # include "includes/exev.h"
 
-
 int	g_exit_status;
 # define PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin\
 				:/sbin:/usr/local/munki:/Library/Apple/usr/bin"
@@ -35,7 +34,7 @@ int	g_exit_status;
 typedef struct s_gt
 {
 	void		*ptr;
-	struct s_gt *next;
+	struct s_gt	*next;
 }t_gt;
 
 void	*get_ptr(size_t i, int flag);

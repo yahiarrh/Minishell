@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:37:53 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 14:16:55 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:12:02 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_cmd	*exp_last(t_cmd *lst)
 		lst = lst->next;
 	return (lst);
 }
+
 void	sq_case(t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
@@ -31,6 +32,7 @@ void	sq_case(t_cmd **head, t_token *token)
 	tmp->cmd = ft_strjoin(s, ft_strdup(token->word));
 	free(s);
 }
+
 void	dq_case(t_env **env, t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
@@ -39,9 +41,10 @@ void	dq_case(t_env **env, t_cmd **head, t_token *token)
 	tmp = exp_last(*head);
 	s = ft_strdup(tmp->cmd);
 	free(tmp->cmd);
-	tmp->cmd =  ft_strjoin(s, expand(env, token->word));
+	tmp->cmd = ft_strjoin(s, expand(env, token->word));
 	free(s);
 }
+
 void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 {
 	char	**s;
@@ -67,6 +70,7 @@ void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 		i++;
 	}
 }
+
 t_cmd	*filtre_exp(t_env **env, t_token *token)
 {
 	t_cmd	*head;
@@ -83,5 +87,5 @@ t_cmd	*filtre_exp(t_env **env, t_token *token)
 			wrd_case(env, &head, token);
 		token = token->down;
 	}
-	return(head);
+	return (head);
 }

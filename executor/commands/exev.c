@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exev.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:50:42 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 16:42:30 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:12:29 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,11 @@ static void	id_back(t_id **lst, t_id *new)
 	ptr->next = new;
 }
 
-static void process(t_env **env, t_args *arg, int falg, t_id **proc)
+static void	process(t_env **env, t_args *arg, int falg, t_id **proc)
 {
 	t_id	*id;
 	int		pie[2];
 	// int		status;
-
 	dup2(arg->fd_out, 1);
 	dup2(arg->fd_in, 0);
 	pipe(pie);

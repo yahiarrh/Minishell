@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/11 14:54:38 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:02:58 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ char	**join_cmds(t_cmd *command)
 	return (c);
 }
 
-t_args  *parcing(t_token *token, t_env *env)
+t_args	*parcing(t_token *token, t_env *env)
 {
-	t_args  *head;
-	t_args  *tmp;
-	
+	t_args	*head;
+	t_args	*tmp;
+
 	head = NULL;
 	if (!token)
 		return (NULL);

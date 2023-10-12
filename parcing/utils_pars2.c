@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/11 15:22:06 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:06:12 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	arg_back(t_args **lst, t_args *new)
 {
 	t_args	*node;
-
 
 	if (!new || !lst)
 		return ;
@@ -27,12 +26,13 @@ void	arg_back(t_args **lst, t_args *new)
 	else
 		*lst = new;
 }
+
 int	heredoc(t_env *env, char *delim)
 {
-	char *promt;
-	char *buff;
-	int pipefd[2];
-	
+	char	*promt;
+	char	*buff;
+	int		pipefd[2];
+
 	pipe(pipefd);
 	while (1)
 	{
@@ -53,7 +53,7 @@ int	heredoc(t_env *env, char *delim)
 	return (pipefd[0]);
 }
 
-bool	fill_redir(t_token *token, t_args *new_arg , t_env *env)
+bool	fill_redir(t_token *token, t_args *new_arg, t_env *env)
 {
 	t_cmd	*tmp;
 
@@ -65,7 +65,8 @@ bool	fill_redir(t_token *token, t_args *new_arg , t_env *env)
 	else if (token->type == REDIN)
 		new_arg->fd_in = open(expand(&env, token->next->word), O_CREAT, 0644);
 	else if (token->type == REDOUT)
-		new_arg->fd_out = open(expand(&env, token->next->word), O_CREAT | O_RDWR, 0644);
+		new_arg->fd_out = open(expand(&env, token->next->word),
+				O_CREAT | O_RDWR, 0644);
 	else if (token->type == APPEND)
 		new_arg->fd_out = open(expand(&env, token->next->word),
 				O_CREAT | O_APPEND, 0644);
@@ -73,6 +74,7 @@ bool	fill_redir(t_token *token, t_args *new_arg , t_env *env)
 		new_arg->fd_in = heredoc(env, expand(&env, token->next->word));
 	return (true);
 }
+
 t_args	*check_tokens(t_token **token, t_env *env)
 {
 	t_args	*new_arg;
@@ -100,10 +102,10 @@ t_args	*check_tokens(t_token **token, t_env *env)
 
 void	print_syn(t_token *token)
 {
-	char *err;
+	char	*err;
 
 	err = "newline";
-	if  (last_token(token)->type == PIPE || token->type == PIPE)
+	if (last_token(token)->type == PIPE || token->type == PIPE)
 		err = "|";
-	printf("syntax error near unexpected token `%s'\n",err);
+	printf("syntax error near unexpected token `%s'\n", err);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_back.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 17:03:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/11 14:01:00 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:06:45 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	token_back(t_token **lst, t_token *new, bool flag)
 {
 	t_token	*node;
-
 
 	if (!new || !lst)
 		return ;
