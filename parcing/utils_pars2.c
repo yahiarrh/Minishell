@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/11 15:22:06 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:23:26 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	heredoc(t_env *env, char *delim)
 		}
 		buff = expand(&env, promt);
 		write(pipefd[1], buff, ft_strlen(buff));
-		printf("%s\n", buff);
 		write(pipefd[1], "\n", 1);
 		free(buff);
 		free(promt);

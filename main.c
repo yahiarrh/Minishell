@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 15:15:05 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:02:26 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,16 @@ int main(int ac, char **av, char **envp)
 	g_exit_status = 0;
 	env = ft_getenv(envp);
 
-	char *prompt = "minishe : ";
+	char *prompt = PROMPT;
 	char *line;
 	while (1)
 	{
 		line = readline(prompt);
 		if(!line)
+		{
+			puts("HNA");
 			break;
+		}
 		if(line)
 			add_history(line);
 		token = tokenizer(line);

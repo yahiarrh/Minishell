@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:37:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:47:03 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static void	dash_case(t_env **env, char *op)
 {
 	if (!(ft_getval(env, "OLDPWD")))
 	{
-		ft_err_msg("bash: cd:", NULL, " OLDPWD not set\n");
+		ft_err_msg("cd:", NULL, " OLDPWD not set\n");
 		return ;
 	}
 	else if (!(ft_getval(env, "OLDPWD")->value))
 	{
-		ft_err_msg("bash: cd:", NULL, " OLDPWD not set\n");
+		ft_err_msg("cd:", NULL, " OLDPWD not set\n");
 		return ;
 	}
 	else
@@ -80,7 +80,7 @@ void	ft_cd(t_env **env, char *p)
 	{
 		if (chdir(p))
 		{
-			ft_err_msg("bash: cd: ", p, ": No such file or directory\n");
+			ft_err_msg("cd: ", p, ": No such file or directory\n");
 			g_exit_status = 1;
 			return ;
 		}

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 11:21:18 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 14:49:30 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:47:39 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ void    exec_comm(t_env **env, char **comm, char **path)
 	rpat = find_path(comm[0], path);
 	cenv = swtch_tp(*env);
 	execve(rpat, comm, cenv);
-	printf("rpat : %s\n", comm[1]);
+	ft_err_msg(NULL, comm[0], " : command not found\n");
 }
