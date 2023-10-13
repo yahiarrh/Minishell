@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 17:07:35 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:53:28 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	sys_comm(t_env **env, char **comm)
 
 	tmp = ft_getval(env, "PATH");
 	if (!tmp)
-		tmp->value = PATH;
+	{
+		ft_err_msg(NULL, comm[0], ": No such file or directory\n");
+		return ;
+	}
 	path = ft_split(tmp->value, ':');
 	exec_comm(env, comm, path);
 }
@@ -49,6 +52,9 @@ pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg)
 {
 	pid_t	tmp;
 
+	tmp = 0;
+	if (!comm || !*comm)
+		return (tmp);
 	if (arg->fd_in)
 		fd.fd_in = arg->fd_in;
 	if (arg->fd_out != 1)
@@ -58,13 +64,10 @@ pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg)
 	{
 		dup2(fd.fd_out, 1);
 		dup2(fd.fd_in, 0);
+		close(fd.fd_toclose[1]);
+		close(fd.fd_toclose[0]);
 		builtin(env, comm);
 		sys_comm(env, comm);
-	}
-	else
-	{
-		wait(NULL);
-		close(fd.fd_toclose);
 	}
 	return(tmp);
 }

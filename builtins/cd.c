@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 12:47:03 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:05:11 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ static void	ft_update_cd(t_env **env, char *name, char *nv)
 	{
 		tmp = lstnew(name);
 		lstadd_back(env, tmp);
-		free(tmp);
 	}
 	else
 	{
 		tmp = ft_getval(env, name);
 	}
-	tmp->value = nv;
+	tmp->value = ft_dup(nv);
 }
 
 static void	dash_case(t_env **env, char *op)

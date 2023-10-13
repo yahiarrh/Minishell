@@ -6,11 +6,20 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:36:58 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:02:07 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	renv(t_env **env)
+{
+
+	if (!ft_getval(env, "PATH"))
+		lstadd_back(env, new("PATH", PATH));
+	lstadd_back(env, new("SHLVL", "1"));
+	lstadd_back(env, new("PWD", getcwd(NULL, 0)));
+}
 
 t_env	*ft_getenv(char **envp)
 {
@@ -62,7 +71,7 @@ void	ft_update(t_env **env, char *name, char *nv)
 	t_env	*tmp;
 
 	tmp = ft_getval(env, name);
-	tmp->value = nv;
+	tmp->value = ft_dup(nv);
 }
 
 int	ft_checkarg(char *arg)

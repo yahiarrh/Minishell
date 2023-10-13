@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 17:02:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:01:46 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,26 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 	g_exit_status = 0;
-	env = ft_getenv(envp);
-
+	if (!envp || !*envp)
+	{
+		env = malloc(sizeof(t_env));
+		ft_memset(env, 0, sizeof(t_env));
+		renv(&env);
+	}
+	else
+	{
+		env = ft_getenv(envp);
+		if (!ft_getval(&env, "SHLVL"))
+			lstadd_back(&env, new("SHLVL", "1"));
+		ft_update(&env, "SHLVL", ft_itoa(ft_atoi(ft_getval(&env, "SHLVL")->value) + 1));
+	}
 	char *prompt = PROMPT;
 	char *line;
 	while (1)
 	{
 		line = readline(prompt);
 		if(!line)
-		{
-			puts("HNA");
 			break;
-		}
 		if(line)
 			add_history(line);
 		token = tokenizer(line);

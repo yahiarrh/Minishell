@@ -20,7 +20,7 @@ LIBFT = libft/libft.a
 
 OBJS	= $(SRC:.c=.o)
 
-%.o : %.c 
+%.o : %.c $(HEADERM)
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 all	: $(NAME)

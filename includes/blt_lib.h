@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:34 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:36:17 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:59:17 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ void	ft_err_msg(char *err, char *targ, char *erty);
 void	ft_exit(char **status);
 char	*ft_join(char const *s1, char const *s2);
 char	*ft_sub(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *s);
-int	ft_cmp2(const char *s1, const char *s2);
-int	ft_cmp(const char *s1, const char *s2);
-
+int		ft_cmp2(const char *s1, const char *s2);
+int		ft_cmp(const char *s1, const char *s2);
+char	*ft_dup(const char *s);
+void	renv(t_env **env);
+t_env	*new(char *name, char *val);
 #endif

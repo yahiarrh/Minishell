@@ -6,11 +6,25 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 11:21:18 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 12:47:39 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:21:40 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+bool	check_dir(char *path)
+{
+	struct stat	file;
+
+	stat(path, &file);
+	if ((*path == '/' || *path == '.')&& access(path, F_OK))
+		return(ft_err_msg(NULL, path, ": No such file or directory\n"), true);
+	if (S_ISDIR(file.st_mode))
+		return(ft_err_msg(NULL, path, ": is a directory\n"), true);
+	if (!access(path, F_OK) && access(path, X_OK))
+		return(ft_err_msg(NULL, path, ": Permission denied\n"), true);
+	return (false);
+}
 
 static int	lstsize(t_env *lst)
 {
@@ -54,6 +68,8 @@ static char *find_path(char *comm, char **path)
 	char	*tmp;
 	char	*tmp1;
 
+	if (comm && (*comm == '.' || *comm == '/'))
+		return (comm);
 	while (*path)
 	{
 		tmp1 = ft_strjoin(*path, "/");
@@ -75,5 +91,8 @@ void    exec_comm(t_env **env, char **comm, char **path)
 	rpat = find_path(comm[0], path);
 	cenv = swtch_tp(*env);
 	execve(rpat, comm, cenv);
-	ft_err_msg(NULL, comm[0], " : command not found\n");
+	if (check_dir(comm[0]))
+		exit(126);
+	ft_err_msg(NULL, comm[0], ": command not found\n");
+		exit(127);
 }
