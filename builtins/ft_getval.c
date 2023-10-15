@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getval.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:36:58 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:53:26 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_env	*ft_getenv(char **envp)
 		equ = 0;
 		while (envp[i][equ] && envp[i][equ] != '=')
 			equ++;
-		tmp = malloc(sizeof(t_env));
+		tmp = get_ptr(sizeof(t_env), 1);
 		ft_memset(tmp, 0, sizeof(t_env));
 		tmp->name = ft_substr(envp[i], 0, equ);
 		if (!ft_cmp(tmp->name, "OLDPWD"))

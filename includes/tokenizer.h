@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/12 12:17:51 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:50:52 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ t_token	*ft_quotes(char *arg, t_flags *flag);
 int		chr_q(char *str, t_flags *flag, char q);
 int		wrd_add(t_token *head, t_flags *flag, char *arg, int i);
 int		q_add(char *arg, t_token *head, t_flags *flag, int i);
+int		spc_chk(char c);
+int		ft_delim(char *str);
 
 #endif

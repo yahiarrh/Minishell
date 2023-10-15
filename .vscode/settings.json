@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "blt_lib.h": "c",
+        "tokenizer.h": "c"
+    }
+}
