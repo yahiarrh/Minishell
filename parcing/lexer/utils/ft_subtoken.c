@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_subtoken.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:50:48 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 14:00:52 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:34:39 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ char	*ft_subtoken(char const *s, unsigned int start, int len)
 	i = 0;
 	st = ft_strlen(s + start);
 	if (start < (unsigned int)len)
-		sub = (char *)malloc(sizeof(char) * (st + 1));
+		sub = get_ptr(sizeof(char) * (st + 1), 1);
 	else
-		sub = (char *)malloc(sizeof(char) * (len + 1));
+		sub = get_ptr(sizeof(char) * (len + 1), 1);
 	if (!sub)
 		return (0);
 	while (s[start] && i < len)

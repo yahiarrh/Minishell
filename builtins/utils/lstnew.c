@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstnew.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:36:47 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:35:32 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:29:26 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*lstnew(char *content)
 {
 	t_env	*s;
 
-	s = malloc(sizeof(t_env));
+	s = get_ptr(sizeof(t_env), 1);
 	if (!s)
 		return (NULL);
 	s->name = ft_strdup(content);

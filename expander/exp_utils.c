@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:37:53 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 12:12:02 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/15 14:31:06 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 			i++;
 			continue ;
 		}
-		tmp = malloc(sizeof(t_cmd));
+		tmp = get_ptr(sizeof(t_cmd), 1);
 		tmp->next = NULL;
 		tmp->cmd = s[i];
 		cmd_back(head, tmp);
@@ -75,7 +75,7 @@ t_cmd	*filtre_exp(t_env **env, t_token *token)
 {
 	t_cmd	*head;
 
-	head = malloc(sizeof(t_cmd));
+	head = get_ptr(sizeof(t_cmd), 1);
 	ft_memset(head, 0, sizeof(t_cmd));
 	while (token)
 	{

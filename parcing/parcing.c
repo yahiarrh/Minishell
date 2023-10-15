@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/12 12:02:58 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/15 14:31:50 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**join_cmds(t_cmd *command)
 
 	i = 0;
 	len = ft_cmdsize(command);
-	c = malloc(sizeof(char *) * (len + 1));
+	c = get_ptr(sizeof(char *) * (len + 1), 1);
 	while (i < len)
 	{
 		c[i] = ft_strdup(command->cmd);
