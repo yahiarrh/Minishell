@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/11 14:06:40 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:18:30 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ t_token	*tokenizer(char *arg)
 			if(flag->len || (!flag->len && (flag->spc && spc_chk(arg[i + 2])))) 
 				token_back(&head, ft_quotes(arg + i, flag), flag->spc);
 			i += flag->len + 2;
-			flag->spc = 0;
+			if (!flag->len && (flag->spc))
+				flag->spc = 1;
+			else
+				flag->spc = 0;
 		}
 		else
 		{
@@ -102,6 +105,21 @@ t_token	*tokenizer(char *arg)
 		}
 	}
 	if (flag->double_q || flag->single_q)
+	{
 		printf("quote not closed\n");
+		return (NULL);
+	}
+	// while (head)
+	// {
+	// 	printf("<<<<<%s\n ",head->word);
+	// 	while (head->down)
+	// 	{
+	// 		printf("<<<<<%s\n ",head->down->word);
+	// 		head = head->down;
+	// 	}
+		
+	// 	head = head->next;
+	// }
+	
 	return (head);
 }

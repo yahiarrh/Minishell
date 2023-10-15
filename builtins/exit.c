@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:05:16 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 12:47:15 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:16:15 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	alph_arg(char **status)
 		{
 			printf("exit\n");
 			ft_err_msg("exit: ", status[1], 
-				": numeric argument required\n");
+				": numeric argument required\n", 0);
 			exit (255);
 		}
 		j++;
@@ -47,8 +47,7 @@ void	ft_exit(char	**status)
 		i++;
 	if (i > 2)
 	{
-		ft_err_msg("exit: ", NULL, "too many arguments\n");
-		g_exit_status = 1;
+		ft_err_msg("exit: ", NULL, "too many arguments\n", 1);
 		return ;
 	}
 	else

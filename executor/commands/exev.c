@@ -6,21 +6,11 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:50:42 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/13 18:54:43 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:17:51 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-// static void	ft_kill(t_id **ids)
-// {
-// 	while (*ids)
-// 	{
-// 		kill((*ids)->id, SIGKILL);
-// 		free(ids);
-// 		*ids = (*ids)->next;
-// 	}
-// }
 
 static int	argsize(t_args *lst)
 {
@@ -42,7 +32,6 @@ static void process(t_env **env, t_args *arg)
 	pid_t	t;
 	int		fd[2];
 	int		tmp_fd[2];
-	int		statu;
 
 	pipe(fd);
 	comm_type(env, join_cmds(arg->cmd), (t_fd){ 0, fd[1], fd}, arg);
@@ -60,26 +49,28 @@ static void process(t_env **env, t_args *arg)
 	t = comm_type(env, join_cmds(arg->cmd), (t_fd){ fd[0], STDOUT_FILENO, fd}, arg);
 	close(fd[1]);
 	close(fd[0]);
+	sig_par(t);
 	while (wait(NULL) != -1)
 		;
-	waitpid(t , &statu, 0);
 }
 static void process1(t_env **env, t_args *arg)
 {
 	pid_t	id;
 	char	**s;
-	int		status;
-
+	// int		status;
 	s = join_cmds(arg->cmd);
+	if (!s || !*s)
+		return ;
+	signal(SIGINT, SIG_IGN);
 	id = fork();
+	sig_ch(id);
 	if (!id && s[0])
 	{
 		dup2(arg->fd_out, 1);
 		dup2(arg->fd_in, 0);
 		sys_comm(env, s);
 	}
-	else
-		waitpid(id, &status, 0);
+	sig_par(id);
 }
 
 void	ft_exec(t_env **env, t_args *arg)

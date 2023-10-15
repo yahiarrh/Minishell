@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/11 14:54:38 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:07:57 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ t_args  *parcing(t_token *token, t_env *env)
 			token = token->next;
 	}
 	if (token)
-		return (print_syn(token), NULL);
+		return (print_syn(token), NULL); 
 	return (head);
 }

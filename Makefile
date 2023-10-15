@@ -16,18 +16,22 @@ RM 		= rm -rf
 
 HEADERM = minishell.h
 
+LDFLAGS="-L/Users/yrrhaibi/.brew/opt/readline/lib"
+
+CPPFLAGS="-I/Users/yrrhaibi/.brew/opt/readline/include"
+
 LIBFT = libft/libft.a
 
 OBJS	= $(SRC:.c=.o)
 
 %.o : %.c $(HEADERM)
-	@$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 all	: $(NAME)
 
 $(NAME) : $(OBJS)
 	@make -C libft
-	@cc $(OBJS) -o $(NAME) $(LIBFT) -lreadline  $(CFLAGS)
+	@cc $(OBJS) -o $(NAME) $(CPPFLAGS) $(LDFLAGS) $(LIBFT) -lreadline  $(CFLAGS)
 
 clean :
 	@make clean -C libft

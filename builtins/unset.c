@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:03:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 12:47:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:16:29 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_unset(t_env **env, char **name)
 	{
 		if (!ft_checkarg(name[i]))
 			ft_err_msg("unset: ", name[i],
-				" :not a valid identifier\n");
+				" :not a valid identifier\n", 1);
 		else
 		{
 			tmp2 = ft_getval(env, name[i]);

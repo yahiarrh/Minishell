@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 11:21:18 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/13 17:21:40 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:21:15 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ bool	check_dir(char *path)
 
 	stat(path, &file);
 	if ((*path == '/' || *path == '.')&& access(path, F_OK))
-		return(ft_err_msg(NULL, path, ": No such file or directory\n"), true);
+		return(ft_err_msg(NULL, path, ": No such file or directory\n", 0), true);
 	if (S_ISDIR(file.st_mode))
-		return(ft_err_msg(NULL, path, ": is a directory\n"), true);
+		return(ft_err_msg(NULL, path, ": is a directory\n", 0), true);
 	if (!access(path, F_OK) && access(path, X_OK))
-		return(ft_err_msg(NULL, path, ": Permission denied\n"), true);
+		return(ft_err_msg(NULL, path, ": Permission denied\n", 0), true);
 	return (false);
 }
 
@@ -56,7 +56,6 @@ static char	**swtch_tp(t_env *env)
 		tmp = ft_strjoin(env->name, "=");
 		s[i] = ft_strjoin(tmp, env->value);
 		i++;
-		free(tmp);
 		env = env->next;
 	}
 	s[i] = NULL;
@@ -74,10 +73,8 @@ static char *find_path(char *comm, char **path)
 	{
 		tmp1 = ft_strjoin(*path, "/");
 		tmp = ft_strjoin(tmp1, comm);
-		free(tmp1);
 		if (!access(tmp, X_OK))
 			return (tmp);
-		free(tmp);
 		path++;
 	}
 	return (NULL);
@@ -93,6 +90,6 @@ void    exec_comm(t_env **env, char **comm, char **path)
 	execve(rpat, comm, cenv);
 	if (check_dir(comm[0]))
 		exit(126);
-	ft_err_msg(NULL, comm[0], ": command not found\n");
+	ft_err_msg(NULL, comm[0], ": command not found\n", 0);
 		exit(127);
 }

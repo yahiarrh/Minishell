@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 22:39:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/13 14:58:51 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:06:35 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void	lstdelone(t_env *lst, void (*del)(void *))
 		return ;
 	del(lst->name);
 	free (lst);
+	lst = NULL;
 }

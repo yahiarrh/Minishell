@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:37:53 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 14:16:55 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:00:59 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	sq_case(t_cmd **head, t_token *token)
 
 	tmp = exp_last(*head);
 	s = ft_strdup(tmp->cmd);
-	free(tmp->cmd);
 	tmp->cmd = ft_strjoin(s, ft_strdup(token->word));
-	free(s);
 }
 void	dq_case(t_env **env, t_cmd **head, t_token *token)
 {
@@ -38,28 +36,24 @@ void	dq_case(t_env **env, t_cmd **head, t_token *token)
 
 	tmp = exp_last(*head);
 	s = ft_strdup(tmp->cmd);
-	free(tmp->cmd);
 	tmp->cmd =  ft_strjoin(s, expand(env, token->word));
-	free(s);
 }
 void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 {
 	char	**s;
+	char	*s1;
 	t_cmd	*tmp;
 	int		i;
 
-	i = 0;
 	s = ft_split(expand(env, token->word), ' ');
-	if (!s)
+	if (!s || !*s)
 		return ;
+	tmp = exp_last(*head);
+	s1 = ft_strdup(tmp->cmd);
+	tmp->cmd =  ft_strjoin(s1, s[0]);
+	i = 1;
 	while (s[i])
 	{
-		if (!i)
-		{
-			(*head)->cmd = *s;
-			i++;
-			continue ;
-		}
 		tmp = malloc(sizeof(t_cmd));
 		tmp->next = NULL;
 		tmp->cmd = s[i];

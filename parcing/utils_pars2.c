@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/12 12:23:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:59:18 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ int	heredoc(t_env *env, char *delim)
 	int pipefd[2];
 	
 	pipe(pipefd);
-	while (1)
+	signal(SIGINT, herdoc_sig);
+	while (isatty(STDIN_FILENO))
 	{
 		promt = readline("> ");
 		if (!promt || !ft_strcmp(promt, delim))
 		{
 			free(promt);
+			puts("RAH DKHEL");
 			break ;
 		}
 		buff = expand(&env, promt);
@@ -48,7 +50,8 @@ int	heredoc(t_env *env, char *delim)
 		free(buff);
 		free(promt);
 	}
-	close(pipefd[1]);
+	if (sig_her(pipefd))
+		return (-1);
 	return (pipefd[0]);
 }
 
@@ -70,6 +73,8 @@ bool	fill_redir(t_token *token, t_args *new_arg , t_env *env)
 				O_CREAT | O_APPEND, 0644);
 	else if (token->type == HEREDOC)
 		new_arg->fd_in = heredoc(env, expand(&env, token->next->word));
+	if (new_arg->fd_in == -1)
+		return (token->type = ERR_SIG, false);
 	return (true);
 }
 t_args	*check_tokens(t_token **token, t_env *env)
@@ -104,5 +109,7 @@ void	print_syn(t_token *token)
 	err = "newline";
 	if  (last_token(token)->type == PIPE || token->type == PIPE)
 		err = "|";
+	else if (token->type == ERR_SIG)
+		return ;
 	printf("syntax error near unexpected token `%s'\n",err);
 }

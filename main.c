@@ -6,73 +6,102 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/13 15:01:46 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:23:11 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <readline/readline.h>
 
-// static t_gt	*last_ptr(t_gt *lst)
-// {
-// 	if (!lst)
-// 		return (lst);
-// 	while (lst->next)
-// 		lst = lst->next;
-// 	return (lst);
-// }
-
-// static void add_ptr(t_gt **head, t_gt *new)
-// {
-// 	t_gt	*tmp;
-
-// 	if (!head || !new)
-// 		return ;
-// 	if (!*head)
-// 	{
-// 		*head = new;
-// 		return ;
-// 	}
-// 	tmp = last_ptr(*head);
-// 	tmp->next = new;
-// }
-
-// void	*get_ptr(size_t i, int flag)
-// {
-// 	void	*ptr;
-// 	static t_gt	*head;
-// 	t_gt	*tmp;
-
-// 	tmp = NULL;
-// 	if (flag == 1)
-// 	{
-// 		ptr = malloc(i);
-// 		if (!ptr)
-// 			return (NULL);
-// 		tmp = malloc(sizeof(t_gt));
-// 		tmp->ptr = ptr;
-// 		add_ptr(&head, tmp);
-// 		return (ptr);
-// 	}
-// 	else
-// 	{
-// 		while (head)
-// 		{
-// 			free(head->ptr);
-// 			head = head->next;
-// 		}
-// 	}
-// 	return (NULL);
-// }
-
-int main(int ac, char **av, char **envp)
+t_gt	*last_ptr(t_gt *lst)
 {
-	t_env *env;
-	t_args *arg;
-	t_token *token;
+	if (!lst)
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
 
+void	add_ptr(t_gt **head, t_gt *new)
+{
+	t_gt	*tmp;
+
+	if (!head || !new)
+		return ;
+	if (!*head)
+	{
+		*head = new;
+		return ;
+	}
+	tmp = last_ptr(*head);
+	tmp->next = new;
+}
+
+void	*get_ptr(size_t i, int flag)
+{
+	void		*ptr;
+	static t_gt	*head;
+	t_gt		*tmp;
+
+	tmp = NULL;
+	if (flag == 1)
+	{
+		ptr = malloc(i);
+		if (!ptr)
+			return (NULL);
+		tmp = malloc(sizeof(t_gt));
+		tmp->ptr = ptr;
+		tmp->next = NULL;
+		add_ptr(&head, tmp);
+		return (ptr);
+	}
+	else
+	{
+		while (head)
+		{
+			free(head->ptr);
+			head = head->next;
+		}
+	}
+	return (NULL);
+}
+
+void	main_loop(t_token *token, t_env *env)
+{
+	char	*prompt;
+	char	*line;
+	t_args	*arg;
+
+	prompt = "Minishell$ ";
+	arg = NULL;
+	while (1)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, inter_handler);
+		line = readline(prompt);
+		printf("%s\n",line);
+		if (!line)
+			return(printf("exit\n"), free(NULL));
+		if (line)
+			add_history(line);
+		token = tokenizer(line);
+		arg = parcing(token, env);
+		if (!arg)	
+			continue ;
+		ft_exec(&env, arg);
+		free(line);
+	}
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_env	*env;
+	t_token	*token;
+
+	rl_catch_signals = 0;
 	(void)av;
-	(void)ac;
+	if (ac > 1)
+		return (0);
+	token = NULL;
 	g_exit_status = 0;
 	if (!envp || !*envp)
 	{
@@ -87,21 +116,7 @@ int main(int ac, char **av, char **envp)
 			lstadd_back(&env, new("SHLVL", "1"));
 		ft_update(&env, "SHLVL", ft_itoa(ft_atoi(ft_getval(&env, "SHLVL")->value) + 1));
 	}
-	char *prompt = PROMPT;
-	char *line;
-	while (1)
-	{
-		line = readline(prompt);
-		if(!line)
-			break;
-		if(line)
-			add_history(line);
-		token = tokenizer(line);
-		arg = parcing(token, env);
-		
-		if (!arg)
-			continue;
-		ft_exec(&env, arg);
-		free(line);
-	}
-} 
+	main_loop(token, env);
+	puts("gsdkaj");
+	exit(g_exit_status);
+}

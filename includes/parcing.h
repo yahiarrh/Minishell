@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/12 12:35:41 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:31:22 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include "../includes/blt_lib.h"
 # include "../libft/libft.h"
-
 // #define ERRPIPE "syntax error near unexpected token `|'"
 
 

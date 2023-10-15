@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/13 15:48:00 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:57:18 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <errno.h>
 # include <unistd.h>
 #include <sys/stat.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 # include "libft/libft.h"
 # include "includes/parcing.h"
 # include "includes/tokenizer.h"

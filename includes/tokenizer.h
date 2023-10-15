@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/07 14:49:20 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/15 17:37:38 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ enum e_cmd
 	REDIN,
 	REDOUT,
 	APPEND,
-	HEREDOC
+	HEREDOC,
+	ERR_SIG
 };
 
 t_token	*last_token(t_token *lst);
