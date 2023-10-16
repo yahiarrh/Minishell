@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:16:02 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 11:16:23 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 12:39:07 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_export(t_env **env, char **name)
 		pr_env(env);
 		return ;
 	}
-	name++;//free n
+	name++;
 	while (*name)
 	{
 		i = extr_name(*name);

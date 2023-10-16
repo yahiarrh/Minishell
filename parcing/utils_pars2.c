@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/15 17:59:18 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:22:38 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	arg_back(t_args **lst, t_args *new)
 {
 	t_args	*node;
-
 
 	if (!new || !lst)
 		return ;
@@ -27,12 +26,13 @@ void	arg_back(t_args **lst, t_args *new)
 	else
 		*lst = new;
 }
+
 int	heredoc(t_env *env, char *delim)
 {
-	char *promt;
-	char *buff;
-	int pipefd[2];
-	
+	char	*promt;
+	char	*buff;
+	int		pipefd[2];
+
 	pipe(pipefd);
 	signal(SIGINT, herdoc_sig);
 	while (isatty(STDIN_FILENO))
@@ -41,7 +41,6 @@ int	heredoc(t_env *env, char *delim)
 		if (!promt || !ft_strcmp(promt, delim))
 		{
 			free(promt);
-			puts("RAH DKHEL");
 			break ;
 		}
 		buff = expand(&env, promt);
@@ -55,7 +54,7 @@ int	heredoc(t_env *env, char *delim)
 	return (pipefd[0]);
 }
 
-bool	fill_redir(t_token *token, t_args *new_arg , t_env *env)
+bool	fill_redir(t_token *token, t_args *new_arg, t_env *env)
 {
 	t_cmd	*tmp;
 
@@ -67,7 +66,8 @@ bool	fill_redir(t_token *token, t_args *new_arg , t_env *env)
 	else if (token->type == REDIN)
 		new_arg->fd_in = open(expand(&env, token->next->word), O_CREAT, 0644);
 	else if (token->type == REDOUT)
-		new_arg->fd_out = open(expand(&env, token->next->word), O_CREAT | O_RDWR, 0644);
+		new_arg->fd_out = open(expand(&env, token->next->word), 
+			O_CREAT | O_RDWR, 0644);
 	else if (token->type == APPEND)
 		new_arg->fd_out = open(expand(&env, token->next->word),
 				O_CREAT | O_APPEND, 0644);

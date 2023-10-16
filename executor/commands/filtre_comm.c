@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 17:04:59 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:22:56 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg)
 		fd.fd_in = arg->fd_in;
 	if (arg->fd_out != 1)
 		fd.fd_out = arg->fd_out;
-	signal(SIGINT, SIG_IGN);
 	tmp = fork();
 	sig_ch(tmp);
 	if (!tmp)
@@ -87,9 +86,9 @@ pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg)
 		dup2(fd.fd_in, 0);
 		close(fd.fd_toclose[1]);
 		close(fd.fd_toclose[0]);
-		if(builtin(env, comm))
+		if (builtin(env, comm))
 			exit (0);
 		sys_comm(env, comm);
 	}
-	return(tmp);
+	return (tmp);
 }

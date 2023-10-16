@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 18:23:11 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:41:19 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ void	main_loop(t_token *token, t_env *env)
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, inter_handler);
 		line = readline(prompt);
-		printf("%s\n",line);
 		if (!line)
-			return(printf("exit\n"), free(NULL));
+			return(printf("exit\n"), exit (0));
 		if (line)
 			add_history(line);
 		token = tokenizer(line);
@@ -117,6 +116,4 @@ int	main(int ac, char **av, char **envp)
 		ft_update(&env, "SHLVL", ft_itoa(ft_atoi(ft_getval(&env, "SHLVL")->value) + 1));
 	}
 	main_loop(token, env);
-	puts("gsdkaj");
-	exit(g_exit_status);
 }
