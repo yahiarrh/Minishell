@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/15 14:32:15 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 15:43:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	tok_indice(t_token **token, char	*arg)
 	return (1);
 }
 
-void	create_tokens(char *arg, t_token *head, t_flags *flag)
+void	create_tokens(char *arg, t_token **head, t_flags *flag)
 {
 	int	i;
 
@@ -75,10 +75,13 @@ void	create_tokens(char *arg, t_token *head, t_flags *flag)
 		else if (ft_tokchr("|<>", arg[i]))
 		{
 			flag->spc = 1;
-			i += tok_indice(&head, arg + i);
+			i += tok_indice(head, arg + i);
 		}
 		else if (arg[i] == '\'' || arg[i] == '\"')
-			i = q_add(arg + i, head, flag, i);
+			{
+				printf("%d\n",i);
+				i = q_add(arg + i, head, flag, i);
+			}
 		else
 			i = wrd_add(head, flag, arg, i);
 	}
@@ -89,14 +92,15 @@ t_token	*tokenizer(char *arg)
 	t_token	*head;
 	t_flags	*flag;
 
-	flag = get_ptr(sizeof(t_flags), 1);
+	flag = malloc(sizeof(t_flags));
 	flag->len = 0;
 	flag->single_q = 0;
 	flag->double_q = 0;
 	flag->spc = 1;
 	head = NULL;
-	create_tokens(arg, head, flag);
+	create_tokens(arg, &head, flag);
 	if (flag->double_q || flag->single_q)
 		printf("quote not closed\n");
+	printf("%s\n",head->word);
 	return (head);
 }

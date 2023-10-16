@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:37:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:15:38 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,24 @@ static void	ft_update_cd(t_env **env, char *name, char *nv)
 	{
 		tmp = lstnew(name);
 		lstadd_back(env, tmp);
-		free(tmp);
 	}
 	else
 	{
 		tmp = ft_getval(env, name);
 	}
-	tmp->value = nv;
+	tmp->value = ft_dup(nv);
 }
 
 static void	dash_case(t_env **env, char *op)
 {
 	if (!(ft_getval(env, "OLDPWD")))
 	{
-		ft_err_msg("bash: cd:", NULL, " OLDPWD not set\n");
+		ft_err_msg("cd:", NULL, " OLDPWD not set\n", 1);
 		return ;
 	}
 	else if (!(ft_getval(env, "OLDPWD")->value))
 	{
-		ft_err_msg("bash: cd:", NULL, " OLDPWD not set\n");
+		ft_err_msg("cd:", NULL, " OLDPWD not set\n", 1);
 		return ;
 	}
 	else
@@ -59,6 +58,7 @@ static void	home_case(t_env **env, char *op)
 	if (chdir(ft_getval(env, "HOME")->value))
 	{
 		perror("chdir problem");
+		g_exit_status = 1;
 		return ;
 	}
 	ft_update_cd(env, "PWD", getcwd(NULL, 0));
@@ -80,8 +80,7 @@ void	ft_cd(t_env **env, char *p)
 	{
 		if (chdir(p))
 		{
-			ft_err_msg("bash: cd: ", p, ": No such file or directory\n");
-			g_exit_status = 1;
+			ft_err_msg("cd: ", p, ": No such file or directory\n", 1);
 			return ;
 		}
 		o = getcwd(NULL, 0);
@@ -89,5 +88,6 @@ void	ft_cd(t_env **env, char *p)
 		ft_update_cd(env, "OLDPWD", op);
 	}
 	free(op);
-	free(o);
+	if (o)
+		free(o);
 }

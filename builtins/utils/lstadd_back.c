@@ -6,11 +6,22 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 22:39:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:35:54 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:06:35 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+t_env	*new(char *name, char *val)
+{
+	t_env	*tmp1;
+
+	tmp1 = malloc(sizeof(t_env));
+	tmp1->name = ft_dup(name);
+	tmp1->value = ft_dup(val);
+	tmp1->next = NULL;
+	return (tmp1);
+}
 
 void	lstadd_back(t_env **lst, t_env *new)
 {
@@ -33,4 +44,5 @@ void	lstdelone(t_env *lst, void (*del)(void *))
 		return ;
 	del(lst->name);
 	free (lst);
+	lst = NULL;
 }

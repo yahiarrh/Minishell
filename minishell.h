@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 11:52:13 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 15:03:10 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 
 # include <stdbool.h>
 # include <stdio.h>
+# include <string.h>
 # include <stdlib.h>
 # include <signal.h>
 # include <unistd.h>
+# include <errno.h>
+# include <unistd.h>
+# include <sys/stat.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "libft/libft.h"
 # include "includes/parcing.h"
 # include "includes/tokenizer.h"
@@ -26,10 +32,11 @@
 # include "includes/exev.h"
 
 int	g_exit_status;
-# define PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin\
-				:/sbin:/usr/local/munki:/Library/Apple/usr/bin"
+# define PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
+/usr/local/munki:/Library/Apple/usr/bin"
 # define ALLOC 1
 # define FREE 0
+# define PROMPT "minishell-1.0$ "
 
 typedef struct s_gt
 {

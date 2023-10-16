@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:23:25 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 17:45:47 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:21:35 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ char	*expand(t_env **env, char *var)
 
 	i = 0;
 	ret = NULL;
+	if (!*var)
+		return (ft_strdup(""));
 	while (var[i])
 	{
 		val = ret;
@@ -91,13 +93,11 @@ char	*expand(t_env **env, char *var)
 		{
 			name = extr_name(var + i + 1);
 			ret = ft_val(env, name, ret);
-			free(val);
 			i += ft_strlen(name) + 1;
 		}
 		else
 		{
 			ret = ft_strjoin(ret, ft_substr(var, i, spc_len(var + i)));
-			free(val);
 			i += spc_len(var + i);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:28:19 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 11:56:43 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/11 14:31:50 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*ft_join(char const *s1, char const *s2)
 	ret[j] = '\0';
 	return (ret);
 }
-
 char	*ft_dup(const char *s)
 {
 	char	*d;
@@ -56,7 +55,6 @@ char	*ft_dup(const char *s)
 	d[i] = '\0';
 	return (d);
 }
-
 char	*ft_sub(char const *s, unsigned int start, size_t len)
 {
 	size_t		i;
@@ -82,7 +80,6 @@ char	*ft_sub(char const *s, unsigned int start, size_t len)
 	sub[i] = '\0';
 	return (sub);
 }
-
 int	ft_cmp2(const char *s1, const char *s2)
 {
 	unsigned char	*s11;

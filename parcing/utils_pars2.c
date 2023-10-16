@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/12 12:06:12 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 15:11:13 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	heredoc(t_env *env, char *delim)
 	int		pipefd[2];
 
 	pipe(pipefd);
-	while (1)
+	signal(SIGINT, herdoc_sig);
+	while (isatty(STDIN_FILENO))
 	{
 		promt = readline("> ");
 		if (!promt || !ft_strcmp(promt, delim))
@@ -44,12 +45,12 @@ int	heredoc(t_env *env, char *delim)
 		}
 		buff = expand(&env, promt);
 		write(pipefd[1], buff, ft_strlen(buff));
-		printf("%s\n", buff);
 		write(pipefd[1], "\n", 1);
 		free(buff);
 		free(promt);
 	}
-	close(pipefd[1]);
+	if (sig_her(pipefd))
+		return (-1);
 	return (pipefd[0]);
 }
 
@@ -72,6 +73,8 @@ bool	fill_redir(t_token *token, t_args *new_arg, t_env *env)
 				O_CREAT | O_APPEND, 0644);
 	else if (token->type == HEREDOC)
 		new_arg->fd_in = heredoc(env, expand(&env, token->next->word));
+	if (new_arg->fd_in == -1)
+		return (token->type = ERR_SIG, false);
 	return (true);
 }
 
@@ -107,5 +110,7 @@ void	print_syn(t_token *token)
 	err = "newline";
 	if (last_token(token)->type == PIPE || token->type == PIPE)
 		err = "|";
+	else if (token->type == ERR_SIG)
+		return ;
 	printf("syntax error near unexpected token `%s'\n", err);
 }

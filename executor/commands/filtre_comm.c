@@ -3,29 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   filtre_comm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 12:12:12 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 14:22:56 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static void	sys_comm(t_env **env, char **comm)
+void	sys_comm(t_env **env, char **comm)
 {
 	char	**path;
 	t_env	*tmp;
 
+	g_exit_status = 0;
 	tmp = ft_getval(env, "PATH");
 	if (!tmp)
-		tmp->value = PATH;
+	{
+		ft_err_msg(NULL, comm[0], ": No such file or directory\n", 127);
+		return ;
+	}
 	path = ft_split(tmp->value, ':');
 	exec_comm(env, comm, path);
 }
 
-static int	builtin(t_env **env, char **comm)
+int	builtin(t_env **env, char **comm)
 {
+	g_exit_status = 0;
 	if (!ft_cmp(comm[0], "pwd"))
 		ft_pwd(env);
 	else if (!ft_cmp(comm[0], "echo"))
@@ -45,14 +50,45 @@ static int	builtin(t_env **env, char **comm)
 	return (1);
 }
 
-void	comm_type(t_env **env, char	**comm, int flag)
+void	sig_par(pid_t p)
 {
-	if (!flag)
+	int	status;
+
+	if (wait(&status) == p)
 	{
-		builtin(env, comm);
-		return ;
+		if (WIFEXITED(status))
+			g_exit_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+			g_exit_status = 128 + WTERMSIG(status);
 	}
-	else
+	if (status == SIGINT)
+		write(1, "\n", 2);
+	if (status == SIGQUIT)
+		write(1, "Quit : 3\n", 10);
+}
+
+pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg)
+{
+	pid_t	tmp;
+
+	tmp = 0;
+	if (!comm || !*comm)
+		return (tmp);
+	if (arg->fd_in)
+		fd.fd_in = arg->fd_in;
+	if (arg->fd_out != 1)
+		fd.fd_out = arg->fd_out;
+	tmp = fork();
+	sig_ch(tmp);
+	if (!tmp)
+	{
+		dup2(fd.fd_out, 1);
+		dup2(fd.fd_in, 0);
+		close(fd.fd_toclose[1]);
+		close(fd.fd_toclose[0]);
+		if (builtin(env, comm))
+			exit (0);
 		sys_comm(env, comm);
-	return ;
+	}
+	return (tmp);
 }

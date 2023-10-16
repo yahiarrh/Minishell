@@ -3,92 +3,90 @@
 /*                                                        :::      ::::::::   */
 /*   exev.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:50:42 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 12:12:29 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 14:26:13 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// static void	ft_kill(t_id **ids)
-// {
-// 	while (*ids)
-// 	{
-// 		kill((*ids)->id, SIGKILL);
-// 		free(ids);
-// 		*ids = (*ids)->next;
-// 	}
-// }
-
-static t_id	*idlast(t_id *lst)
+static int	argsize(t_args *lst)
 {
+	int	count;
+
+	count = 0;
 	if (!lst)
-		return (lst);
-	while (lst->next)
+		return (0);
+	while (lst != NULL)
+	{
+		count++;
 		lst = lst->next;
-	return (lst);
+	}
+	return (count);
 }
 
-static void	id_back(t_id **lst, t_id *new)
+static void	process(t_env **env, t_args *arg)
 {
-	t_id	*ptr;
+	pid_t	t;
+	int		fd[2];
+	int		tmp_fd[2];
 
-	if (!lst || !new)
-		return ;
-	if (!*lst)
+	pipe(fd);
+	comm_type(env, join_cmds(arg->cmd), (t_fd){0, fd[1], fd}, arg);
+	arg = arg->next;
+	while (arg->next)
 	{
-		*lst = new;
-		return ;
+		pipe(tmp_fd);
+		close(fd[1]);
+		comm_type(env, join_cmds(arg->cmd),
+			(t_fd){fd[0], tmp_fd[1], tmp_fd}, arg);
+		close(fd[0]);
+		fd[0] = tmp_fd[0];
+		fd[1] = tmp_fd[1];
+		arg = arg->next;
 	}
-	ptr = idlast(*lst);
-	ptr->next = new;
+	t = comm_type(env, join_cmds(arg->cmd),
+			(t_fd){fd[0], STDOUT_FILENO, fd}, arg);
+	close(fd[1]);
+	close(fd[0]);
+	sig_par(t);
+	while (wait(NULL) != -1)
+		;
 }
 
-static void	process(t_env **env, t_args *arg, int falg, t_id **proc)
+static void	process1(t_env **env, t_args *arg)
 {
-	t_id	*id;
-	int		pie[2];
-	// int		status;
-	dup2(arg->fd_out, 1);
-	dup2(arg->fd_in, 0);
-	pipe(pie);
-	id = malloc(sizeof(t_id));
-	ft_memset(id, 0, sizeof(t_id));
-	id->id = fork();
-	id_back(proc, id);
-	if (!id->id)
+	pid_t	id;
+	char	**s;
+
+	s = join_cmds(arg->cmd);
+	if (!s || !*s)
+		return ;
+	id = fork();
+	sig_ch(id);
+	if (!id && s[0])
 	{
-		if (falg)
-			dup2(pie[1], arg->fd_out);
-		close(pie[0]);
-		close(arg->fd_out);
-		comm_type(env, join_cmds(arg->cmd), 1);
+		dup2(arg->fd_out, 1);
+		dup2(arg->fd_in, 0);
+		sys_comm(env, s);
 	}
-	else
-	{
-		if (falg)
-			dup2(pie[0], arg->fd_in);
-		close(pie[1]);
-		close(arg->fd_in);
-		wait(NULL);
-		// waitpid(id->id, &status, 0);
-	}
+	sig_par(id);
 }
 
 void	ft_exec(t_env **env, t_args *arg)
 {
-	t_id *proc;
+	t_id	*proc;
 
 	proc = NULL;
-	while (arg)
+	if (argsize(arg) == 1 && builtin(env, join_cmds(arg->cmd)))
+		return ;
+	else if (argsize(arg) == 1)
 	{
-		if (arg->next)
-			process(env, arg, 1, &proc);
-		else
-			process(env, arg, 0, &proc);
-		arg = arg->next;
+		process1(env, arg);
+		return ;
 	}
-	// ft_kill(&proc);
+	else
+		process(env, arg);
 }

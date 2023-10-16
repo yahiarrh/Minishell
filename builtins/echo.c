@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:04:30 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 17:44:57 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/15 09:48:53 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	ft_echo(char **s)
 	int	i;
 	int	flag;
 
-	i = 0;
+	i = 1;
 	flag = 0;
-	if (!s[0])
+	if (!s[1])
 	{
 		printf("\n");
 		return ;
 	}
-	while (s[i][0] == '-' && s[i][1] == 'n')
+	while (s[i] && (s[i][0] == '-' && s[i][1] == 'n'))
 	{
 		if (!option(s[i]))
 			break ;

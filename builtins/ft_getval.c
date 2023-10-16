@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getval.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/13 14:53:26 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/13 15:02:07 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	renv(t_env **env)
+{
+
+	if (!ft_getval(env, "PATH"))
+		lstadd_back(env, new("PATH", PATH));
+	lstadd_back(env, new("SHLVL", "1"));
+	lstadd_back(env, new("PWD", getcwd(NULL, 0)));
+}
 
 t_env	*ft_getenv(char **envp)
 {
@@ -29,7 +38,7 @@ t_env	*ft_getenv(char **envp)
 		equ = 0;
 		while (envp[i][equ] && envp[i][equ] != '=')
 			equ++;
-		tmp = get_ptr(sizeof(t_env), 1);
+		tmp = malloc(sizeof(t_env));
 		ft_memset(tmp, 0, sizeof(t_env));
 		tmp->name = ft_substr(envp[i], 0, equ);
 		if (!ft_cmp(tmp->name, "OLDPWD"))
@@ -62,7 +71,7 @@ void	ft_update(t_env **env, char *name, char *nv)
 	t_env	*tmp;
 
 	tmp = ft_getval(env, name);
-	tmp->value = nv;
+	tmp->value = ft_dup(nv);
 }
 
 int	ft_checkarg(char *arg)

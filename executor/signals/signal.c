@@ -6,23 +6,59 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:24:49 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/11 13:47:28 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:21:37 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// static void	handle(int signal)
-// {
-// 	if (signal == SIGINT)
-// 		printf("");
-// 	else
-// 		ft_exit()
+bool	sig_her(int *p)
+{
+	int	fd;
 
-// }
-// void    sig(void)
-// {
-// 	signal(SIGINT, &handle);
-// 	signal(0, &handle);
-// 	signal(SIGQUIT, SIG_IGN);
-// }
+	signal(SIGINT, inter_handler);
+	if (!isatty(STDIN_FILENO))
+	{
+		fd = open(ttyname(STDERR_FILENO), O_RDONLY);
+		close(p[0]);
+		close(p[1]);
+		return (true);
+	}
+	close(p[1]);
+	return (false);
+}
+
+void	herdoc_sig(int i)
+{
+	(void)i;
+	close(STDIN_FILENO);
+}
+
+void	inter_handler(int sig)
+{
+	(void)sig;
+	ft_putendl_fd("", 1);
+	rl_on_new_line();
+	rl_redisplay();
+	rl_replace_line("", 0);
+	g_exit_status = 1;
+}
+
+void	sig_hand(int sig)
+{
+	if (sig == SIGINT)
+		write(1, "", 1);
+	if (sig == SIGQUIT)
+		write(1, "Quit: 3", 7);
+}
+
+void	sig_ch(pid_t pid)
+{
+	if (pid == 0)
+	{
+		signal(SIGINT, sig_hand);
+		signal(SIGQUIT, sig_hand);
+	}
+	else
+		signal(SIGINT, SIG_IGN);
+}

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:11:09 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/13 14:50:52 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 15:36:40 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
+
 # include <stdio.h>
 # include <stdbool.h>
 # include <stdlib.h>
@@ -46,8 +47,10 @@ enum e_cmd
 	REDIN,
 	REDOUT,
 	APPEND,
-	HEREDOC
+	HEREDOC,
+	ERR_SIG
 };
+
 t_token	*last_token(t_token *lst);
 t_token	*last_down(t_token *lst);
 void	token_back(t_token **lst, t_token *new, bool flag);
@@ -65,9 +68,9 @@ t_token	*heredoc_tok(void);
 t_token	*double_quotes(char *arg, t_flags *flag);
 t_token	*single_quotes(char *arg, t_flags *flag);
 t_token	*ft_quotes(char *arg, t_flags *flag);
+int		q_add(char *arg, t_token **head, t_flags *flag, int i);
+int		wrd_add(t_token **head, t_flags *flag, char *arg, int i);
 int		chr_q(char *str, t_flags *flag, char q);
-int		wrd_add(t_token *head, t_flags *flag, char *arg, int i);
-int		q_add(char *arg, t_token *head, t_flags *flag, int i);
 int		spc_chk(char c);
 int		ft_delim(char *str);
 

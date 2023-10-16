@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:37:53 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 14:31:06 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/15 15:00:59 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_cmd	*exp_last(t_cmd *lst)
 		lst = lst->next;
 	return (lst);
 }
-
 void	sq_case(t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
@@ -28,11 +27,8 @@ void	sq_case(t_cmd **head, t_token *token)
 
 	tmp = exp_last(*head);
 	s = ft_strdup(tmp->cmd);
-	free(tmp->cmd);
 	tmp->cmd = ft_strjoin(s, ft_strdup(token->word));
-	free(s);
 }
-
 void	dq_case(t_env **env, t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
@@ -40,42 +36,36 @@ void	dq_case(t_env **env, t_cmd **head, t_token *token)
 
 	tmp = exp_last(*head);
 	s = ft_strdup(tmp->cmd);
-	free(tmp->cmd);
-	tmp->cmd = ft_strjoin(s, expand(env, token->word));
-	free(s);
+	tmp->cmd =  ft_strjoin(s, expand(env, token->word));
 }
-
 void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 {
 	char	**s;
+	char	*s1;
 	t_cmd	*tmp;
 	int		i;
 
-	i = 0;
 	s = ft_split(expand(env, token->word), ' ');
-	if (!s)
+	if (!s || !*s)
 		return ;
+	tmp = exp_last(*head);
+	s1 = ft_strdup(tmp->cmd);
+	tmp->cmd =  ft_strjoin(s1, s[0]);
+	i = 1;
 	while (s[i])
 	{
-		if (!i)
-		{
-			(*head)->cmd = *s;
-			i++;
-			continue ;
-		}
-		tmp = get_ptr(sizeof(t_cmd), 1);
+		tmp = malloc(sizeof(t_cmd));
 		tmp->next = NULL;
 		tmp->cmd = s[i];
 		cmd_back(head, tmp);
 		i++;
 	}
 }
-
 t_cmd	*filtre_exp(t_env **env, t_token *token)
 {
 	t_cmd	*head;
 
-	head = get_ptr(sizeof(t_cmd), 1);
+	head = malloc(sizeof(t_cmd));
 	ft_memset(head, 0, sizeof(t_cmd));
 	while (token)
 	{
@@ -87,5 +77,5 @@ t_cmd	*filtre_exp(t_env **env, t_token *token)
 			wrd_case(env, &head, token);
 		token = token->down;
 	}
-	return (head);
+	return(head);
 }

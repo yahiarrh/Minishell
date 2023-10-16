@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   blt_lib.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:34 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/12 12:11:39 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/15 11:14:45 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	ft_update(t_env **env, char *name, char *nv);
 void	ft_unset(t_env **env, char **name);
 void	ft_export(t_env **env, char **name);
 int		ft_checkarg(char *arg);
-void	ft_err_msg(char *err, char *targ, char *erty);
+void	ft_err_msg(char *err, char *targ, char *erty, int exit_stat);
 void	ft_exit(char **status);
 char	*ft_join(char const *s1, char const *s2);
 char	*ft_sub(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *s);
 int		ft_cmp2(const char *s1, const char *s2);
 int		ft_cmp(const char *s1, const char *s2);
-
+char	*ft_dup(const char *s);
+void	renv(t_env **env);
+t_env	*new(char *name, char *val);
 #endif
