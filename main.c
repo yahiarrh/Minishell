@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 15:57:54 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 17:04:48 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	main_loop(t_token *token, t_env *env)
 	char	*line;
 	t_args	*arg;
 
-	prompt = "Minishell$ ";
+	prompt = "Minishell-1.0$ ";
 	arg = NULL;
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:15:47 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 16:50:31 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 16:58:21 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	q_add(char *arg, t_token **head, t_flags *flag, int i)
 {
 	flag->len = chr_q(arg + i + 1, flag, arg[i]);
-	printf("-%c-\n", arg[i + 2]);
-	if (flag->len || (!flag->len
+	if (flag->len > 0|| (!flag->len
 			&& (flag->spc && (spc_chk(arg[i + 2]) || !arg[i + 2]))))
 		token_back(head, ft_quotes(arg + i, flag), flag->spc);
 	i += flag->len + 2;

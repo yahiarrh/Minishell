@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 16:42:00 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/16 17:00:55 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,9 @@ t_token	*tokenizer(char *arg)
 	head = NULL;
 	create_tokens(arg, &head, flag);
 	if (flag->double_q || flag->single_q)
-		printf("quote not closed\n");
+	{
+		printf("syntax error quote not closed\n");
+		return (NULL);
+	}
 	return (head);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filtre_comm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 14:22:56 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:29:07 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	sys_comm(t_env **env, char **comm)
 	tmp = ft_getval(env, "PATH");
 	if (!tmp)
 	{
-		ft_err_msg(NULL, comm[0], ": No such file or directory\n", 127);
-		return ;
+		ft_err_msg(NULL, comm[0], ": No such file or directory\n",127);
+		exit(127) ;
 	}
 	path = ft_split(tmp->value, ':');
 	exec_comm(env, comm, path);

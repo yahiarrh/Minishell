@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:14:59 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 15:44:09 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:57:55 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	chr_q(char *str, t_flags *flag, char q)
 		count++;
 		i++;
 	}
+	if (str[i] != q)
+		return (-1);
 	(str[i] == '\"') && (flag->double_q = !flag->double_q);
 	(str[i] == '\'') && (flag->single_q = !flag->single_q);
 	return (count);

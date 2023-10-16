@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 11:15:38 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:46:10 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,14 @@ static void	dash_case(t_env **env, char *op)
 
 static void	home_case(t_env **env, char *op)
 {
-	if (chdir(ft_getval(env, "HOME")->value))
+	if (ft_getval(env, "HOME"))
 	{
-		perror("chdir problem");
+		if (chdir(ft_getval(env, "HOME")->value)== -1)
+			ft_err_msg("cd: ", ft_getval(env, "HOME")->value, ": No such file or directory\n", 1);
+	}
+	else
+	{
+		printf("%scd: HOME not set\n", PROMPT);
 		g_exit_status = 1;
 		return ;
 	}

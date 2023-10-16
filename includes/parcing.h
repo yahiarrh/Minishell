@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 14:48:10 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:10:40 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		ft_cmdsize(t_cmd *lst);
 t_args	*last_arg(t_args *lst);
 t_cmd	*cmd_last(t_cmd *lst);
 void	cmd_back(t_cmd **lst, t_cmd *new);
-int		heredoc(t_env *env, char *delim);
 void	print_syn(t_token *token);
 char	**join_cmds(t_cmd *command);
 

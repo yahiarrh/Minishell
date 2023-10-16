@@ -2,6 +2,7 @@
     "files.associations": {
         "blt_lib.h": "c",
         "tokenizer.h": "c",
-        "expand.h": "c"
+        "expand.h": "c",
+        "stdlib.h": "c"
     }
 }

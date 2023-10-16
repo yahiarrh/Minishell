@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 15:03:10 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:04:00 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	g_exit_status;
 /usr/local/munki:/Library/Apple/usr/bin"
 # define ALLOC 1
 # define FREE 0
-# define PROMPT "minishell-1.0$ "
+# define PROMPT "minishell: "
 
 typedef struct s_gt
 {

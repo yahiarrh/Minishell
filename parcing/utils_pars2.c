@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 15:11:13 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:12:35 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ void	arg_back(t_args **lst, t_args *new)
 		*lst = new;
 }
 
-int	heredoc(t_env *env, char *delim)
+int	heredoc(t_env *env, char *delim, bool flag)
 {
 	char	*promt;
-	char	*buff;
 	int		pipefd[2];
 
 	pipe(pipefd);
@@ -43,14 +42,13 @@ int	heredoc(t_env *env, char *delim)
 			free(promt);
 			break ;
 		}
-		buff = expand(&env, promt);
-		write(pipefd[1], buff, ft_strlen(buff));
+		if (flag)
+			promt = expand(&env, promt);
+		write(pipefd[1], promt, ft_strlen(promt));
 		write(pipefd[1], "\n", 1);
-		free(buff);
-		free(promt);
 	}
 	if (sig_her(pipefd))
-		return (-1);
+		return (-2);
 	return (pipefd[0]);
 }
 
@@ -64,17 +62,22 @@ bool	fill_redir(t_token *token, t_args *new_arg, t_env *env)
 	if (!tmp->cmd && token->next && token->next->type == PIPE)
 		return (false);
 	else if (token->type == REDIN)
-		new_arg->fd_in = open(expand(&env, token->next->word), O_CREAT, 0644);
+		new_arg->fd_in = open(expand(&env, token->next->word), O_RDONLY, 0644);
 	else if (token->type == REDOUT)
 		new_arg->fd_out = open(expand(&env, token->next->word),
-				O_CREAT | O_RDWR, 0644);
+				O_CREAT | O_TRUNC | O_RDWR, 0644);
 	else if (token->type == APPEND)
 		new_arg->fd_out = open(expand(&env, token->next->word),
-				O_CREAT | O_APPEND, 0644);
+				O_CREAT | O_APPEND | O_RDWR, 0644);
 	else if (token->type == HEREDOC)
-		new_arg->fd_in = heredoc(env, expand(&env, token->next->word));
-	if (new_arg->fd_in == -1)
+		new_arg->fd_in = heredoc(env, token->next->word, (token->next->type == WORD));
+	if (new_arg->fd_in == -2)
 		return (token->type = ERR_SIG, false);
+	if (new_arg->fd_in == -1)
+	{
+		ft_err_msg(NULL, token->next->word, ": No such file or directory\n", 1);
+		return (token->type = ERR_SIG, false);
+	}
 	return (true);
 }
 
