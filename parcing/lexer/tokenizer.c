@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 15:43:44 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:42:00 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ void	create_tokens(char *arg, t_token **head, t_flags *flag)
 			i += tok_indice(head, arg + i);
 		}
 		else if (arg[i] == '\'' || arg[i] == '\"')
-			{
-				printf("%d\n",i);
-				i = q_add(arg + i, head, flag, i);
-			}
+			i = q_add(arg, head, flag, i);
 		else
 			i = wrd_add(head, flag, arg, i);
 	}
@@ -101,6 +98,5 @@ t_token	*tokenizer(char *arg)
 	create_tokens(arg, &head, flag);
 	if (flag->double_q || flag->single_q)
 		printf("quote not closed\n");
-	printf("%s\n",head->word);
 	return (head);
 }

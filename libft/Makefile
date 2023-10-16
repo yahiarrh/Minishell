@@ -22,13 +22,14 @@ LIBFTH = libft.h
 
 OBJS	= $(SRC:.c=.o)
 
+%.o :  %.c $(LIBFTH) 
+	@$(CC) -c $(CFLAGS) $<
+
 all	: $(NAME)
 
 $(NAME) : $(OBJS)
 	@$(AR) $@ $?
 
-%.o :  %.c $(LIBFTH) 
-	@$(CC) -c $(CFLAGS) $<
 
 clean :
 	$(RM) $(OBJS) $(OBJS_B)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 15:25:52 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:57:54 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	*get_ptr(size_t i, int flag)
 		tmp->ptr = ptr;
 		tmp->next = NULL;
 		add_ptr(&head, tmp);
-		return (ptr);
+		return (ptr); 
 	}
 	else
 	{
