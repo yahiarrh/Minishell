@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 17:58:53 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:39:12 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	to_pa_ex(char *line, t_token *token, t_args *arg, t_env *env)
 		return (false);
 	}
 	ft_exec(&env, arg);
-	get_ptr(0, 0);
+	// get_ptr(0, 0);
 	return (true);
 }
 

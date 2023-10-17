@@ -1,0 +1,17 @@
+heredoc
+
+unset :
+export:
+env: heap use after free
+
+ls | < dsfdsf | ls
+
+cat<< a : signal >> control c
+> asdf
+> adsf
+> adsfas
+> dfas
+> df
+> 
+=================================================================
+==90064==ERROR: AddressSanitizer: attempting double-free on 0x60200000bdb0 in thread
