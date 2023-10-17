@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:14:59 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 16:57:55 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/17 11:34:54 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_token	*double_quotes(char *arg, t_flags *flag)
 {
 	t_token	*token;
 
-	token = malloc(sizeof(t_token));
+	token = get_ptr(sizeof(t_token), 1);
 	if (!token)
 		return (NULL);
 	token->word = ft_subtoken(arg, 0, flag->len);
@@ -53,7 +53,7 @@ t_token	*single_quotes(char *arg, t_flags *flag)
 {
 	t_token	*token;
 
-	token = malloc(sizeof(t_token));
+	token = get_ptr(sizeof(t_token), 1);
 	if (!token)
 		return (NULL);
 	token->word = ft_subtoken(arg, 0, flag->len);

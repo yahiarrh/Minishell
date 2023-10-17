@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 10:06:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 15:33:15 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:35:36 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*word_tok(char *arg, int len)
 	int		i;
 
 	i = 0;
-	command = malloc(sizeof(t_token));
+	command = get_ptr(sizeof(t_token), 1);
 	command->word = ft_subtoken(arg, 0, len);
 	command->type = WORD;
 	command->next = NULL;
@@ -30,9 +30,9 @@ t_token	*pipe_tok(void)
 {
 	t_token	*token;
 
-	token = malloc(sizeof(t_token));
+	token = get_ptr(sizeof(t_token), 1);
 	token->type = PIPE;
-	token->word = malloc(sizeof(char) * 2);
+	token->word = get_ptr(sizeof(char) * 2, 1);
 	token->word[0] = '|';
 	token->word[1] = '\0';
 	token->next = NULL;

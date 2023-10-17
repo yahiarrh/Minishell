@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:37:53 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 15:00:59 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:37:01 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_cmd	*exp_last(t_cmd *lst)
 		lst = lst->next;
 	return (lst);
 }
+
 void	sq_case(t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
@@ -29,6 +30,7 @@ void	sq_case(t_cmd **head, t_token *token)
 	s = ft_strdup(tmp->cmd);
 	tmp->cmd = ft_strjoin(s, ft_strdup(token->word));
 }
+
 void	dq_case(t_env **env, t_cmd **head, t_token *token)
 {
 	t_cmd	*tmp;
@@ -36,8 +38,9 @@ void	dq_case(t_env **env, t_cmd **head, t_token *token)
 
 	tmp = exp_last(*head);
 	s = ft_strdup(tmp->cmd);
-	tmp->cmd =  ft_strjoin(s, expand(env, token->word));
+	tmp->cmd = ft_strjoin(s, expand(env, token->word));
 }
+
 void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 {
 	char	**s;
@@ -50,22 +53,23 @@ void	wrd_case(t_env **env, t_cmd **head, t_token *token)
 		return ;
 	tmp = exp_last(*head);
 	s1 = ft_strdup(tmp->cmd);
-	tmp->cmd =  ft_strjoin(s1, s[0]);
+	tmp->cmd = ft_strjoin(s1, s[0]);
 	i = 1;
 	while (s[i])
 	{
-		tmp = malloc(sizeof(t_cmd));
+		tmp = get_ptr(sizeof(t_cmd), 1);
 		tmp->next = NULL;
 		tmp->cmd = s[i];
 		cmd_back(head, tmp);
 		i++;
 	}
 }
+
 t_cmd	*filtre_exp(t_env **env, t_token *token)
 {
 	t_cmd	*head;
 
-	head = malloc(sizeof(t_cmd));
+	head = get_ptr(sizeof(t_cmd), 1);
 	ft_memset(head, 0, sizeof(t_cmd));
 	while (token)
 	{
@@ -77,5 +81,5 @@ t_cmd	*filtre_exp(t_env **env, t_token *token)
 			wrd_case(env, &head, token);
 		token = token->down;
 	}
-	return(head);
+	return (head);
 }

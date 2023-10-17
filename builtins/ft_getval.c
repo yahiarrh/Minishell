@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/13 15:02:07 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:38:15 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	renv(t_env **env)
 {
-
 	if (!ft_getval(env, "PATH"))
 		lstadd_back(env, new("PATH", PATH));
 	lstadd_back(env, new("SHLVL", "1"));
@@ -40,11 +39,11 @@ t_env	*ft_getenv(char **envp)
 			equ++;
 		tmp = malloc(sizeof(t_env));
 		ft_memset(tmp, 0, sizeof(t_env));
-		tmp->name = ft_substr(envp[i], 0, equ);
+		tmp->name = ft_sub(envp[i], 0, equ);
 		if (!ft_cmp(tmp->name, "OLDPWD"))
 			tmp->value = NULL;
 		else
-			tmp->value = getenv(tmp->name);
+			tmp->value = ft_dup(getenv(tmp->name));
 		lstadd_back(&env, tmp);
 	}
 	return (env);

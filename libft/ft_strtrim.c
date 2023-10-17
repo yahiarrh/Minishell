@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:18:31 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2022/10/31 01:16:18 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:45:51 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		start++;
 	while (start < end && ft_strchr(set, s1[end - 1]))
 		end--;
-	ret = (char *)malloc((end - start + 1) * sizeof(char));
+	ret = (char *)ft_get_ptr((end - start + 1) * sizeof(char));
 	if (!ret)
 		return (0);
 	ft_strlcpy(ret, &s1[start], end - start + 1);

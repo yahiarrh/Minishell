@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 11:21:18 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 14:21:15 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:14:13 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ bool	check_dir(char *path)
 	struct stat	file;
 
 	stat(path, &file);
-	if ((*path == '/' || *path == '.')&& access(path, F_OK))
-		return(ft_err_msg(NULL, path, ": No such file or directory\n", 0), true);
+	if ((*path == '/' || *path == '.') && access(path, F_OK))
+	{
+		return (ft_err_msg(NULL, path,
+				FILE_ERR, 0), true);
+	}
 	if (S_ISDIR(file.st_mode))
-		return(ft_err_msg(NULL, path, ": is a directory\n", 0), true);
-	if (!access(path, F_OK) && access(path, X_OK))
-		return(ft_err_msg(NULL, path, ": Permission denied\n", 0), true);
+		return (ft_err_msg(NULL, path, ": is a directory\n", 0), true);
+	if (*path == '.' && !access(path, F_OK) && access(path, X_OK))
+		return (ft_err_msg(NULL, path, ": Permission denied\n", 0), true);
 	return (false);
 }
 
@@ -45,12 +48,12 @@ static char	**swtch_tp(t_env *env)
 {
 	char	**s;
 	char	*tmp;
-	int 	i;
+	int		i;
 
 	i = 0;
-	s = malloc(sizeof(char *) * (lstsize(env) + 1));
+	s = get_ptr(sizeof(char *) * (lstsize(env) + 1), 1);
 	if (!s)
-		return(NULL);
+		return (NULL);
 	while (env)
 	{
 		tmp = ft_strjoin(env->name, "=");
@@ -62,7 +65,7 @@ static char	**swtch_tp(t_env *env)
 	return (s);
 }
 
-static char *find_path(char *comm, char **path)
+static char	*find_path(char *comm, char **path)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -80,10 +83,10 @@ static char *find_path(char *comm, char **path)
 	return (NULL);
 }
 
-void    exec_comm(t_env **env, char **comm, char **path)
+void	exec_comm(t_env **env, char **comm, char **path)
 {
-	char    *rpat;
-	char    **cenv;
+	char	*rpat;
+	char	**cenv;
 
 	rpat = find_path(comm[0], path);
 	cenv = swtch_tp(*env);
@@ -91,5 +94,5 @@ void    exec_comm(t_env **env, char **comm, char **path)
 	if (check_dir(comm[0]))
 		exit(126);
 	ft_err_msg(NULL, comm[0], ": command not found\n", 0);
-		exit(127);
+	exit(127);
 }

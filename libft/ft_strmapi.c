@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:12:59 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2022/10/31 01:32:36 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:45:46 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	if (!s || !f)
 		return (NULL);
-	str = malloc(sizeof(char) * ft_strlen(s) + 1);
+	str = ft_get_ptr(sizeof(char) * ft_strlen(s) + 1);
 	if (!str)
 		return (0);
 	while (s[i])

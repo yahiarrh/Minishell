@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:16:02 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 12:39:07 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:24:32 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ static void	up_val(t_env **env, char *name, char *n)
 	if (value)
 	{
 		if (*value == '=')
-			ft_update(env, n, value + 1);
+			ft_upexp(env, n, value + 1, 0);
 		else if (*value == '+' && ft_getval(env, n)->value)
-			ft_update(env, n, 
-				ft_join(ft_getval(env, n)->value, value + 2));
+			ft_upexp(env, n, 
+				ft_join(ft_getval(env, n)->value, value + 2), 1);
 		else
-			ft_update(env, n, value + 2);
+			ft_upexp(env, n, value + 2, 0);
 	}
 }
 
@@ -108,6 +108,7 @@ void	ft_export(t_env **env, char **name)
 		else
 			up_val(env, *name, n);
 		name++;
+		free(n);
 	}
 	return ;
 }

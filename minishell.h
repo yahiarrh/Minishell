@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 17:04:00 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/17 14:39:53 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ typedef struct s_gt
 	struct s_gt	*next;
 }t_gt;
 
-void	*get_ptr(size_t i, int flag);
+typedef struct s_std
+{
+	int	fd_in;
+	int	fd_out;
+}t_std;
 
 #endif

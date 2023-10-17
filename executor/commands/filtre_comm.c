@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   filtre_comm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 17:29:07 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/17 11:24:47 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+bool	is_builtin(char *comm)
+{
+	if (!ft_cmp(comm, "pwd"))
+		return (true);
+	else if (!ft_cmp(comm, "echo"))
+		return (true);
+	else if (!ft_cmp(comm, "env"))
+		return (true);
+	else if (!ft_cmp(comm, "cd"))
+		return (true);
+	else if (!ft_cmp(comm, "export"))
+		return (true);
+	else if (!ft_cmp(comm, "unset"))
+		return (true);
+	else if (!ft_cmp(comm, "exit"))
+		return (true);
+	return (false);
+}
 
 void	sys_comm(t_env **env, char **comm)
 {
@@ -21,8 +40,8 @@ void	sys_comm(t_env **env, char **comm)
 	tmp = ft_getval(env, "PATH");
 	if (!tmp)
 	{
-		ft_err_msg(NULL, comm[0], ": No such file or directory\n",127);
-		exit(127) ;
+		ft_err_msg(NULL, comm[0], FILE_ERR, 127);
+		exit(127);
 	}
 	path = ft_split(tmp->value, ':');
 	exec_comm(env, comm, path);
@@ -32,7 +51,7 @@ int	builtin(t_env **env, char **comm)
 {
 	g_exit_status = 0;
 	if (!ft_cmp(comm[0], "pwd"))
-		ft_pwd(env);
+		ft_pwd();
 	else if (!ft_cmp(comm[0], "echo"))
 		ft_echo(comm);
 	else if (!ft_cmp(comm[0], "env"))
@@ -87,7 +106,7 @@ pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg)
 		close(fd.fd_toclose[1]);
 		close(fd.fd_toclose[0]);
 		if (builtin(env, comm))
-			exit (0);
+			exit (g_exit_status);
 		sys_comm(env, comm);
 	}
 	return (tmp);

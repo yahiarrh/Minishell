@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 12:42:56 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/09/01 14:48:26 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:44:53 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ int			ft_lstsize(t_list *lst);
 void		ft_lstclear(t_list **lst, void (*del) (void *));
 void		ft_lstiter(t_list *lst, void (*f) (void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f) (void*), void (*del) (void *));
-
+void		*ft_get_ptr(size_t l);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 23:57:06 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 12:21:52 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:45:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strdup(const char *s)
 		return (NULL);
 	i = 0;
 	len = ft_strlen(s);
-	d = (char *)malloc((len + 1) * sizeof(char));
+	d = (char *)ft_get_ptr((len + 1) * sizeof(char));
 	if (!d)
 		return (NULL);
 	while (s[i])

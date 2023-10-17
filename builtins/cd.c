@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 18:46:10 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/17 12:55:06 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	ft_update_cd(t_env **env, char *name, char *nv)
 	else
 	{
 		tmp = ft_getval(env, name);
+		if (tmp)
+			free(tmp->value);
 	}
 	tmp->value = ft_dup(nv);
 }
@@ -55,10 +57,15 @@ static void	dash_case(t_env **env, char *op)
 
 static void	home_case(t_env **env, char *op)
 {
+	char	*o;
+
 	if (ft_getval(env, "HOME"))
 	{
-		if (chdir(ft_getval(env, "HOME")->value)== -1)
-			ft_err_msg("cd: ", ft_getval(env, "HOME")->value, ": No such file or directory\n", 1);
+		if (chdir(ft_getval(env, "HOME")->value) == -1)
+		{
+			ft_err_msg("cd: ", ft_getval(env, "HOME")->value, FILE_ERR, 1);
+			return ;
+		}
 	}
 	else
 	{
@@ -66,8 +73,10 @@ static void	home_case(t_env **env, char *op)
 		g_exit_status = 1;
 		return ;
 	}
-	ft_update_cd(env, "PWD", getcwd(NULL, 0));
+	o = getcwd(NULL, 0);
+	ft_update_cd(env, "PWD", o);
 	ft_update_cd(env, "OLDPWD", op);
+	free(o);
 }
 
 void	ft_cd(t_env **env, char *p)
@@ -85,14 +94,13 @@ void	ft_cd(t_env **env, char *p)
 	{
 		if (chdir(p))
 		{
-			ft_err_msg("cd: ", p, ": No such file or directory\n", 1);
+			ft_err_msg("cd: ", p, FILE_ERR, 1);
 			return ;
 		}
 		o = getcwd(NULL, 0);
 		ft_update_cd(env, "PWD", o);
 		ft_update_cd(env, "OLDPWD", op);
+		free(o);
 	}
 	free(op);
-	if (o)
-		free(o);
 }

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:21:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2022/10/31 01:19:37 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:45:41 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_itoa(int n)
 
 	i = 0;
 	f = count(n);
-	c = (char *)malloc(sizeof(char) * (f + 1));
+	c = (char *)ft_get_ptr(sizeof(char) * (f + 1));
 	if (!c)
 		return (NULL);
 	if (n == 0)

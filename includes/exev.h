@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:39 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 14:26:58 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:58:42 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_fd
 	int	*fd_toclose;
 }t_fd;
 
+bool	is_builtin(char *comm);
 int		builtin(t_env **env, char **comm);
 void	ft_exec(t_env **env, t_args *arg);
 void	exec_comm(t_env **env, char **comm, char **path);

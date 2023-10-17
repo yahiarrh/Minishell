@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:24:49 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/16 14:21:37 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:49:44 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	sig_her(int *p)
 	signal(SIGINT, inter_handler);
 	if (!isatty(STDIN_FILENO))
 	{
-		fd = open(ttyname(STDERR_FILENO), O_RDONLY);
+		fd = open(ttyname(STDOUT_FILENO), O_RDONLY);
 		close(p[0]);
 		close(p[1]);
 		return (true);
@@ -37,10 +37,10 @@ void	herdoc_sig(int i)
 void	inter_handler(int sig)
 {
 	(void)sig;
-	ft_putendl_fd("", 1);
-	rl_on_new_line();
-	rl_redisplay();
 	rl_replace_line("", 0);
+	rl_on_new_line();
+	ft_putendl_fd("", 1);
+	rl_redisplay();
 	g_exit_status = 1;
 }
 

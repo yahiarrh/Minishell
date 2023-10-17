@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 17:00:55 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/17 11:34:22 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_token	*tokenizer(char *arg)
 	t_token	*head;
 	t_flags	*flag;
 
-	flag = malloc(sizeof(t_flags));
+	flag = get_ptr(sizeof(t_flags), 1);
 	flag->len = 0;
 	flag->single_q = 0;
 	flag->double_q = 0;

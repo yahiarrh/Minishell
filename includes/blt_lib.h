@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:34 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 11:14:45 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:24:58 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef struct s_env{
 t_env	*ft_getenv(char **envp);
 t_env	*ft_getval(t_env **env, char *name);
 void	ft_env(t_env **env);
-void	ft_pwd(t_env **env);
+void	ft_upexp(t_env **env, char *name, char *nv, int flag);
+void	ft_pwd(void);
 void	ft_cd(t_env **env, char *p);
 void	lstadd_back(t_env **lst, t_env *new);
 void	lstdelone(t_env *lst, void (*del)(void *));

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:53:22 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/07 16:18:54 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:47:22 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static	char	*give_word(char const *s, char c)
 	f = 0;
 	while (s[f] && s[f] != c)
 		f++;
-	ret = (char *)malloc(f + 1);
+	ret = (char *)ft_get_ptr(f + 1);
 	if (!ret)
 		return (NULL);
 	f = 0;
@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	count = count_word(s, c);
-	word = malloc((sizeof(char *) * (count + 1)));
+	word = ft_get_ptr((sizeof(char *) * (count + 1)));
 	if (!word)
 		return (NULL);
 	while (*s)

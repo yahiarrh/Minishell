@@ -6,11 +6,23 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:03:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/15 11:16:29 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:25:22 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_upexp(t_env **env, char *name, char *nv, int flag)
+{
+	t_env	*tmp;
+
+	tmp = ft_getval(env, name);
+	if (tmp->value)
+		free(tmp->value);
+	tmp->value = ft_dup(nv);
+	if (flag)
+		free(nv);
+}
 
 static t_env	*prev(t_env *tmp, t_env *tmp2, char *name)
 {

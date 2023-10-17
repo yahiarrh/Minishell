@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 18:12:35 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/17 13:06:51 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	arg_back(t_args **lst, t_args *new)
 int	heredoc(t_env *env, char *delim, bool flag)
 {
 	char	*promt;
+	char	*tmp;
 	int		pipefd[2];
 
 	pipe(pipefd);
@@ -42,10 +43,13 @@ int	heredoc(t_env *env, char *delim, bool flag)
 			free(promt);
 			break ;
 		}
+		(flag) && (tmp = expand(&env, promt));
+		(flag) && (write(pipefd[1], tmp, ft_strlen(tmp)));
 		if (flag)
-			promt = expand(&env, promt);
-		write(pipefd[1], promt, ft_strlen(promt));
+			free(tmp);
+		(flag) || (write(pipefd[1], promt, ft_strlen(promt)));
 		write(pipefd[1], "\n", 1);
+		free(promt);
 	}
 	if (sig_her(pipefd))
 		return (-2);
@@ -70,12 +74,12 @@ bool	fill_redir(t_token *token, t_args *new_arg, t_env *env)
 		new_arg->fd_out = open(expand(&env, token->next->word),
 				O_CREAT | O_APPEND | O_RDWR, 0644);
 	else if (token->type == HEREDOC)
-		new_arg->fd_in = heredoc(env, token->next->word, (token->next->type == WORD));
-	if (new_arg->fd_in == -2)
-		return (token->type = ERR_SIG, false);
-	if (new_arg->fd_in == -1)
+		new_arg->fd_in = heredoc(env, token->next->word,
+				(token->next->type == WORD));
+	if (new_arg->fd_in == -1 || new_arg->fd_in == -2)
 	{
-		ft_err_msg(NULL, token->next->word, ": No such file or directory\n", 1);
+		if (new_arg->fd_in == -1)
+			ft_err_msg(NULL, token->next->word, FILE_ERR, 1);
 		return (token->type = ERR_SIG, false);
 	}
 	return (true);
@@ -85,7 +89,7 @@ t_args	*check_tokens(t_token **token, t_env *env)
 {
 	t_args	*new_arg;
 
-	new_arg = malloc(sizeof(t_args));
+	new_arg = get_ptr(sizeof(t_args), 1);
 	if (!new_arg)
 		return (NULL);
 	ft_memset(new_arg, 0, sizeof(t_args));
