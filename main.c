@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 14:36:02 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:22:03 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	main_loop(t_token *token, t_env *env)
 		token = tokenizer(line);
 		arg = parcing(token, env);
 		if (!arg)
+		{
+			free(line);
 			continue ;
+		}
 		ft_exec(&env, arg);
 		get_ptr(0, 0);
 		free(line);

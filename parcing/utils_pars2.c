@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/17 13:06:51 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:34:31 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ t_args	*check_tokens(t_token **token, t_env *env)
 	{
 		if ((*token)->type > DQ)
 		{
-			if (!((*token)->next) || !(fill_redir((*token), new_arg, env)))
+			if ((!(*token)->next || (*token)->next->type > DQ)
+					|| !(fill_redir((*token), new_arg, env)))
 				return (NULL);
 			(*token) = (*token)->next;
 		}
@@ -117,6 +118,13 @@ void	print_syn(t_token *token)
 	err = "newline";
 	if (last_token(token)->type == PIPE || token->type == PIPE)
 		err = "|";
+	else if (last_token(token)->type > DQ || token->type > DQ)
+	{
+		if (last_token(token)->type > DQ)
+			err = ft_strdup(last_token(token)->word);
+		else
+			err = ft_strdup(token->word);
+	}
 	else if (token->type == ERR_SIG)
 		return ;
 	printf("syntax error near unexpected token `%s'\n", err);

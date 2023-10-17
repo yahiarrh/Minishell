@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getval.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:26:28 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 12:38:15 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:45:17 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	renv(t_env **env)
 {
+	char	*s;
+
+	s = getcwd(NULL, 0);
 	if (!ft_getval(env, "PATH"))
 		lstadd_back(env, new("PATH", PATH));
 	lstadd_back(env, new("SHLVL", "1"));
-	lstadd_back(env, new("PWD", getcwd(NULL, 0)));
+	lstadd_back(env, new("PWD", s));
+	free(s);
 }
 
 t_env	*ft_getenv(char **envp)

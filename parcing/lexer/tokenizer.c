@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 08:10:01 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/17 11:34:22 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:05:35 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_token	*tokenizer(char *arg)
 	if (flag->double_q || flag->single_q)
 	{
 		printf("syntax error quote not closed\n");
+		get_ptr(0, 0);
 		return (NULL);
 	}
 	return (head);

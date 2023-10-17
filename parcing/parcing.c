@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/16 15:15:53 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:18:27 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,13 @@ t_args	*parcing(t_token *token, t_env *env)
 
 	head = NULL;
 	if (!token)
-		return (NULL);
+		return (get_ptr(0, 0), NULL);
 	if (token->type == PIPE || last_token(token)->type == PIPE)
-		return (print_syn(token), NULL);
+	{
+		print_syn(token);
+		get_ptr(0, 0);
+		return (NULL);
+	}
 	while (token)
 	{
 		tmp = check_tokens(&token, env);
@@ -52,6 +56,9 @@ t_args	*parcing(t_token *token, t_env *env)
 			token = token->next;
 	}
 	if (token)
-		return (print_syn(token), NULL);
+	{
+		print_syn(token);
+		return (get_ptr(0, 0), NULL);
+	}
 	return (head);
 }
