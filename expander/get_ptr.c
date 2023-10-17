@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:09:48 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 14:34:00 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:45:59 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ void	add_ptr(t_gt **head, t_gt *new)
 	tmp->next = new;
 }
 
-void	free_ptr(void)
+void	free_ptr(t_gt **head)
 {
-	static t_gt	*head;
 	t_gt		*tmp;
 
-	while (head)
+	while ((*head))
 	{
-		tmp = head;
-		head = head->next;
+		tmp = *head;
+		(*head) = (*head)->next;
 		free(tmp->ptr);
 		free(tmp);
+		tmp = NULL;
 	}
 }
 
@@ -69,6 +69,6 @@ void	*get_ptr(size_t i, int flag)
 		return (ptr); 
 	}
 	else
-		free_ptr();
+		free_ptr(&head);
 	return (NULL);
 }

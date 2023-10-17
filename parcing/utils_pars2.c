@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/17 16:15:24 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/17 16:52:14 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_args	*check_tokens(t_token **token, t_env *env)
 		if ((*token)->type > DQ)
 		{
 			if ((!(*token)->next || (*token)->next->type > DQ)
-					|| !(fill_redir((*token), new_arg, env)))
+				|| !(fill_redir((*token), new_arg, env)))
 				return (NULL);
 			(*token) = (*token)->next;
 		}
@@ -119,7 +119,7 @@ void	print_syn(t_token *token)
 	if (last_token(token)->type == PIPE || token->type == PIPE)
 		err = "|";
 	else if (last_token(token)->type > DQ
-			|| (token->type > DQ && token->type != ERR_SIG))
+		|| (token->type > DQ && token->type != ERR_SIG))
 	{
 		if (last_token(token)->type > DQ)
 			err = ft_strdup(last_token(token)->word);

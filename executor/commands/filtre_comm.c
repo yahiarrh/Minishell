@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 11:24:47 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:35:23 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ void	sys_comm(t_env **env, char **comm)
 	char	**path;
 	t_env	*tmp;
 
-	g_exit_status = 0;
 	tmp = ft_getval(env, "PATH");
-	if (!tmp)
+	if (access(comm[0], X_OK) && !tmp)
 	{
 		ft_err_msg(NULL, comm[0], FILE_ERR, 127);
 		exit(127);
 	}
-	path = ft_split(tmp->value, ':');
+	if (!tmp)
+		path = ft_split(PATH, ':');
+	else
+		path = ft_split(tmp->value, ':');
 	exec_comm(env, comm, path);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:25:41 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 12:55:06 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:22:12 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ft_cd(t_env **env, char *p)
 		if (chdir(p))
 		{
 			ft_err_msg("cd: ", p, FILE_ERR, 1);
+			free(op);
 			return ;
 		}
 		o = getcwd(NULL, 0);
