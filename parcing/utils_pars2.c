@@ -6,7 +6,7 @@
 /*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/17 15:34:31 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/17 16:15:24 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ void	print_syn(t_token *token)
 	err = "newline";
 	if (last_token(token)->type == PIPE || token->type == PIPE)
 		err = "|";
-	else if (last_token(token)->type > DQ || token->type > DQ)
+	else if (last_token(token)->type > DQ
+			|| (token->type > DQ && token->type != ERR_SIG))
 	{
 		if (last_token(token)->type > DQ)
 			err = ft_strdup(last_token(token)->word);
