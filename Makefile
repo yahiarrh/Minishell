@@ -8,7 +8,7 @@ SRC	=	main.c builtins/cd.c builtins/echo.c builtins/env.c builtins/exit.c builti
 
 
  
-CFLAGS	= -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g
 
 CC		= cc
 
@@ -16,9 +16,9 @@ RM 		= rm -rf
 
 HEADERM = minishell.h includes/blt_lib.h   includes/parcing.h includes/exev.h includes/tokenizer.h includes/expand.h
 
-LDFLAGS="-L/Users/yrrhaibi/.brew/opt/readline/lib"
+LDFLAGS="-L/Users/msaidi/.brew/opt/readline/lib"
 
-CPPFLAGS="-I/Users/yrrhaibi/.brew/opt/readline/include"
+CPPFLAGS="-I/Users/msaidi/.brew/opt/readline/include"
 
 LIBFT = libft/libft.a
 

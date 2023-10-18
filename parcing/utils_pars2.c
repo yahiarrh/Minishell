@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/18 10:55:19 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 14:55:24 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	fill_redir(t_token *token, t_args *new_arg, t_env *env)
 	t_cmd	*tmp;
 
 	tmp = filtre_exp(&env, token->next);
-	if (ft_cmdsize(tmp) > 1)
+	if (ft_cmdsize(tmp) > 1 && (token->type = ERR_SIG))
 		return (printf("%s: ambiguous redirect\n", token->next->word), false);
 	if (!tmp->cmd && token->next && token->next->type == PIPE)
 		return (false);
@@ -122,7 +122,7 @@ void	print_syn(t_token *token)
 		if (last_token(token)->type > DQ)
 			err = ft_strdup(last_token(token)->word);
 		else
-			err = ft_strdup(token->word);
+			err = ft_strdup(token->next->word);
 	}
 	else if (token->type == ERR_SIG)
 	{
