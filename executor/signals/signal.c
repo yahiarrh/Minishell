@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:24:49 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 11:49:44 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:16:15 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ void	inter_handler(int sig)
 
 void	sig_hand(int sig)
 {
-	if (sig == SIGINT)
-		write(1, "", 1);
-	if (sig == SIGQUIT)
-		write(1, "Quit: 3", 7);
+	(void)sig;
 }
 
 void	sig_ch(pid_t pid)
