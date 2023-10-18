@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/17 16:52:14 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:55:19 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	heredoc(t_env *env, char *delim, bool flag)
 		}
 		(flag) && (tmp = expand(&env, promt));
 		(flag) && (write(pipefd[1], tmp, ft_strlen(tmp)));
-		if (flag)
-			free(tmp);
 		(flag) || (write(pipefd[1], promt, ft_strlen(promt)));
 		write(pipefd[1], "\n", 1);
 		free(promt);
@@ -74,12 +72,12 @@ bool	fill_redir(t_token *token, t_args *new_arg, t_env *env)
 		new_arg->fd_out = open(expand(&env, token->next->word),
 				O_CREAT | O_APPEND | O_RDWR, 0644);
 	else if (token->type == HEREDOC)
-		new_arg->fd_in = heredoc(env, token->next->word,
+		new_arg->fd_in = heredoc(env, join_downs(token->next),
 				(token->next->type == WORD));
 	if (new_arg->fd_in == -1 || new_arg->fd_in == -2)
 	{
 		if (new_arg->fd_in == -1)
-			ft_err_msg(NULL, token->next->word, FILE_ERR, 1);
+			return (ft_err_msg(NULL, token->next->word, FILE_ERR, 1), 1);
 		return (token->type = ERR_SIG, false);
 	}
 	return (true);
@@ -127,6 +125,10 @@ void	print_syn(t_token *token)
 			err = ft_strdup(token->word);
 	}
 	else if (token->type == ERR_SIG)
+	{
+		g_exit_status = 1;
 		return ;
+	}
+	g_exit_status = 258;
 	printf("syntax error near unexpected token `%s'\n", err);
 }

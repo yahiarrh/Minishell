@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:34 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 12:24:58 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:12:00 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_unset(t_env **env, char **name);
 void	ft_export(t_env **env, char **name);
 int		ft_checkarg(char *arg);
 void	ft_err_msg(char *err, char *targ, char *erty, int exit_stat);
-void	ft_exit(char **status);
+void	ft_exit(char **status, bool f);
 char	*ft_join(char const *s1, char const *s2);
 char	*ft_sub(char const *s, unsigned int start, size_t len);
 int		ft_cmp2(const char *s1, const char *s2);

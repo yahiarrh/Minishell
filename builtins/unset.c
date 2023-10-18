@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:03:58 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 12:25:22 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 09:48:53 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_unset(t_env **env, char **name)
 			tmp2 = ft_getval(env, name[i]);
 			if (tmp2)
 			{
-				if (!ft_cmp((*env)->name, name[i]))
+				if (tmp2 == *env)
 					*env = (*env)->next;
 				else
 					tmp = prev(*env, tmp2, name[i]);

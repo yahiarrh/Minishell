@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 09:21:13 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 16:35:23 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:12:11 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	sys_comm(t_env **env, char **comm)
 	exec_comm(env, comm, path);
 }
 
-int	builtin(t_env **env, char **comm)
+int	builtin(t_env **env, char **comm, bool f)
 {
 	g_exit_status = 0;
 	if (!ft_cmp(comm[0], "pwd"))
@@ -65,7 +65,7 @@ int	builtin(t_env **env, char **comm)
 	else if (!ft_cmp(comm[0], "unset"))
 		ft_unset(env, comm);
 	else if (!ft_cmp(comm[0], "exit"))
-		ft_exit(comm);
+		ft_exit(comm, f);
 	else
 		return (0);
 	return (1);
@@ -93,6 +93,8 @@ pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg)
 	pid_t	tmp;
 
 	tmp = 0;
+	if (arg->fd_in == -1)
+		return (tmp);
 	if (!comm || !*comm)
 		return (tmp);
 	if (arg->fd_in)
@@ -107,7 +109,7 @@ pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg)
 		dup2(fd.fd_in, 0);
 		close(fd.fd_toclose[1]);
 		close(fd.fd_toclose[0]);
-		if (builtin(env, comm))
+		if (builtin(env, comm, 1))
 			exit (g_exit_status);
 		sys_comm(env, comm);
 	}

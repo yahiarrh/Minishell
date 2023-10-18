@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 12:42:56 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 11:44:53 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:15:46 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <limits.h>
 # include <unistd.h>
 
 typedef struct s_list

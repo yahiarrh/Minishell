@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/12 12:03:20 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/18 10:21:18 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*join_downs(t_token *cmd)
+{
+	char	*s;
+
+	s = NULL;
+	while (cmd)
+	{
+		s = ft_strjoin(s, cmd->word);
+		cmd = cmd->down;
+	}
+	return (s);
+}
 
 int	ft_cmdsize(t_cmd *lst)
 {

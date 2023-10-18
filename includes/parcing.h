@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/17 14:39:40 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:20:49 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ t_cmd	*cmd_last(t_cmd *lst);
 void	cmd_back(t_cmd **lst, t_cmd *new);
 void	print_syn(t_token *token);
 char	**join_cmds(t_cmd *command);
-
+char	*join_downs(t_token *cmd);
 #endif

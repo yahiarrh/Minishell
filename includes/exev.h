@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:59:39 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 10:58:42 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:10:32 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_fd
 }t_fd;
 
 bool	is_builtin(char *comm);
-int		builtin(t_env **env, char **comm);
+int		builtin(t_env **env, char **comm, bool f);
 void	ft_exec(t_env **env, t_args *arg);
 void	exec_comm(t_env **env, char **comm, char **path);
 pid_t	comm_type(t_env **env, char	**comm, t_fd fd, t_args *arg);
