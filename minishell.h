@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:07:33 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/17 14:39:53 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:39:19 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	g_exit_status;
 /usr/local/munki:/Library/Apple/usr/bin"
 # define ALLOC 1
 # define FREE 0
+# define F ": ambiguous redirect\n"
 # define PROMPT "minishell: "
+# define P "minishell: "
 
 typedef struct s_gt
 {

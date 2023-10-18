@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/18 10:21:18 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:27:47 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	ft_cmdsize(t_cmd *lst)
 		return (0);
 	while (lst)
 	{
-		count++;
+		if (lst->cmd)
+			count++;
 		lst = lst->next;
 	}
 	return (count);

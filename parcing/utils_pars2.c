@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/18 14:55:24 by msaidi           ###   ########.fr       */
+/*   Updated: 2023/10/18 16:39:11 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,29 @@ int	heredoc(t_env *env, char *delim, bool flag)
 	return (pipefd[0]);
 }
 
-bool	fill_redir(t_token *token, t_args *new_arg, t_env *env)
+bool	fill_redir(t_token *token, t_args *n_a, t_env *env)
 {
 	t_cmd	*tmp;
 
 	tmp = filtre_exp(&env, token->next);
-	if (ft_cmdsize(tmp) > 1 && (token->type = ERR_SIG))
-		return (printf("%s: ambiguous redirect\n", token->next->word), false);
+	if (ft_cmdsize(tmp) != 1)
+		return (printf("%s%s%s", P, token->next->word, F), n_a->fd_in = -1, 1);
 	if (!tmp->cmd && token->next && token->next->type == PIPE)
 		return (false);
 	else if (token->type == REDIN)
-		new_arg->fd_in = open(expand(&env, token->next->word), O_RDONLY, 0644);
+		n_a->fd_in = open(expand(&env, token->next->word), O_RDONLY, 0644);
 	else if (token->type == REDOUT)
-		new_arg->fd_out = open(expand(&env, token->next->word),
+		n_a->fd_out = open(expand(&env, token->next->word),
 				O_CREAT | O_TRUNC | O_RDWR, 0644);
 	else if (token->type == APPEND)
-		new_arg->fd_out = open(expand(&env, token->next->word),
+		n_a->fd_out = open(expand(&env, token->next->word),
 				O_CREAT | O_APPEND | O_RDWR, 0644);
 	else if (token->type == HEREDOC)
-		new_arg->fd_in = heredoc(env, join_downs(token->next),
+		n_a->fd_in = heredoc(env, join_downs(token->next),
 				(token->next->type == WORD));
-	if (new_arg->fd_in == -1 || new_arg->fd_in == -2)
+	if (n_a->fd_in == -1 || n_a->fd_in == -2)
 	{
-		if (new_arg->fd_in == -1)
+		if (n_a->fd_in == -1)
 			return (ft_err_msg(NULL, token->next->word, FILE_ERR, 1), 1);
 		return (token->type = ERR_SIG, false);
 	}
