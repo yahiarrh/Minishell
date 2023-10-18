@@ -6,7 +6,7 @@
 /*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/18 16:39:11 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:01:29 by yrrhaibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ bool	fill_redir(t_token *token, t_args *n_a, t_env *env)
 	tmp = filtre_exp(&env, token->next);
 	if (ft_cmdsize(tmp) != 1)
 		return (printf("%s%s%s", P, token->next->word, F), n_a->fd_in = -1, 1);
+	if (n_a->fd_in == -1)
+		return (true);
 	if (!tmp->cmd && token->next && token->next->type == PIPE)
 		return (false);
 	else if (token->type == REDIN)
