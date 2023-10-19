@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:02:23 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/18 10:20:49 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:49:46 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_args
 
 t_cmd	*filtre_exp(t_env **env, t_token *token);
 void	arg_back(t_args **lst, t_args *new);
+void	chk_redir(t_token *token, t_args *arg, t_env *env);
+int		heredoc(t_env *env, char *delim, bool flag);
 bool	fill_redir(t_token *token, t_args *new_arg, t_env *env);
 t_args	*check_tokens(t_token **token, t_env *env);
 t_args	*parcing(t_token *token, t_env *env);

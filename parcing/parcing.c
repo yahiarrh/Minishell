@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:54:40 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/17 16:59:38 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:48:50 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	chk_redir(t_token *token, t_args *arg, t_env *env)
+{
+	if (token->type == REDIN)
+		arg->fd_in = open(expand(&env, token->next->word), O_RDONLY, 0644);
+	else if (token->type == REDOUT)
+		arg->fd_out = open(expand(&env, token->next->word),
+				O_CREAT | O_TRUNC | O_RDWR, 0644);
+	else if (token->type == APPEND)
+		arg->fd_out = open(expand(&env, token->next->word),
+				O_CREAT | O_APPEND | O_RDWR, 0644);
+	else if (token->type == HEREDOC)
+		arg->fd_in = heredoc(env, join_downs(token->next),
+				(token->next->type == WORD));
+}
 
 char	**join_cmds(t_cmd *command)
 {

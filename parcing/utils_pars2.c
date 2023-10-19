@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:02:48 by msaidi            #+#    #+#             */
-/*   Updated: 2023/10/18 19:01:29 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:48:38 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,21 @@ int	heredoc(t_env *env, char *delim, bool flag)
 	return (pipefd[0]);
 }
 
-bool	fill_redir(t_token *token, t_args *n_a, t_env *env)
+bool	fill_redir(t_token *token, t_args *arg, t_env *env)
 {
 	t_cmd	*tmp;
 
 	tmp = filtre_exp(&env, token->next);
 	if (ft_cmdsize(tmp) != 1)
-		return (printf("%s%s%s", P, token->next->word, F), n_a->fd_in = -1, 1);
-	if (n_a->fd_in == -1)
+		return (printf("%s%s%s", P, token->next->word, F), arg->fd_in = -1, 1);
+	if (arg->fd_in == -1)
 		return (true);
 	if (!tmp->cmd && token->next && token->next->type == PIPE)
 		return (false);
-	else if (token->type == REDIN)
-		n_a->fd_in = open(expand(&env, token->next->word), O_RDONLY, 0644);
-	else if (token->type == REDOUT)
-		n_a->fd_out = open(expand(&env, token->next->word),
-				O_CREAT | O_TRUNC | O_RDWR, 0644);
-	else if (token->type == APPEND)
-		n_a->fd_out = open(expand(&env, token->next->word),
-				O_CREAT | O_APPEND | O_RDWR, 0644);
-	else if (token->type == HEREDOC)
-		n_a->fd_in = heredoc(env, join_downs(token->next),
-				(token->next->type == WORD));
-	if (n_a->fd_in == -1 || n_a->fd_in == -2)
+	chk_redir(token, arg, env);
+	if (arg->fd_in == -1 || arg->fd_in == -2)
 	{
-		if (n_a->fd_in == -1)
+		if (arg->fd_in == -1)
 			return (ft_err_msg(NULL, token->next->word, FILE_ERR, 1), 1);
 		return (token->type = ERR_SIG, false);
 	}

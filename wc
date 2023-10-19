@@ -1,0 +1,15 @@
+Makefile
+a
+builtins
+cat
+executor
+expander
+includes
+l
+libft
+main.c
+main.o
+minishell
+minishell.h
+parcing
+wc

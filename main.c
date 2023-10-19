@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrrhaibi <yrrhaibi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msaidi <msaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:24:04 by yrrhaibi          #+#    #+#             */
-/*   Updated: 2023/10/18 12:34:21 by yrrhaibi         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:51:52 by msaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	fill_env(t_env **env)
+{
+	char	*s;
+
+	if (!ft_getval(env, "SHLVL"))
+		lstadd_back(env, new("SHLVL", "1"));
+	s = ft_getval(env, "SHLVL")->value;
+	ft_update(env, "SHLVL", 
+		ft_itoa(ft_atoi(ft_getval(env, "SHLVL")->value) + 1));
+	free(s);
+}
 
 bool	to_pa_ex(char *line, t_token *token, t_args *arg, t_env **env)
 {
@@ -70,11 +82,7 @@ int	main(int ac, char **av, char **envp)
 	else
 	{
 		env = ft_getenv(envp);
-		if (!ft_getval(&env, "SHLVL"))
-			lstadd_back(&env, new("SHLVL", "1"));
-		free(ft_getval(&env, "SHLVL")->value);
-		ft_update(&env, "SHLVL", 
-			ft_itoa(ft_atoi(ft_getval(&env, "SHLVL")->value) + 1));
+		fill_env(&env);
 	}
 	main_loop(token, &env);
 }
